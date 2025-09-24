@@ -61,14 +61,26 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
     "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM"
   ];
 
-  const availableAddOns = [
-    "Deep Carpet Clean",
-    "Window Cleaning", 
-    "Appliance Clean",
-    "Sanitization",
-    "Upholstery Treatment",
-    "Pest Control Add-on"
-  ];
+  const availableAddOns = (() => {
+    const baseAddOns = [
+      "Deep Carpet Clean",
+      "Window Cleaning", 
+      "Appliance Clean",
+      "Sanitization",
+      "Upholstery Treatment"
+    ];
+    
+    // Add service-specific add-ons
+    if (serviceData.serviceType === "packers-movers") {
+      return [
+        ...baseAddOns,
+        "Half Truck",
+        "Full Truck"
+      ];
+    }
+    
+    return [...baseAddOns, "Pest Control Add-on"];
+  })();
 
   const propertyTypes = [
     "Studio", "1 BR", "2 BR", "3 BR", "4 BR", "5 BR",
@@ -81,39 +93,125 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
     // Service-specific pricing logic
     switch (serviceData.serviceType) {
       case "maid-service":
-        basePrice = basePrice * quantity * hours;
+        // Base price is per hour with materials option
+        const materialsCost = addOns.includes("materials") ? 11 : 0;
+        basePrice = (basePrice + materialsCost) * quantity * hours;
         break;
-      case "upholstery-cleaning":
-        basePrice = basePrice * numberOfSeats;
-        break;
-      case "carpet-cleaning":
-        const carpetPrices = { Small: 50, Medium: 75, Large: 100, "Extra Large": 150 };
-        basePrice = carpetPrices[carpetSize as keyof typeof carpetPrices] * numberOfCarpets || basePrice;
-        break;
-      case "kitchen-deep-cleaning":
-        const kitchenPrices = {
-          "Studio": 175, "1 BR": 275, "2 BR": 275, "3 BR": 275, "4 BR": 275, "5 BR": 300,
-          "2 BR villa": 310, "3 BR villa": 310, "4 BR villa": 310, "5 BR villa": 310, "Penthouse": 310
+        
+      case "deep-cleaning":
+        const deepCleaningPrices = {
+          "Studio": 345, "1 BR": 460, "2 BR": 570, "3 BR": 685, "4 BR": 860,
+          "1 BR villa": 745, "2 BR villa": 915, "3 BR villa": 1145, "4 BR villa": 1370, "5 BR villa": 1830
         };
-        basePrice = kitchenPrices[propertyType as keyof typeof kitchenPrices] || basePrice;
+        basePrice = deepCleaningPrices[propertyType as keyof typeof deepCleaningPrices] || basePrice;
         break;
+        
+      case "upholstery-cleaning":
+        const fabricType = addOns.includes("leather") ? 46 : 30;
+        basePrice = fabricType * numberOfSeats;
+        break;
+        
+      case "carpet-cleaning":
+        const carpetPrices = { "Small": 75, "Medium": 105, "Large": 150 };
+        basePrice = (carpetPrices[carpetSize as keyof typeof carpetPrices] || 75) * numberOfCarpets;
+        break;
+        
+      case "mattress-cleaning":
+        const mattressPrices = { "Single": 115, "Queen": 175, "King": 185 };
+        basePrice = mattressPrices[propertyType as keyof typeof mattressPrices] || 115;
+        break;
+        
+      case "kitchen-deep-cleaning":
+        const kitchenPrices = { "Small": 170, "Medium": 230, "Large": 345 };
+        basePrice = kitchenPrices[propertyType as keyof typeof kitchenPrices] || 170;
+        break;
+        
       case "bathroom-deep-cleaning":
-        basePrice = basePrice * numberOfBathrooms;
+        basePrice = 170 * numberOfBathrooms;
         break;
+        
+      case "pest-control":
+        const pestType = addOns.includes("mosquito-fly") ? "mosquito" : 
+                        addOns.includes("bedbug") ? "bedbug" : 
+                        addOns.includes("rodent") ? "rodent" : "general";
+                        
+        const pestPrices = {
+          general: {
+            "Studio": 120, "1 BR": 120, "2 BR": 150, "3 BR": 180, "4 BR": 240, "5 BR": 276,
+            "1 BR villa": 180, "2 BR villa": 228, "3 BR villa": 288, "4 BR villa": 348, "5 BR villa": 408
+          },
+          mosquito: {
+            "Studio": 150, "1 BR": 150, "2 BR": 200, "3 BR": 240, "4 BR": 280, "5 BR": 350,
+            "2 BR villa": 270, "3 BR villa": 300, "4 BR villa": 370, "5 BR villa": 380
+          },
+          bedbug: {
+            "Studio": 144, "1 BR": 156, "2 BR": 180, "3 BR": 228, "4 BR": 276, "5 BR": 300,
+            "1 BR villa": 240, "2 BR villa": 324, "3 BR villa": 348, "4 BR villa": 420, "5 BR villa": 480
+          },
+          rodent: {
+            "Studio": 170, "1 BR": 170, "2 BR": 250, "3 BR": 280, "4 BR": 320, "5 BR": 350,
+            "1 BR villa": 230, "2 BR villa": 265, "3 BR villa": 300, "4 BR villa": 350, "5 BR villa": 380
+          }
+        };
+        basePrice = pestPrices[pestType][propertyType as keyof typeof pestPrices[typeof pestType]] || 120;
+        break;
+        
+      case "ac-service":
+        basePrice = 150 * numberOfUnits;
+        break;
+        
+      case "ac-duct-cleaning":
+        basePrice = 350 * numberOfUnits;
+        break;
+        
       case "ac-coil-cleaning":
-        basePrice = basePrice * numberOfUnits;
+        basePrice = 375 * numberOfUnits;
         break;
-      default:
-        if (propertyType) {
-          const propertyMultipliers = {
-            "Studio": 1, "1 BR": 1.2, "2 BR": 1.5, "3 BR": 1.8, "4 BR": 2.1, "5 BR": 2.5,
-            "2 BR villa": 2.8, "3 BR villa": 3.2, "4 BR villa": 3.6, "5 BR villa": 4, "Penthouse": 4.5
-          };
-          basePrice = basePrice * (propertyMultipliers[propertyType as keyof typeof propertyMultipliers] || 1);
+        
+      case "ac-duct-coil-cleaning":
+        basePrice = 475 * numberOfUnits;
+        break;
+        
+      case "painting":
+        const paintingPrices = {
+          "Studio": 600, "1 BR": 840, "2 BR": 1200, "3 BR": 1680, "4 BR": 2450, "5 BR": 2800,
+          "1 BR villa": 1450, "2 BR villa": 1920, "3 BR villa": 2400, "4 BR villa": 3150, "5 BR villa": 3850
+        };
+        basePrice = paintingPrices[propertyType as keyof typeof paintingPrices] || 600;
+        break;
+        
+      case "packers-movers":
+        const region = addOns.includes("abudhabi") ? "abudhabi" : "dubai";
+        const moversPrices = {
+          dubai: {
+            "Studio": 743, "1 BR": 943, "2 BR": 1657, "3 BR": 1900, "4 BR": 3095, "5 BR": 4571,
+            "2 BR villa": 1857, "3 BR villa": 2810, "4 BR villa": 3762, "5 BR villa": 4714
+          },
+          abudhabi: {
+            "Studio": 1229, "1 BR": 1610, "2 BR": 1895, "3 BR": 3324, "4 BR": 3800,
+            "2 BR villa": 2371, "3 BR villa": 3514, "4 BR villa": 4752, "5 BR villa": 5657
+          }
+        };
+        basePrice = moversPrices[region][propertyType as keyof typeof moversPrices[typeof region]] || 743;
+        
+        // Add truck costs
+        if (addOns.includes("half-truck")) {
+          basePrice += region === "dubai" ? 367 : 810;
         }
+        if (addOns.includes("full-truck")) {
+          basePrice += region === "dubai" ? 629 : 1238;
+        }
+        break;
+        
+      case "handyman":
+        basePrice = 150 * hours;
+        break;
+        
+      default:
+        basePrice = serviceData.basePrice;
     }
     
-    // Add-ons pricing
+    // Add-ons pricing (excluding service-specific ones handled above)
     const addonPricing = {
       "Deep Carpet Clean": 100,
       "Window Cleaning": 150,
@@ -124,7 +222,24 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
     };
     
     const addOnTotal = addOns.reduce((total, addon) => {
-      return total + (addonPricing[addon as keyof typeof addonPricing] || 0);
+      // Handle service-specific add-ons separately in service logic above
+      const serviceSpecificAddOns = ["materials", "leather", "mosquito-fly", "bedbug", "rodent", "abudhabi", "half-truck", "full-truck"];
+      
+      if (!serviceSpecificAddOns.includes(addon.toLowerCase().replace(/\s/g, '-'))) {
+        return total + (addonPricing[addon as keyof typeof addonPricing] || 0);
+      }
+      
+      // Handle truck add-ons for packers-movers
+      if (addon === "Half Truck") {
+        const region = addOns.includes("abudhabi") ? "abudhabi" : "dubai";
+        return total + (region === "dubai" ? 367 : 810);
+      }
+      if (addon === "Full Truck") {
+        const region = addOns.includes("abudhabi") ? "abudhabi" : "dubai";
+        return total + (region === "dubai" ? 629 : 1238);
+      }
+      
+      return total;
     }, 0);
     
     return basePrice + addOnTotal;
@@ -196,6 +311,43 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
             <div className="animate-fade-in">
               <Label className="text-lg font-semibold flex items-center gap-2">
                 <Target className="h-5 w-5 text-secondary" />
+                Materials Included
+              </Label>
+              <div className="mt-2 space-y-2">
+                <div 
+                  className={cn(
+                    "p-3 rounded-lg border cursor-pointer transition-all",
+                    !addOns.includes("materials") ? "border-secondary bg-secondary/10" : "border-muted"
+                  )}
+                  onClick={() => {
+                    if (addOns.includes("materials")) {
+                      setAddOns(addOns.filter(item => item !== "materials"));
+                    }
+                  }}
+                >
+                  <div className="font-medium">Without Materials - AED 34/hour</div>
+                  <div className="text-sm text-muted-foreground">You provide cleaning materials</div>
+                </div>
+                <div 
+                  className={cn(
+                    "p-3 rounded-lg border cursor-pointer transition-all",
+                    addOns.includes("materials") ? "border-secondary bg-secondary/10" : "border-muted"
+                  )}
+                  onClick={() => {
+                    if (!addOns.includes("materials")) {
+                      setAddOns([...addOns, "materials"]);
+                    }
+                  }}
+                >
+                  <div className="font-medium">With Materials - AED 45/hour</div>
+                  <div className="text-sm text-muted-foreground">We bring professional cleaning materials</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="animate-fade-in">
+              <Label className="text-lg font-semibold flex items-center gap-2">
+                <Target className="h-5 w-5 text-secondary" />
                 Number of Maids (1-8)
               </Label>
               <div className="flex items-center gap-4 mt-2">
@@ -253,31 +405,65 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
 
       case "upholstery-cleaning":
         return (
-          <div className="animate-fade-in">
-            <Label className="text-lg font-semibold flex items-center gap-2">
-              <Target className="h-5 w-5 text-secondary" />
-              Number of Seats
-            </Label>
-            <div className="flex items-center gap-4 mt-2">
-              <Button 
-                variant="outline" 
-                size="icon" 
-                onClick={() => setNumberOfSeats(Math.max(1, numberOfSeats - 1))}
-                className="hover:scale-110 transition-transform"
-              >
-                <Minus className="h-4 w-4" />
-              </Button>
-              <div className="bg-primary/10 rounded-lg px-6 py-3 font-bold text-xl text-primary animate-pulse">
-                {numberOfSeats}
+          <div className="space-y-6">
+            <div className="animate-fade-in">
+              <Label className="text-lg font-semibold">Material Type</Label>
+              <div className="mt-2 space-y-2">
+                <div 
+                  className={cn(
+                    "p-3 rounded-lg border cursor-pointer transition-all",
+                    !addOns.includes("leather") ? "border-secondary bg-secondary/10" : "border-muted"
+                  )}
+                  onClick={() => {
+                    if (addOns.includes("leather")) {
+                      setAddOns(addOns.filter(item => item !== "leather"));
+                    }
+                  }}
+                >
+                  <div className="font-medium">Fabric - AED 30 per seat</div>
+                </div>
+                <div 
+                  className={cn(
+                    "p-3 rounded-lg border cursor-pointer transition-all",
+                    addOns.includes("leather") ? "border-secondary bg-secondary/10" : "border-muted"
+                  )}
+                  onClick={() => {
+                    if (!addOns.includes("leather")) {
+                      setAddOns([...addOns.filter(item => item !== "leather"), "leather"]);
+                    }
+                  }}
+                >
+                  <div className="font-medium">Leather - AED 46 per seat</div>
+                </div>
               </div>
-              <Button 
-                variant="outline" 
-                size="icon"
-                onClick={() => setNumberOfSeats(numberOfSeats + 1)}
-                className="hover:scale-110 transition-transform"
-              >
-                <Plus className="h-4 w-4" />
-              </Button>
+            </div>
+            
+            <div className="animate-fade-in">
+              <Label className="text-lg font-semibold flex items-center gap-2">
+                <Target className="h-5 w-5 text-secondary" />
+                Number of Seats
+              </Label>
+              <div className="flex items-center gap-4 mt-2">
+                <Button 
+                  variant="outline" 
+                  size="icon" 
+                  onClick={() => setNumberOfSeats(Math.max(1, numberOfSeats - 1))}
+                  className="hover:scale-110 transition-transform"
+                >
+                  <Minus className="h-4 w-4" />
+                </Button>
+                <div className="bg-primary/10 rounded-lg px-6 py-3 font-bold text-xl text-primary animate-pulse">
+                  {numberOfSeats}
+                </div>
+                <Button 
+                  variant="outline" 
+                  size="icon"
+                  onClick={() => setNumberOfSeats(numberOfSeats + 1)}
+                  className="hover:scale-110 transition-transform"
+                >
+                  <Plus className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
           </div>
         );
@@ -292,10 +478,9 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
                   <SelectValue placeholder="Select carpet size" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Small">Small - AED 50</SelectItem>
-                  <SelectItem value="Medium">Medium - AED 75</SelectItem>
-                  <SelectItem value="Large">Large - AED 100</SelectItem>
-                  <SelectItem value="Extra Large">Extra Large - AED 150</SelectItem>
+                  <SelectItem value="Small">Small (5x10 ft) - AED 75</SelectItem>
+                  <SelectItem value="Medium">Medium (8x12 ft) - AED 105</SelectItem>
+                  <SelectItem value="Large">Large (10x15 ft) - AED 150</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -327,12 +512,46 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
           </div>
         );
 
+      case "mattress-cleaning":
+        return (
+          <div className="animate-fade-in">
+            <Label className="text-lg font-semibold">Mattress Size</Label>
+            <Select onValueChange={setPropertyType}>
+              <SelectTrigger className="mt-2">
+                <SelectValue placeholder="Select mattress size" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Single">Single - AED 115</SelectItem>
+                <SelectItem value="Queen">Queen Size - AED 175</SelectItem>
+                <SelectItem value="King">King Size - AED 185</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        );
+
+      case "kitchen-deep-cleaning":
+        return (
+          <div className="animate-fade-in">
+            <Label className="text-lg font-semibold">Kitchen Size</Label>
+            <Select onValueChange={setPropertyType}>
+              <SelectTrigger className="mt-2">
+                <SelectValue placeholder="Select kitchen size" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Small">Small (Below 100 sq.ft) - AED 170</SelectItem>
+                <SelectItem value="Medium">Medium (100-200 sq.ft) - AED 230</SelectItem>
+                <SelectItem value="Large">Large (Above 200 sq.ft) - AED 345</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        );
+
       case "bathroom-deep-cleaning":
         return (
           <div className="animate-fade-in">
             <Label className="text-lg font-semibold flex items-center gap-2">
               <Target className="h-5 w-5 text-secondary" />
-              Number of Bathrooms (1-5)
+              Number of Bathrooms (1-5) - AED 170 each
             </Label>
             <div className="flex items-center gap-4 mt-2">
               <Button 
@@ -358,29 +577,133 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
           </div>
         );
 
-      case "ac-coil-cleaning":
+      case "pest-control":
         return (
-          <div className="animate-fade-in">
+          <div className="space-y-6">
+            <div className="animate-fade-in">
+              <Label className="text-lg font-semibold">Pest Control Type</Label>
+              <div className="mt-2 space-y-2">
+                <div 
+                  className={cn(
+                    "p-3 rounded-lg border cursor-pointer transition-all",
+                    !addOns.some(addon => ["mosquito-fly", "bedbug", "rodent"].includes(addon)) ? "border-secondary bg-secondary/10" : "border-muted"
+                  )}
+                  onClick={() => {
+                    setAddOns(addOns.filter(item => !["mosquito-fly", "bedbug", "rodent"].includes(item)));
+                  }}
+                >
+                  <div className="font-medium">General Pest Control</div>
+                </div>
+                {[
+                  { key: "mosquito-fly", label: "Mosquito & Fly Control" },
+                  { key: "bedbug", label: "Bedbug Control" },
+                  { key: "rodent", label: "Rodent/Rat Control" }
+                ].map(({ key, label }) => (
+                  <div 
+                    key={key}
+                    className={cn(
+                      "p-3 rounded-lg border cursor-pointer transition-all",
+                      addOns.includes(key) ? "border-secondary bg-secondary/10" : "border-muted"
+                    )}
+                    onClick={() => {
+                      const filtered = addOns.filter(item => !["mosquito-fly", "bedbug", "rodent"].includes(item));
+                      setAddOns([...filtered, key]);
+                    }}
+                  >
+                    <div className="font-medium">{label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div className="animate-fade-in">
+              <Label className="text-lg font-semibold">Property Type</Label>
+              <Select onValueChange={setPropertyType}>
+                <SelectTrigger className="mt-2">
+                  <SelectValue placeholder="Select your property type" />
+                </SelectTrigger>
+                <SelectContent>
+                  {propertyTypes.map((type) => (
+                    <SelectItem key={type} value={type}>{type}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        );
+
+      case "packers-movers":
+        return (
+          <div className="space-y-6">
+            <div className="animate-fade-in">
+              <Label className="text-lg font-semibold">Region</Label>
+              <div className="mt-2 space-y-2">
+                <div 
+                  className={cn(
+                    "p-3 rounded-lg border cursor-pointer transition-all",
+                    !addOns.includes("abudhabi") ? "border-secondary bg-secondary/10" : "border-muted"
+                  )}
+                  onClick={() => {
+                    setAddOns(addOns.filter(item => item !== "abudhabi"));
+                  }}
+                >
+                  <div className="font-medium">Dubai Region</div>
+                </div>
+                <div 
+                  className={cn(
+                    "p-3 rounded-lg border cursor-pointer transition-all",
+                    addOns.includes("abudhabi") ? "border-secondary bg-secondary/10" : "border-muted"
+                  )}
+                  onClick={() => {
+                    if (!addOns.includes("abudhabi")) {
+                      setAddOns([...addOns, "abudhabi"]);
+                    }
+                  }}
+                >
+                  <div className="font-medium">Abu Dhabi Region</div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="animate-fade-in">
+              <Label className="text-lg font-semibold">Property Type</Label>
+              <Select onValueChange={setPropertyType}>
+                <SelectTrigger className="mt-2">
+                  <SelectValue placeholder="Select your property type" />
+                </SelectTrigger>
+                <SelectContent>
+                  {propertyTypes.map((type) => (
+                    <SelectItem key={type} value={type}>{type}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        );
+
+      case "handyman":
+        return (
+          <div className="animate-fade-in delay-200">
             <Label className="text-lg font-semibold flex items-center gap-2">
-              <Target className="h-5 w-5 text-secondary" />
-              Number of Units (1-8)
+              <Clock className="h-5 w-5 text-secondary" />
+              Hours - AED 150/hour
             </Label>
             <div className="flex items-center gap-4 mt-2">
               <Button 
                 variant="outline" 
                 size="icon" 
-                onClick={() => setNumberOfUnits(Math.max(1, numberOfUnits - 1))}
+                onClick={() => setHours(Math.max(1, hours - 1))}
                 className="hover:scale-110 transition-transform"
               >
                 <Minus className="h-4 w-4" />
               </Button>
-              <div className="bg-primary/10 rounded-lg px-6 py-3 font-bold text-xl text-primary animate-pulse">
-                {numberOfUnits}
+              <div className="bg-secondary/10 rounded-lg px-6 py-3 font-bold text-xl text-secondary animate-pulse">
+                {hours}
               </div>
               <Button 
                 variant="outline" 
                 size="icon"
-                onClick={() => setNumberOfUnits(Math.min(8, numberOfUnits + 1))}
+                onClick={() => setHours(hours + 1)}
                 className="hover:scale-110 transition-transform"
               >
                 <Plus className="h-4 w-4" />
@@ -390,6 +713,39 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
         );
 
       default:
+        // For AC services and others that need unit/property selection
+        if (["ac-service", "ac-duct-cleaning", "ac-coil-cleaning", "ac-duct-coil-cleaning"].includes(serviceData.serviceType || "")) {
+          return (
+            <div className="animate-fade-in">
+              <Label className="text-lg font-semibold flex items-center gap-2">
+                <Target className="h-5 w-5 text-secondary" />
+                Number of AC Units (1-8)
+              </Label>
+              <div className="flex items-center gap-4 mt-2">
+                <Button 
+                  variant="outline" 
+                  size="icon" 
+                  onClick={() => setNumberOfUnits(Math.max(1, numberOfUnits - 1))}
+                  className="hover:scale-110 transition-transform"
+                >
+                  <Minus className="h-4 w-4" />
+                </Button>
+                <div className="bg-primary/10 rounded-lg px-6 py-3 font-bold text-xl text-primary animate-pulse">
+                  {numberOfUnits}
+                </div>
+                <Button 
+                  variant="outline" 
+                  size="icon"
+                  onClick={() => setNumberOfUnits(Math.min(8, numberOfUnits + 1))}
+                  className="hover:scale-110 transition-transform"
+                >
+                  <Plus className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          );
+        }
+        
         return (
           <div className="animate-fade-in">
             <Label className="text-lg font-semibold">Property Type</Label>
@@ -538,7 +894,9 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
                                 "Appliance Clean": 200,
                                 "Sanitization": 120,
                                 "Upholstery Treatment": 180,
-                                "Pest Control Add-on": 250
+                                "Pest Control Add-on": 250,
+                                "Half Truck": addOns.includes("abudhabi") ? 810 : 367,
+                                "Full Truck": addOns.includes("abudhabi") ? 1238 : 629
                               };
                               return addonPricing[addon as keyof typeof addonPricing] || 0;
                             })()}
