@@ -9,7 +9,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon, Clock, MapPin, Star, Plus, Minus, ShoppingCart, Sparkles, Gift, Zap, Target, Trophy, Gamepad2 } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { CalendarIcon, Clock, MapPin, Star, Plus, Minus, ShoppingCart, Sparkles, Gift, Zap, Target, Trophy, Gamepad2, Info, CheckCircle, XCircle, Clipboard } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
@@ -60,6 +61,280 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
     "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM",
     "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM"
   ];
+
+  const getServiceDetails = (serviceType: string) => {
+    const serviceDetails = {
+      "maid-service": {
+        description: "Home is where the heart is but is that any good with all the dust lying around? Get your home squeaky clean and revive that furniture shine with our highly-experienced maids. Our maids are skilled in handling a variety of tasks, such as Dusting, Vacuuming, Mopping and Window Cleaning. Oh! And did we mention washing & ironing of clothes, dishwashing and furniture cleaning are part of the deal? Our maids also come well equipped with the essentials if you lack the cleaning materials and may also be availed privately and for offices.",
+        scopeOfWork: [
+          "Assessment of works to be carried out upon arrival and following client-specific instructions and requests.",
+          "Performing all the essential duties within the allotted time period and prioritizing delicate tasks as a primary. Priority cleaning of areas and surfaces that are commonly in contact.",
+          "Covering all other general duties such as folding clothes, arranging any used items upon completion of the primary tasks.",
+          "Summarize and check-list all the performed activities upon job completion."
+        ],
+        inclusions: [
+          "Bed makeovers",
+          "Bathroom and kitchen cleaning",
+          "Cleaning of carpets and sofas",
+          "Mopping floors with disinfectant including balcony areas",
+          "Ironing clothes, laundry activities, disposing of trash and other household-related tasks"
+        ],
+        exclusions: [
+          "Use of cleaning materials and tools such as vacuum cleaner, broom, etc. (unless the customer opts for 'with material' package)",
+          "Any tasks relating to the use of heavy equipment, such as ladders or cleaning of heightened areas, high windows, ceiling, etc."
+        ]
+      },
+      "deep-cleaning": {
+        description: "Recover your home to its 'day-one' state with our rigorous deep cleaning offerings. Expect a sparkly clean house from tip to toe. Our experienced unit of deep cleaners have you covered with the essentials and will perform the required method as per the condition or specification of your house. Whether its carpet covered floors or tiled walls, we have an eye for stain marks and the equipment to handle it delicately. You can even look forward to a comprehensive scrub of your furniture, countertops and even cabinet interiors. Our products are of approved quality and meet the recommended professional standards. Bank on us to get your home spick and span!",
+        scopeOfWork: [
+          "Conduct a survey of the premises for recommended methods of application and assess any areas that require urgent attention, such as hardened or dried stained tiles or fabric.",
+          "Initiating the cleaning works with the required equipment and chemicals while heeding utmost care to sensitive areas or items.",
+          "Use of machinery and its sensitivity for the scrubbing of floor tiles, marble or tiled surfaces and various types of furniture.",
+          "Upon completion, a thorough inspection and report will be documented of all the tasks carried out during the deep cleaning session."
+        ],
+        inclusions: [
+          "Comprehensive auto floor scrubbing in all areas with the use of safe cleaning disinfectants",
+          "Deep cleaning in the bathroom, kitchen and balcony floors, walls and other surfaces",
+          "High-pressure dry vacuuming of sofas, curtains, carpets and other fabrics",
+          "Internal cleaning of cabinets, cupboards and other storage facilities"
+        ],
+        exclusions: [
+          "Use of any particular cleaning chemicals suggested or provided by the customer",
+          "Full carpet floors or other special treatments are subject to site survey and inspection only"
+        ]
+      },
+      "upholstery-cleaning": {
+        description: "Cleanse your sofa back to its original state with ILAJ's special Sofa cleaning services. Covering various sofa sizes and shapes, our selection of quality products and its skilled and sensitive application will see that you'll be seated in pure bliss and comfort until its next treatment.",
+        scopeOfWork: [
+          "Acknowledge sofa material and inspect for any stains and damages.",
+          "Application of product on the sofa and performing the cleaning with the required machinery delicately.",
+          "Review and report cleaned sofa(s), paying heed to prioritized areas."
+        ],
+        inclusions: [
+          "Application of safe and DM approved product",
+          "Odourless cleaning and shampoo products",
+          "Use of industry-standard polishing methods by trained professional"
+        ],
+        exclusions: [
+          "Treatment of any permanent damage or stain marks, such as tear marks, burn marks, etc.",
+          "Any use of harmful chemicals or detergents"
+        ]
+      },
+      "carpet-cleaning": {
+        description: "Cleanse your carpet back to its original state with ILAJ's special Carpet cleaning services. Covering various carpet sizes and shapes, our selection of quality products and its skilled and sensitive application will see that your feet will rest upon pure bliss.",
+        scopeOfWork: [
+          "Acknowledge carpet material and inspect for any stains and damages.",
+          "Application of product on the carpet and performing the cleaning with the required machinery in a delicate manner",
+          "Review and report cleaned carpet, paying heed to prioritized areas."
+        ],
+        inclusions: [
+          "Application of safe and DM approved product",
+          "Odourless cleaning and shampoo products",
+          "Use of industry-standard polishing machinery by a trained professional"
+        ],
+        exclusions: [
+          "Treatment of any permanent damage or stain marks, such as tear marks, burn marks, etc.",
+          "Any use of harmful chemicals or detergents"
+        ]
+      },
+      "kitchen-deep-cleaning": {
+        description: "Recover your home to its 'day-one' state with our rigorous deep cleaning offerings. Expect a sparkly clean kitchen from tip to toe. Our experienced unit of deep cleaners have you covered with the essentials and will perform the required method as per the condition or specification of your home. From the sink to every appliance and all tiled floors and walls, we have an eye for stain marks and the equipment to handle it delicately. You can even look forward to a comprehensive scrub of your countertops, cabinets and other storage units. Our products are of approved quality and meet the recommended professional standards. Bank on us to get your kitchen spick and span!",
+        scopeOfWork: [
+          "Conduct a survey of the premises for recommended methods of application and assess any areas that require urgent attention, such as hardened or dried stains.",
+          "Initiating the cleaning works with the required equipment and chemicals while heeding utmost care to sensitive areas or items.",
+          "Use of machinery and its sensitivity for the scrubbing of sinks, countertops, marble or other tiled surfaces.",
+          "Upon completion, a thorough inspection and report will be documented of all the tasks carried out during the kitchen deep cleaning session."
+        ],
+        inclusions: [
+          "Comprehensive auto floor scrubbing in all areas and corners with the use of safe cleaning disinfectants",
+          "Exterior cleaning of exhaust units for removal of dust, oil and other particles",
+          "High-pressure dry vacuuming of sofas, curtains, carpets and other fabrics",
+          "Internal cleaning of cabinets, cupboards and other storage facilities"
+        ],
+        exclusions: [
+          "Use of any particular cleaning chemicals suggested or provided by the customer",
+          "Full carpet floors or other special treatments are subject to site survey and inspection only"
+        ]
+      },
+      "bathroom-deep-cleaning": {
+        description: "Recover your bathroom to its 'day-one' state with our rigorous deep cleaning offerings. Expect a sparkly clean bathroom from tip to toe. Our experienced unit of deep cleaners have you covered with the essentials and will perform the required method as per the condition or specification of your home. From the sink to the tiled walls, we have an eye for stain marks and the equipment to handle it delicately. You can even look forward to a comprehensive scrub of your countertops and cabinet interiors. Our products are of approved quality and meet the recommended professional standards. Bank on us to get your bathroom spick and span!",
+        scopeOfWork: [
+          "Conduct a survey of the premises for recommended methods of application and assess any areas that require urgent attention, such as hardened or dried stains.",
+          "Initiating the cleaning works with the required equipment and chemicals while heeding utmost care to sensitive areas or items.",
+          "Use of machinery and its sensitivity to the scrubbing of bathtubs, sinks, floor and wall tiles, marble, etc.",
+          "Upon completion, a thorough inspection and report will be documented of all the tasks carried out during the bathroom deep cleaning session."
+        ],
+        inclusions: [
+          "Comprehensive auto floor scrubbing in all areas with the use of safe cleaning disinfectants",
+          "Exterior cleaning of exhaust units for removal of dust, oil and other particles",
+          "Internal cleaning of cabinets, cupboards and other storage facilities"
+        ],
+        exclusions: [
+          "Use of any particular cleaning chemicals suggested or provided by the customer",
+          "Full carpet floors or other special treatments are subject to site survey and inspection only"
+        ]
+      },
+      "ac-service": {
+        description: "Our crew of specialized and qualified technicians ensure your Air conditioning systems are maintained properly as we understand the common problem that affects these systems across the region. Your A/C system should keep your family comfortable when outdoor temperatures rise. To ensure this happens, preventative maintenance is critical for a properly functioning and efficient unit. Some issues may allow your system to continue providing cool air but could be wasting energy without your knowledge and eventually causing breakdowns of the entire system.",
+        scopeOfWork: [
+          "Provide a detailed condition survey report with suggested Corrective actions.",
+          "Cleaning of the A/C filters and grills.",
+          "Inspecting and Cleaning of the condensate drain tray",
+          "Flushing of the A/C drain lines",
+          "Checking the condition and Operational status of the thermostat.",
+          "Checking up the Oil and Refrigerant gas levels and further topping up.",
+          "Check the Condition & Operation of the Indoor fan motor",
+          "Check the Condition & Operation of the Outdoor unit for stand-alone systems."
+        ],
+        inclusions: [
+          "Detailed condition survey report",
+          "Cleaning of A/C filters and grills",
+          "Condensate drain tray inspection and cleaning",
+          "A/C drain lines flushing",
+          "Thermostat condition and operational check",
+          "Oil and refrigerant gas level check and top-up"
+        ],
+        exclusions: [
+          "Spare parts, material and consumables",
+          "Evaporator Coil Cleaning",
+          "Diffuser Cleaning more than 3 metres",
+          "Refrigerant Gas leak rectification",
+          "Chilled water line leaks rectification",
+          "Gypsum ceiling cutting or any other civil works"
+        ]
+      },
+      "ac-coil-cleaning": {
+        description: "ILAJ's trained technicians will carefully clean and sanitise your air-conditioning heating/cooling coil. Coil cleaning has become a specialized area of care within air conditioning systems. The coil is in the airflow path on all air conditioning systems. Therefore, it has a direct effect on the rate of airflow and the efficiency of heat transfer and indoor air quality.",
+        scopeOfWork: [
+          "The indoor air conditioning unit, which houses the cooling coil, is cleaned of debris using specialized dust extraction equipment.",
+          "The internal insulation of the air handling unit is inspected and repaired as necessary.",
+          "The evaporator coil fins are then checked for damage and repaired as required.",
+          "The AHU internal surfaces & evaporator coil is cleaned."
+        ],
+        inclusions: [
+          "Specialized dust extraction equipment cleaning",
+          "Internal insulation inspection and repair",
+          "Evaporator coil fins damage check and repair",
+          "AHU internal surfaces cleaning"
+        ],
+        exclusions: [
+          "Spare parts, material and consumables"
+        ]
+      },
+      "ac-duct-cleaning": {
+        description: "ILAJ's trained technicians will carefully clean your air-conditioning and air-duct system. Duct cleaning removes contaminants. This improves indoor air quality, airflow, odors, operation costs and occupant's health. After the system is cleaned, there will be a noticeable reduction in dust, and diffusers will be visibly cleaner.",
+        scopeOfWork: [
+          "Air handling units - We remove debris, dust, lint, carbon and other contaminants from the air handling unit (AHU).",
+          "Return air system - The return air system clean includes the removal of contaminants from internal surfaces of rigid and flexible duct, any internal flow control devices, i.e., dampers or vanes, and registers.",
+          "Supply air system - The supply system clean consists of contaminant removal from internal surfaces of rigid and flexible duct, any internal flow control devices, i.e., dampers and vanes, and diffusers."
+        ],
+        inclusions: [
+          "Air handling units debris removal",
+          "Return air system contamination cleaning",
+          "Supply air system contamination cleaning",
+          "Internal surfaces cleaning of rigid and flexible ducts"
+        ],
+        exclusions: [
+          "Spare parts, material and consumables"
+        ]
+      },
+      "ac-duct-coil-cleaning": {
+        description: "ILAJ's trained technicians will carefully clean your air-conditioning and air-duct system.",
+        scopeOfWork: [
+          "AC Coil Cleaning - The indoor air conditioning unit, which houses the cooling coil, is cleaned of debris using specialized dust extraction equipment. The internal insulation of the air handling unit is inspected and repaired as necessary. The evaporator coil fins are then checked for damage and repaired as required. The AHU internal surfaces & evaporator coil is cleaned.",
+          "AC Duct Cleaning - Air handling units: We remove debris, dust, lint, carbon and other contaminants from the air handling unit (AHU). Return air system and Supply air system cleaning of all internal surfaces."
+        ],
+        inclusions: [
+          "Complete AC coil cleaning service",
+          "Complete AC duct cleaning service",
+          "Specialized equipment cleaning",
+          "Internal surfaces and components cleaning"
+        ],
+        exclusions: [
+          "Spare parts, material and consumables"
+        ]
+      },
+      "pest-control": {
+        description: "Pesky pests can pose a threat to your wellbeing, let alone the condition of your house. They carry the potential to cause both illness and financial loss. Reclaim your territory with ILAJ's team of pest killing professionals. Our technicians will see that your property is ridden of all nasty creepy crawlies and help you to practice the best preventive measures to avoid an infestation. We're skilled in exterminating various pests from roaches to rats and ensure you the applied treatment is completely safe to yourself and your home.",
+        scopeOfWork: [
+          "Inspect potential areas of a breach where the property may be accessible to pests.",
+          "Examine any evidence of existing pests and tracking the source of the infestation.",
+          "Applying pesticide treatment thoroughly in all areas of the premises and potential routes.",
+          "Review and advise the customer if follow up treatment is required and instruct on prevention practices."
+        ],
+        inclusions: [
+          "Application of safe and DM approved pesticides for general pests as well as individual treatments for specific pests",
+          "The guarantee period of 90 days applies to all treatments",
+          "Odourless gel and spray treatments"
+        ],
+        exclusions: [
+          "Post-treatment cleaning",
+          "Relocation of furniture",
+          "Use of scaffolding or ladder equipment"
+        ]
+      },
+      "painting": {
+        description: "Liven up the atmosphere with a fresh coat of paint. Get rid of those stained and cracked walls with our professional painters and increase your standard of living with some new vibrant tones for your home.",
+        scopeOfWork: [
+          "Inspection of all walls for any cracks or crevices and any damage that may require minimal plastering.",
+          "Applying protective sheets over nearby furniture or items to avoid spillage or smudging of paint",
+          "Applying paint in layers per room",
+          "Removal and disposal of protective sheets and arrangement of any furniture back to its original location",
+          "Inspecting the newly painted walls and rooms for any errors, smudges or stains and ensuring the colour shade is uniform throughout."
+        ],
+        inclusions: [
+          "Jotun Fenomastic Paint",
+          "Plastering of minimal cracks in walls",
+          "All essential protective gear and painting tools"
+        ],
+        exclusions: [
+          "Painting of ceiling is excluded from the above-mentioned price. For ceiling painting, an additional 10% will be charged.",
+          "Any colour paints are other than common shades of White and Off-White",
+          "Any additional effects such as texturing"
+        ]
+      },
+      "packers-movers": {
+        description: "Our Professional movers and packers in the market make the whole process of home moving much more efficient and seamless. We handle every situation in a planned and proper manner while on the go. Regardless of your moving requirements, we take everything into account, strategize and execute plans to provide maximum coverage. Pre-site visits are always preferred. Our Price Inclusive of Basic Handyman Services. 3 days prior booking require for movers. Our Price inclusive of dismantling, Packing, moving and Professional Setup of stuffs from home to home / office to office. Insurance service cost you additional amount (Optional)",
+        scopeOfWork: [
+          "Pre-site visit and assessment",
+          "Professional dismantling of furniture and fixtures",
+          "Careful packing using quality materials",
+          "Safe transportation to destination",
+          "Professional setup and arrangement at new location"
+        ],
+        inclusions: [
+          "Basic handyman services",
+          "Dismantling, packing, moving and professional setup",
+          "Quality packing materials",
+          "Professional team and equipment"
+        ],
+        exclusions: [
+          "Insurance service (optional at additional cost)",
+          "Storage services",
+          "Cleaning services at old or new location"
+        ]
+      },
+      "handyman": {
+        description: "Professional handyman services for home repairs and maintenance tasks.",
+        scopeOfWork: [
+          "Assessment of repair and maintenance requirements",
+          "Professional execution of assigned tasks",
+          "Quality assurance and cleanup"
+        ],
+        inclusions: [
+          "Professional handyman service",
+          "Basic tools and equipment",
+          "Quality workmanship"
+        ],
+        exclusions: [
+          "Materials and spare parts",
+          "Electrical or plumbing work requiring licenses"
+        ]
+      }
+    };
+    
+    return serviceDetails[serviceType as keyof typeof serviceDetails] || serviceDetails["deep-cleaning"];
+  };
 
   const availableAddOns = (() => {
     const baseAddOns = [
@@ -795,7 +1070,83 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
                 ></div>
               </div>
             </CardContent>
-          </Card>
+            </Card>
+
+            {/* Service Details Section */}
+            <Card className="overflow-hidden">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Info className="h-6 w-6 text-primary" />
+                  Service Details
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Accordion type="single" collapsible className="w-full">
+                  <AccordionItem value="description">
+                    <AccordionTrigger className="flex items-center gap-2">
+                      <Info className="h-4 w-4" />
+                      Description
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p className="text-muted-foreground leading-relaxed">
+                        {getServiceDetails(serviceData.serviceType || "").description}
+                      </p>
+                    </AccordionContent>
+                  </AccordionItem>
+                  
+                  <AccordionItem value="scope">
+                    <AccordionTrigger className="flex items-center gap-2">
+                      <Clipboard className="h-4 w-4" />
+                      Scope of Work
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <ul className="space-y-2">
+                        {getServiceDetails(serviceData.serviceType || "").scopeOfWork.map((item, index) => (
+                          <li key={index} className="flex items-start gap-3">
+                            <Target className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                            <span className="text-muted-foreground">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </AccordionContent>
+                  </AccordionItem>
+                  
+                  <AccordionItem value="inclusions">
+                    <AccordionTrigger className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-green-600" />
+                      What's Included
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <ul className="space-y-2">
+                        {getServiceDetails(serviceData.serviceType || "").inclusions.map((item, index) => (
+                          <li key={index} className="flex items-start gap-3">
+                            <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span className="text-muted-foreground">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </AccordionContent>
+                  </AccordionItem>
+                  
+                  <AccordionItem value="exclusions">
+                    <AccordionTrigger className="flex items-center gap-2">
+                      <XCircle className="h-4 w-4 text-red-600" />
+                      What's Not Included
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <ul className="space-y-2">
+                        {getServiceDetails(serviceData.serviceType || "").exclusions.map((item, index) => (
+                          <li key={index} className="flex items-start gap-3">
+                            <XCircle className="h-4 w-4 text-red-600 mt-0.5 flex-shrink-0" />
+                            <span className="text-muted-foreground">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </CardContent>
+            </Card>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
