@@ -114,12 +114,13 @@ const Home = () => {
                   #1 Home Service Provider in UAE
                 </Badge>
                 <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
-                  Professional Services
-                  <span className="block text-secondary">At Your Doorstep</span>
+                  Your Property, 
+                  <span className="block text-secondary">Our Priority</span>
                 </h1>
                 <p className="text-xl text-white/90 leading-relaxed">
-                  From deep cleaning to AC maintenance, pest control to holiday home management - 
-                  we bring professional services directly to your door.
+                  We go beyond delivering services — we provide peace of mind. Whether it's a home, office, 
+                  or holiday home, our commitment is to care for every space with reliability, transparency, 
+                  and attention to detail. With us, you can trust that your property is always in safe and professional hands.
                 </p>
               </div>
               

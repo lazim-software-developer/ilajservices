@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Gallery from "./pages/Gallery";
+import ImageVideoGallery from "./pages/ImageVideoGallery";
 import Blogs from "./pages/Blogs";
 import Contact from "./pages/Contact";
 import ProfessionalServices from "./pages/services/ProfessionalServices";
@@ -31,6 +32,7 @@ const App = () => (
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/gallery" element={<Gallery />} />
+              <Route path="/image-video-gallery" element={<ImageVideoGallery />} />
               <Route path="/blogs" element={<Blogs />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/services/professional" element={<ProfessionalServices />} />

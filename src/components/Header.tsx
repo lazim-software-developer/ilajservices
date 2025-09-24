@@ -51,15 +51,15 @@ const Header = () => {
           <div className="flex items-center gap-4 text-muted-foreground">
             <div className="flex items-center gap-1">
               <Phone className="h-4 w-4" />
-              <span>+971 XX XXX XXXX</span>
+              <span>600 562624</span>
             </div>
             <div className="flex items-center gap-1">
               <Mail className="h-4 w-4" />
-              <span>info@ilajservices.com</span>
+              <span>info@ilaj.ae</span>
             </div>
           </div>
           <div className="text-muted-foreground">
-            Professional Services at Your Doorstep
+            Available 9-6 Mon-Sat | 1001, Suntech Tower, DSO, Dubai
           </div>
         </div>
 
