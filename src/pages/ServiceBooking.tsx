@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import EnhancedServiceBooking from "@/components/EnhancedServiceBooking";
+import GamifiedServiceBooking from "@/components/GamifiedServiceBooking";
 
 const ServiceBooking = () => {
   const { serviceId } = useParams();
@@ -32,7 +32,7 @@ const ServiceBooking = () => {
 
   const serviceData = getServiceData(serviceId || "deep-cleaning");
 
-  return <EnhancedServiceBooking serviceData={serviceData} />;
+  return <GamifiedServiceBooking serviceData={serviceData} />;
 };
 
 export default ServiceBooking;

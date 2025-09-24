@@ -9,66 +9,48 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  const heroImages = [
+    "/lovable-uploads/9c656186-628c-46d9-b263-7e372f0a8bf7.png",
+    "/lovable-uploads/00d8abb5-8a1c-40c2-87ee-3aa6583cf8cf.png",
+    "/lovable-uploads/e8bf1a42-abdc-4be6-92ec-5e86dafa7f90.png",
+    "/lovable-uploads/78a49ba5-8cb9-40d9-b04e-d409d61b4935.png",
+    "/lovable-uploads/9470a896-617e-4470-8f48-1b686adc6cc3.png",
+    "/lovable-uploads/a90bd9f1-897a-4fa1-9933-b4bb1e94b9de.png",
+    "/lovable-uploads/f44c00a2-be13-45d3-a1f6-b197c16afabb.png",
+    "/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.png",
+    "/lovable-uploads/5a4a612f-8971-4ca5-b85c-298b721a9f60.png"
+  ];
+
   const heroServices = [
     {
       title: "Deep Cleaning Service",
       description: "Complete deep cleaning for your home with professional equipment and eco-friendly products.",
-      image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=400&fit=crop",
+      image: "/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.png",
       price: "AED 150",
       rating: 4.9,
       duration: "3-4 hours",
       features: ["Deep Kitchen Clean", "Bathroom Sanitization", "Floor Care"],
-      href: "/services/professional/deep-cleaning"
-    },
-    {
-      title: "AC Service & Maintenance",
-      description: "Professional AC cleaning, maintenance, and repair services for optimal performance.",
-      image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&h=400&fit=crop",
-      price: "AED 120",
-      rating: 4.8,
-      duration: "2-3 hours",
-      features: ["Coil Cleaning", "Filter Replacement", "Performance Check"],
-      href: "/services/professional/ac-service"
-    },
-    {
-      title: "Maid Service",
-      description: "Reliable and professional maid service for regular home maintenance and cleaning.",
-      image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=600&h=400&fit=crop",
-      price: "AED 80",
-      rating: 4.7,
-      duration: "2-6 hours",
-      features: ["Regular Cleaning", "Flexible Schedule", "Trained Staff"],
-      href: "/services/professional/maid-service"
-    },
-    {
-      title: "Carpet & Upholstery Cleaning",
-      description: "Specialized cleaning for carpets, sofas, and upholstery using advanced techniques.",
-      image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=600&h=400&fit=crop",
-      price: "AED 100",
-      rating: 4.8,
-      duration: "1-2 hours",
-      features: ["Stain Removal", "Fabric Protection", "Quick Dry"],
-      href: "/services/professional/upholstery-cleaning"
+      href: "/booking/deep-cleaning"
     },
     {
       title: "Pest Control Service",
       description: "Comprehensive pest control solutions to keep your home safe and pest-free.",
-      image: "https://images.unsplash.com/photo-1572020525351-3ca5c5962200?w=600&h=400&fit=crop",
+      image: "/lovable-uploads/9470a896-617e-4470-8f48-1b686adc6cc3.png",
       price: "AED 200",
       rating: 4.9,
       duration: "1-2 hours",
       features: ["Safe Chemicals", "Long-lasting", "Follow-up Service"],
-      href: "/services/professional/pest-control"
+      href: "/booking/pest-control"
     },
     {
-      title: "Holiday Home Management",
-      description: "Complete property management and maintenance for holiday homes and short-term rentals.",
-      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop",
-      price: "AED 300",
-      rating: 4.9,
-      duration: "Flexible",
-      features: ["Property Check", "Guest Prep", "Maintenance"],
-      href: "/services/holiday-home"
+      title: "AC Duct Cleaning",
+      description: "Professional AC duct cleaning service for improved air quality and system efficiency.",
+      image: "/lovable-uploads/e8bf1a42-abdc-4be6-92ec-5e86dafa7f90.png",
+      price: "AED 250",
+      rating: 4.8,
+      duration: "2-3 hours",
+      features: ["Deep Duct Clean", "Improved Air Quality", "System Efficiency"],
+      href: "/booking/ac-duct-cleaning"
     }
   ];
 
@@ -145,12 +127,22 @@ const Home = () => {
             </div>
             
             <div className="relative">
-              <img 
-                src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=800&h=600&fit=crop" 
-                alt="Professional cleaning service"
-                className="rounded-2xl shadow-strong w-full"
-              />
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-medium">
+              <Carousel className="w-full">
+                <CarouselContent>
+                  {heroImages.map((image, index) => (
+                    <CarouselItem key={index}>
+                      <img 
+                        src={image} 
+                        alt={`Professional cleaning service ${index + 1}`}
+                        className="rounded-2xl shadow-strong w-full h-[400px] lg:h-[500px] object-cover"
+                      />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="left-4" />
+                <CarouselNext className="right-4" />
+              </Carousel>
+              <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-medium animate-fade-in">
                 <div className="flex items-center gap-3">
                   <div className="bg-secondary/10 rounded-full p-2">
                     <CheckCircle className="h-6 w-6 text-secondary" />
