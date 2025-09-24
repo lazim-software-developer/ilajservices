@@ -1,0 +1,232 @@
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Phone, Mail, MapPin, Clock, MessageSquare, Users } from "lucide-react";
+
+const Contact = () => {
+  const contactInfo = [
+    {
+      icon: Phone,
+      title: "Call Us",
+      details: ["+971 XX XXX XXXX", "+971 XX XXX XXXX"],
+      description: "Available 24/7 for urgent services"
+    },
+    {
+      icon: Mail,
+      title: "Email Us",
+      details: ["info@ilajservices.com", "support@ilajservices.com"],
+      description: "We'll respond within 2 hours"
+    },
+    {
+      icon: MapPin,
+      title: "Visit Us",
+      details: ["Dubai, UAE", "Abu Dhabi, UAE"],
+      description: "Service areas across Emirates"
+    },
+    {
+      icon: Clock,
+      title: "Working Hours",
+      details: ["Mon-Sun: 6:00 AM - 11:00 PM", "Emergency: 24/7"],
+      description: "Flexible scheduling available"
+    }
+  ];
+
+  const services = [
+    "Deep Cleaning",
+    "AC Service & Maintenance", 
+    "Maid Service",
+    "Carpet & Upholstery Cleaning",
+    "Pest Control",
+    "Holiday Home Management",
+    "Corporate Cleaning",
+    "Painting Services",
+    "Packers & Movers",
+    "Other"
+  ];
+
+  return (
+    <div className="min-h-screen py-8">
+      <div className="container mx-auto px-4">
+        {/* Header */}
+        <div className="text-center space-y-4 mb-16">
+          <Badge className="bg-primary/10 text-primary border-primary/20">
+            Get in Touch
+          </Badge>
+          <h1 className="text-3xl lg:text-5xl font-bold text-primary">
+            Contact ILAJ Services
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            Ready to book a service or have questions? We're here to help. 
+            Reach out to us through any of the channels below.
+          </p>
+        </div>
+
+        {/* Contact Info Cards */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {contactInfo.map((info, index) => (
+            <Card key={index} className="text-center group hover:shadow-medium transition-all duration-300">
+              <CardContent className="pt-8 pb-6">
+                <div className="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
+                  <info.icon className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">{info.title}</h3>
+                <div className="space-y-1 mb-2">
+                  {info.details.map((detail, i) => (
+                    <p key={i} className="font-medium text-foreground">{detail}</p>
+                  ))}
+                </div>
+                <p className="text-sm text-muted-foreground">{info.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Contact Form & Map */}
+        <div className="grid lg:grid-cols-2 gap-12 mb-16">
+          {/* Contact Form */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-2xl flex items-center gap-2">
+                <MessageSquare className="h-6 w-6 text-primary" />
+                Send us a Message
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="firstName">First Name *</Label>
+                  <Input id="firstName" placeholder="Enter your first name" />
+                </div>
+                <div>
+                  <Label htmlFor="lastName">Last Name *</Label>
+                  <Input id="lastName" placeholder="Enter your last name" />
+                </div>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="email">Email Address *</Label>
+                  <Input id="email" type="email" placeholder="Enter your email" />
+                </div>
+                <div>
+                  <Label htmlFor="phone">Phone Number *</Label>
+                  <Input id="phone" placeholder="Enter your phone number" />
+                </div>
+              </div>
+
+              <div>
+                <Label htmlFor="service">Service Interested In</Label>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a service" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {services.map((service, index) => (
+                      <SelectItem key={index} value={service.toLowerCase().replace(/\s+/g, '-')}>
+                        {service}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
+                <Label htmlFor="location">Location</Label>
+                <Input id="location" placeholder="Enter your location (Dubai, Abu Dhabi, etc.)" />
+              </div>
+
+              <div>
+                <Label htmlFor="message">Message</Label>
+                <Textarea 
+                  id="message" 
+                  placeholder="Tell us about your requirements, preferred timing, or any special requests..."
+                  rows={4}
+                />
+              </div>
+
+              <Button className="w-full bg-gradient-primary hover:bg-primary-hover">
+                Send Message
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Quick Actions & Info */}
+          <div className="space-y-6">
+            {/* Quick Booking */}
+            <Card className="bg-gradient-secondary text-white">
+              <CardContent className="p-8">
+                <h3 className="text-2xl font-bold mb-4">Quick Booking</h3>
+                <p className="text-white/90 mb-6">
+                  Need immediate service? Call us directly for same-day booking and emergency services.
+                </p>
+                <div className="space-y-3">
+                  <Button className="w-full bg-white text-secondary hover:bg-gray-50">
+                    <Phone className="h-4 w-4 mr-2" />
+                    Call Now: +971 XX XXX XXXX
+                  </Button>
+                  <Button variant="outline" className="w-full border-white text-white hover:bg-white hover:text-secondary">
+                    <MessageSquare className="h-4 w-4 mr-2" />
+                    WhatsApp Us
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* FAQ */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Users className="h-6 w-6 text-primary" />
+                  Frequently Asked
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <h4 className="font-semibold mb-1">Do you provide same-day service?</h4>
+                  <p className="text-sm text-muted-foreground">Yes, we offer same-day service based on availability. Call us to check.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-1">Are your cleaning products eco-friendly?</h4>
+                  <p className="text-sm text-muted-foreground">Absolutely! We use only eco-friendly and safe cleaning products.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-1">Do you serve all areas in UAE?</h4>
+                  <p className="text-sm text-muted-foreground">We cover major areas in Dubai, Abu Dhabi, and expanding to other emirates.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-1">What if I'm not satisfied with the service?</h4>
+                  <p className="text-sm text-muted-foreground">We offer 100% satisfaction guarantee with free re-service if needed.</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="bg-gradient-primary rounded-2xl text-white p-8 lg:p-12 text-center">
+          <h2 className="text-2xl lg:text-4xl font-bold mb-4">
+            Ready to Get Started?
+          </h2>
+          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+            Join thousands of satisfied customers across the UAE. Book your service today 
+            and experience the ILAJ difference.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="bg-secondary hover:bg-secondary-hover text-secondary-foreground">
+              Book Service Online
+            </Button>
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
+              Get Free Quote
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Contact;
