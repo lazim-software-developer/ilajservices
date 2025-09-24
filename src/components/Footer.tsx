@@ -20,10 +20,6 @@ const Footer = () => {
     { name: "Get Quote", href: "/contact" }
   ];
 
-  const areas = [
-    "Dubai Marina", "Downtown Dubai", "Business Bay", "JBR", 
-    "Abu Dhabi City", "Al Reem Island", "Sharjah", "Ajman"
-  ];
 
   return (
     <footer className="bg-primary text-primary-foreground">
@@ -96,40 +92,26 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact & Service Areas */}
-          <div className="space-y-6">
-            <div>
-              <h4 className="font-semibold text-lg mb-4">Contact Info</h4>
-              <div className="space-y-3">
-                <div className="flex items-center gap-2 text-sm">
-                  <Phone className="h-4 w-4 text-secondary" />
-                  <span>+971 XX XXX XXXX</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <Mail className="h-4 w-4 text-secondary" />
-                  <span>info@ilajservices.com</span>
-                </div>
-                <div className="flex items-start gap-2 text-sm">
-                  <MapPin className="h-4 w-4 text-secondary mt-0.5" />
-                  <span>Dubai, Abu Dhabi & Sharjah, UAE</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <Clock className="h-4 w-4 text-secondary" />
-                  <span>24/7 Available</span>
-                </div>
+          {/* Contact Info */}
+          <div>
+            <h4 className="font-semibold text-lg mb-4">Contact Info</h4>
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 text-sm">
+                <Phone className="h-4 w-4 text-secondary" />
+                <span>600 562624</span>
               </div>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-base mb-3">Service Areas</h4>
-              <div className="flex flex-wrap gap-2">
-                {areas.slice(0, 4).map((area, index) => (
-                  <span key={index} className="text-xs bg-primary-foreground/10 px-2 py-1 rounded">
-                    {area}
-                  </span>
-                ))}
+              <div className="flex items-center gap-2 text-sm">
+                <Mail className="h-4 w-4 text-secondary" />
+                <span>info@ilaj.ae</span>
               </div>
-              <span className="text-xs text-primary-foreground/60 mt-1 block">+4 more areas</span>
+              <div className="flex items-start gap-2 text-sm">
+                <MapPin className="h-4 w-4 text-secondary mt-0.5" />
+                <span>1001, Suntech Tower, DSO, Dubai</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <Clock className="h-4 w-4 text-secondary" />
+                <span>Mon-Sat: 9AM-6PM</span>
+              </div>
             </div>
           </div>
         </div>

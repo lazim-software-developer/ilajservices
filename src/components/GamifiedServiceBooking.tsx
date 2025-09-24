@@ -57,10 +57,16 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
   const [showCelebration, setShowCelebration] = useState(false);
 
   const timeSlots = [
-    "08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM",
-    "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM",
-    "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM"
+    "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", 
+    "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM"
   ];
+
+  // Function to get minimum date (22 hours from now)
+  const getMinimumDate = () => {
+    const now = new Date();
+    const minDate = new Date(now.getTime() + (22 * 60 * 60 * 1000)); // 22 hours from now
+    return minDate;
+  };
 
   const getServiceDetails = (serviceType: string) => {
     const serviceDetails = {
@@ -1072,81 +1078,6 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
             </CardContent>
             </Card>
 
-            {/* Service Details Section */}
-            <Card className="overflow-hidden">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Info className="h-6 w-6 text-primary" />
-                  Service Details
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Accordion type="single" collapsible className="w-full">
-                  <AccordionItem value="description">
-                    <AccordionTrigger className="flex items-center gap-2">
-                      <Info className="h-4 w-4" />
-                      Description
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <p className="text-muted-foreground leading-relaxed">
-                        {getServiceDetails(serviceData.serviceType || "").description}
-                      </p>
-                    </AccordionContent>
-                  </AccordionItem>
-                  
-                  <AccordionItem value="scope">
-                    <AccordionTrigger className="flex items-center gap-2">
-                      <Clipboard className="h-4 w-4" />
-                      Scope of Work
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <ul className="space-y-2">
-                        {getServiceDetails(serviceData.serviceType || "").scopeOfWork.map((item, index) => (
-                          <li key={index} className="flex items-start gap-3">
-                            <Target className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                            <span className="text-muted-foreground">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </AccordionContent>
-                  </AccordionItem>
-                  
-                  <AccordionItem value="inclusions">
-                    <AccordionTrigger className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-green-600" />
-                      What's Included
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <ul className="space-y-2">
-                        {getServiceDetails(serviceData.serviceType || "").inclusions.map((item, index) => (
-                          <li key={index} className="flex items-start gap-3">
-                            <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
-                            <span className="text-muted-foreground">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </AccordionContent>
-                  </AccordionItem>
-                  
-                  <AccordionItem value="exclusions">
-                    <AccordionTrigger className="flex items-center gap-2">
-                      <XCircle className="h-4 w-4 text-red-600" />
-                      What's Not Included
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <ul className="space-y-2">
-                        {getServiceDetails(serviceData.serviceType || "").exclusions.map((item, index) => (
-                          <li key={index} className="flex items-start gap-3">
-                            <XCircle className="h-4 w-4 text-red-600 mt-0.5 flex-shrink-0" />
-                            <span className="text-muted-foreground">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              </CardContent>
-            </Card>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -1290,7 +1221,9 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
                         mode="single"
                         selected={selectedDate}
                         onSelect={setSelectedDate}
+                        disabled={(date) => date < getMinimumDate()}
                         initialFocus
+                        className="pointer-events-auto"
                       />
                     </PopoverContent>
                   </Popover>
@@ -1454,8 +1387,8 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
                   // Here you would redirect to payment gateway
                 }}
               >
-                <ShoppingCart className="h-4 w-4 mr-2" />
-                Proceed to Payment
+                <ShoppingCart className="h-4 w-4 mr-2 group-hover:animate-bounce" />
+                Proceed to Payment - AED {getFinalPrice().toFixed(2)}
               </Button>
               
               <div className="text-center text-xs text-muted-foreground">
@@ -1465,6 +1398,82 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
           </Card>
         </div>
       </div>
+
+      {/* Service Details Section - Moved to Bottom */}
+      <Card className="overflow-hidden mt-8">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Info className="h-6 w-6 text-primary" />
+            Service Details
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="description">
+              <AccordionTrigger className="flex items-center gap-2">
+                <Info className="h-4 w-4" />
+                Description
+              </AccordionTrigger>
+              <AccordionContent>
+                <p className="text-muted-foreground leading-relaxed">
+                  {getServiceDetails(serviceData.serviceType || "").description}
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+            
+            <AccordionItem value="scope">
+              <AccordionTrigger className="flex items-center gap-2">
+                <Clipboard className="h-4 w-4" />
+                Scope of Work
+              </AccordionTrigger>
+              <AccordionContent>
+                <ul className="space-y-2">
+                  {getServiceDetails(serviceData.serviceType || "").scopeOfWork.map((item, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <Target className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                      <span className="text-muted-foreground">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+            
+            <AccordionItem value="inclusions">
+              <AccordionTrigger className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4 text-green-600" />
+                What's Included
+              </AccordionTrigger>
+              <AccordionContent>
+                <ul className="space-y-2">
+                  {getServiceDetails(serviceData.serviceType || "").inclusions.map((item, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-muted-foreground">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+            
+            <AccordionItem value="exclusions">
+              <AccordionTrigger className="flex items-center gap-2">
+                <XCircle className="h-4 w-4 text-red-600" />
+                What's Not Included
+              </AccordionTrigger>
+              <AccordionContent>
+                <ul className="space-y-2">
+                  {getServiceDetails(serviceData.serviceType || "").exclusions.map((item, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <XCircle className="h-4 w-4 text-red-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-muted-foreground">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </CardContent>
+      </Card>
     </div>
   );
 };

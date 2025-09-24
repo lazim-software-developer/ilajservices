@@ -12,26 +12,26 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Call Us",
-      details: ["+971 XX XXX XXXX", "+971 XX XXX XXXX"],
-      description: "Available 24/7 for urgent services"
+      details: ["600 562624"],
+      description: "Available Mon-Sat: 9AM-6PM"
+    },
+    {
+      icon: MessageSquare,
+      title: "WhatsApp",
+      details: ["600 562624"],
+      description: "Quick response guaranteed"
     },
     {
       icon: Mail,
       title: "Email Us",
-      details: ["info@ilajservices.com", "support@ilajservices.com"],
+      details: ["info@ilaj.ae"],
       description: "We'll respond within 2 hours"
     },
     {
       icon: MapPin,
       title: "Visit Us",
-      details: ["Dubai, UAE", "Abu Dhabi, UAE"],
-      description: "Service areas across Emirates"
-    },
-    {
-      icon: Clock,
-      title: "Working Hours",
-      details: ["Mon-Sun: 6:00 AM - 11:00 PM", "Emergency: 24/7"],
-      description: "Flexible scheduling available"
+      details: ["1001, Suntech Tower, DSO, Dubai"],
+      description: "Our office location"
     }
   ];
 
@@ -166,7 +166,7 @@ const Contact = () => {
                 <div className="space-y-3">
                   <Button className="w-full bg-white text-secondary hover:bg-gray-50">
                     <Phone className="h-4 w-4 mr-2" />
-                    Call Now: +971 XX XXX XXXX
+                    Call Now: 600 562624
                   </Button>
                   <Button variant="outline" className="w-full border-white text-white hover:bg-white hover:text-secondary">
                     <MessageSquare className="h-4 w-4 mr-2" />
