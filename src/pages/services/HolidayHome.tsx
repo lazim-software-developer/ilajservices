@@ -8,89 +8,124 @@ const HolidayHome = () => {
   const packages = [
     {
       title: "One-Time Cleaning",
-      price: "AED 200",
-      description: "Perfect for single property preparation",
+      price: "AED 180",
+      originalPrice: "AED 240",
+      description: "One-time Service",
       features: [
-        "Complete property cleaning",
-        "Linen change & arrangement",
-        "Bathroom sanitization",
-        "Kitchen deep clean",
-        "Floor mopping & vacuuming",
-        "Balcony/Outdoor cleaning"
+        "1 cleaning Session",
+        "Save AED 60"
       ],
       popular: false
     },
     {
       title: "Basic Pack",
-      price: "AED 350/month",
-      description: "Essential monthly maintenance",
+      price: "AED 500",
+      originalPrice: "AED 1080",
+      description: "5 cleaning Service",
       features: [
-        "Bi-weekly cleaning service",
-        "Linen management",
-        "Basic maintenance check",
-        "Guest checkout cleaning",
-        "Property condition report",
-        "Emergency response"
+        "5 Check-out cleanings",
+        "AED 100 per cleaning",
+        "Valid for 6 months",
+        "Flexible scheduling",
+        "Special Price for Additional Services",
+        "Save AED 580"
       ],
       popular: false
     },
     {
-      title: "Standard Pack",
-      price: "AED 550/month",
-      description: "Comprehensive property management",
+      title: "Mid Pack",
+      price: "AED 900",
+      originalPrice: "AED 1800",
+      description: "10 cleaning Service",
       features: [
-        "Weekly cleaning service",
-        "Complete linen service",
-        "Monthly deep cleaning",
-        "Guest welcome preparation",
-        "Maintenance coordination",
-        "Property inspection reports",
-        "24/7 emergency support"
+        "10 Check-out cleanings",
+        "AED 90 per cleaning",
+        "Valid for 6 months",
+        "Flexible scheduling",
+        "Dedicated account manager",
+        "Special Price for additional Services",
+        "Save AED 900"
       ],
       popular: true
     },
     {
       title: "Custom-Tailored Pack",
-      price: "From AED 700",
-      description: "Fully customized to your needs",
+      price: "Contact Us",
+      originalPrice: "Special Price",
+      description: "Annual Contract",
       features: [
-        "Flexible cleaning schedule",
-        "Personalized service plan",
-        "Premium linen options",
-        "Concierge services",
-        "Guest experience management",
-        "Property upgrade suggestions",
-        "Dedicated account manager"
+        "Valid for 12 months",
+        "Flexible scheduling",
+        "Dedicated account manager",
+        "Dedicated Housekeeping Team",
+        "Special Price for additional Services"
       ],
       popular: false
     }
   ];
 
   const whatsIncluded = [
-    "Professional cleaning team",
-    "Eco-friendly cleaning products",
-    "Quality bed linen & towels",
-    "Bathroom essentials restocking",
-    "Kitchen amenities check",
-    "Property security inspection",
-    "Guest preparation checklist",
-    "Damage assessment report"
+    "Complete cleaning with professional materials and equipment",
+    "Premium after-cleaning air fragrance",
+    "Linen & amenities setup (provided by the holiday home operator)",
+    "Unit inspection with a detailed report",
+    "Before, during, and after cleaning photos for records"
   ];
 
   const termsConditions = [
-    "Minimum 3-month contract for monthly packages",
-    "24-hour notice required for service cancellation",
-    "Additional charges apply for excessive cleaning requirements",
-    "Property access details must be provided in advance",
-    "Damage beyond normal wear will be charged separately",
-    "Service areas limited to Dubai, Abu Dhabi, and Sharjah"
+    "Bookings must be made at least 24 hours in advance",
+    "Linen and amenities to be provided by the customer",
+    "Full payment required before service delivery",
+    "Any service-related issues must be reported within 24 hours of completion"
   ];
 
-  const pricingBySize = [
-    { size: "Studio (up to 500 sq ft)", basic: "AED 200", standard: "AED 300", premium: "AED 400" },
-    { size: "1 Bedroom (500-800 sq ft)", basic: "AED 250", standard: "AED 350", premium: "AED 450" },
-    { size: "2 Bedroom (800-1200 sq ft)", basic: "AED 350", standard: "AED 450", premium: "AED 550" },
-    { size: "3+ Bedroom (1200+ sq ft)", basic: "AED 450", standard: "AED 550", premium: "AED 650" }
+  const sopSteps = [
+    {
+      title: "Pre-Cleaning Preparation",
+      subtitle: "Complete turnover cleaning between guests",
+      items: [
+        "Confirm booking and service scope",
+        "Gather all cleaning supplies and equipment", 
+        "Inspect property condition before starting"
+      ]
+    },
+    {
+      title: "Cleaning Execution", 
+      subtitle: "Ongoing maintenance and upkeep",
+      items: [
+        "Dusting, vacuuming, and mopping of all rooms",
+        "Deep cleaning of kitchen and bathrooms",
+        "Glass, mirror, and surface polishing",
+        "Trash removal and disposal"
+      ]
+    },
+    {
+      title: "Linen & Amenities Setup",
+      subtitle: "",
+      items: [
+        "Bed-making with fresh linen (provided by operator)",
+        "Placement of towels and amenities as per checklist",
+        "Arrangement of living area to guest-ready standards"
+      ]
+    },
+    {
+      title: "Finishing Touches",
+      subtitle: "",
+      items: [
+        "Application of premium air fragrance",
+        "Final inspection of all rooms for quality assurance",
+        "Capturing \"after-cleaning\" photos for reporting"
+      ]
+    },
+    {
+      title: "Post-Service Reporting",
+      subtitle: "",
+      items: [
+        "Detailed housekeeping report with before & after images",
+        "Notification of any damages or maintenance concerns",
+        "Customer confirmation and feedback request"
+      ]
+    }
   ];
 
   const whyChooseUs = [
@@ -142,17 +177,17 @@ const HolidayHome = () => {
             Holiday Home Management
           </Badge>
           <h1 className="text-3xl lg:text-5xl font-bold text-primary">
-            Professional Holiday Home Services
+            Holiday Home Housekeeping
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Complete property management and cleaning services for holiday homes, short-term rentals,
-            and vacation properties. Keep your guests happy and your property pristine.
+            Keeping your holiday home spotless is our priority. At ILAJ, we provide tailored housekeeping solutions designed for holiday home operators — from one-time cleaning to ongoing packages that ensure every guest walks into a fresh, welcoming space.
           </p>
         </div>
 
         {/* Service Packages */}
         <div className="mb-20">
-          <h2 className="text-3xl font-bold text-center mb-12">Choose Your Service Package</h2>
+          <h2 className="text-3xl font-bold text-center mb-4">Holiday Home Housekeeping Packages</h2>
+          <p className="text-center text-muted-foreground mb-12">Save money and schedule anytime with our flexible bulk packages</p>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {packages.map((pkg, index) => (
               <Card key={index} className={`relative ${pkg.popular ? 'border-secondary shadow-medium scale-105' : ''}`}>
@@ -163,7 +198,12 @@ const HolidayHome = () => {
                 )}
                 <CardHeader className="text-center">
                   <CardTitle className="text-xl">{pkg.title}</CardTitle>
-                  <div className="text-2xl font-bold text-primary">{pkg.price}</div>
+                  <div className="space-y-1">
+                    <div className="text-2xl font-bold text-primary">{pkg.price}</div>
+                    {pkg.originalPrice && pkg.originalPrice !== pkg.price && (
+                      <div className="text-sm text-muted-foreground line-through">{pkg.originalPrice}</div>
+                    )}
+                  </div>
                   <p className="text-sm text-muted-foreground">{pkg.description}</p>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -178,8 +218,9 @@ const HolidayHome = () => {
                   </ul>
                   <Button
                     className={`w-full ${pkg.popular ? 'bg-secondary hover:bg-secondary-hover' : 'bg-primary hover:bg-primary-hover'}`}
+                    onClick={() => window.location.href = '/booking/holiday-home-additional'}
                   >
-                    Select Package
+                    {pkg.title === "Custom-Tailored Pack" ? "Contact Us" : "Select Package"}
                   </Button>
                 </CardContent>
               </Card>
@@ -209,71 +250,31 @@ const HolidayHome = () => {
         <Card className="mb-20">
           <CardHeader>
             <CardTitle className="text-2xl text-center">🧹 ILAJ Housekeeping SOP</CardTitle>
+            <p className="text-center text-muted-foreground">
+              Our housekeeping services follow a structured Standard Operating Procedure to guarantee consistency and quality across every property
+            </p>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div>
-                <h4 className="font-semibold mb-2 text-primary">Pre-Arrival Preparation</h4>
-                <ul className="text-sm space-y-1 text-muted-foreground">
-                  <li>• Complete property cleaning</li>
-                  <li>• Fresh linen setup</li>
-                  <li>• Amenities restocking</li>
-                  <li>• Quality inspection</li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-2 text-primary">During Stay Support</h4>
-                <ul className="text-sm space-y-1 text-muted-foreground">
-                  <li>• 24/7 emergency response</li>
-                  <li>• Maintenance coordination</li>
-                  <li>• Guest service support</li>
-                  <li>• Issue resolution</li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-2 text-primary">Post-Checkout Process</h4>
-                <ul className="text-sm space-y-1 text-muted-foreground">
-                  <li>• Damage assessment</li>
-                  <li>• Deep cleaning service</li>
-                  <li>• Inventory check</li>
-                  <li>• Report generation</li>
-                </ul>
-              </div>
+              {sopSteps.map((step, index) => (
+                <div key={index} className="space-y-3">
+                  <div>
+                    <h4 className="font-semibold text-primary">{step.title}</h4>
+                    {step.subtitle && (
+                      <p className="text-sm text-muted-foreground italic">{step.subtitle}</p>
+                    )}
+                  </div>
+                  <ul className="text-sm space-y-1 text-muted-foreground">
+                    {step.items.map((item, i) => (
+                      <li key={i}>• {item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
           </CardContent>
         </Card>
 
-        {/* Pricing by Property Size */}
-        <div className="mb-20">
-          <h2 className="text-3xl font-bold text-center mb-12">Pricing by Property Size</h2>
-          <Card>
-            <CardContent className="p-0">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-muted/50">
-                    <tr>
-                      <th className="text-left p-4">Property Size</th>
-                      <th className="text-left p-4">Basic Clean</th>
-                      <th className="text-left p-4">Standard Clean</th>
-                      <th className="text-left p-4">Premium Clean</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {pricingBySize.map((row, index) => (
-                      <tr key={index} className="border-t">
-                        <td className="p-4 font-medium">{row.size}</td>
-                        <td className="p-4 text-primary font-semibold">{row.basic}</td>
-                        <td className="p-4 text-primary font-semibold">{row.standard}</td>
-                        <td className="p-4 text-primary font-semibold">{row.premium}</td>
-                      </tr>
-                    ))
-                    }
-                  </tbody>
-                </table>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
 
         {/* Why Property Managers Choose ILAJ */}
         <div className="mb-20">
@@ -319,7 +320,7 @@ const HolidayHome = () => {
           </h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
             Join hundreds of property managers who trust ILAJ for their holiday home management.
-            Get started today and ensure your guests have the perfect experience.
+            While booking any package, you can request additional services on the next page.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-white text-secondary hover:bg-gray-50">
