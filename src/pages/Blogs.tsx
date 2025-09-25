@@ -84,7 +84,7 @@ const Blogs = () => {
     "Property Management",
     "Green Living",
     "Pest Control",
-    "Corporate"
+    "Business"
   ];
 
   return (
@@ -175,11 +175,10 @@ const Blogs = () => {
         {/* Newsletter Section */}
         <div className="bg-gradient-primary rounded-2xl text-white p-8 lg:p-12 text-center">
           <h2 className="text-2xl lg:text-4xl font-bold mb-4">
-            Never Miss a Cleaning Tip
+            Stay Inspired, Stay Fresh
           </h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            Subscribe to our newsletter for regular updates on home maintenance tips, 
-            exclusive offers, and the latest cleaning techniques.
+            Join the ILAJ circle and get more than just updates — receive practical care tips for homes, offices, and holiday stays, exclusive offers crafted for you, and insider know-how that keeps every space at its best.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
             <Input 
