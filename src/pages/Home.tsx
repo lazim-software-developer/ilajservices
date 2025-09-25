@@ -27,7 +27,6 @@ const Home = () => {
       description: "Complete deep cleaning for your home with professional equipment and eco-friendly products.",
       image: "/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.png",
       price: "AED 150",
-      rating: 4.9,
       duration: "3-4 hours",
       features: ["Deep Kitchen Clean", "Bathroom Sanitization", "Floor Care"],
       href: "/booking/deep-cleaning"
@@ -37,7 +36,7 @@ const Home = () => {
       description: "Comprehensive pest control solutions to keep your home safe and pest-free.",
       image: "/lovable-uploads/9470a896-617e-4470-8f48-1b686adc6cc3.png",
       price: "AED 200",
-           duration: "1-2 hours",
+      duration: "1-2 hours",
       features: ["Safe Chemicals", "Long-lasting", "Follow-up Service"],
       href: "/booking/pest-control"
     },
@@ -46,7 +45,6 @@ const Home = () => {
       description: "Professional AC duct cleaning service for improved air quality and system efficiency.",
       image: "/lovable-uploads/e8bf1a42-abdc-4be6-92ec-5e86dafa7f90.png",
       price: "AED 250",
-      rating: 4.8,
       duration: "2-3 hours",
       features: ["Deep Duct Clean", "Improved Air Quality", "System Efficiency"],
       href: "/booking/ac-duct-cleaning"
