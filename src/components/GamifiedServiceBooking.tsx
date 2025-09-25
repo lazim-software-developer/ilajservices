@@ -52,9 +52,8 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
   const [numberOfBathrooms, setNumberOfBathrooms] = useState(1);
   const [numberOfUnits, setNumberOfUnits] = useState(1);
   const [showDiscountAnimation, setShowDiscountAnimation] = useState(false);
-  const [showAddOnPulse, setShowAddOnPulse] = useState(false);
-  const [completedSteps, setCompletedSteps] = useState(0);
   const [showCelebration, setShowCelebration] = useState(false);
+  const [completedSteps, setCompletedSteps] = useState(0);
 
   const timeSlots = [
     "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", 
