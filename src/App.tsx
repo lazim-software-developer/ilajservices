@@ -30,6 +30,7 @@ import BookingManagement from "./pages/admin/BookingManagement";
 import ServiceManagement from "./pages/admin/ServiceManagement";
 import ServiceProviders from "./pages/admin/ServiceProviders";
 import FinanceManagement from "./pages/admin/FinanceManagement";
+import Reports from "./pages/admin/Reports";
 
 const queryClient = new QueryClient();
 
@@ -61,11 +62,13 @@ const App = () => (
               
               {/* Services & Providers */}
               <Route path="services" element={<ServiceManagement />} />
+              <Route path="service-providers" element={<ServiceProviders />} />
               <Route path="vendors" element={<ServiceProviders />} />
               <Route path="workers" element={<div className="p-6"><h1 className="text-3xl font-bold">Workers</h1><p>Worker management coming soon</p></div>} />
               <Route path="pricing" element={<div className="p-6"><h1 className="text-3xl font-bold">Pricing Rules</h1><p>Dynamic pricing rules coming soon</p></div>} />
               
               {/* Finance & Accounting */}
+              <Route path="finance" element={<FinanceManagement />} />
               <Route path="invoices" element={<div className="p-6"><h1 className="text-3xl font-bold">Invoices</h1><p>Invoice management coming soon</p></div>} />
               <Route path="payments" element={<div className="p-6"><h1 className="text-3xl font-bold">Payments</h1><p>Payment management coming soon</p></div>} />
               <Route path="ledger" element={<div className="p-6"><h1 className="text-3xl font-bold">Ledger</h1><p>General ledger coming soon</p></div>} />
@@ -73,7 +76,7 @@ const App = () => (
               
               {/* Marketing & Analytics */}
               <Route path="promotions" element={<div className="p-6"><h1 className="text-3xl font-bold">Promotions</h1><p>Promotion management coming soon</p></div>} />
-              <Route path="reports" element={<div className="p-6"><h1 className="text-3xl font-bold">Reports</h1><p>Reporting dashboard coming soon</p></div>} />
+              <Route path="reports" element={<Reports />} />
               <Route path="analytics" element={<div className="p-6"><h1 className="text-3xl font-bold">Analytics</h1><p>Business analytics coming soon</p></div>} />
               
               {/* System */}
@@ -84,7 +87,6 @@ const App = () => (
               {/* Legacy routes for backward compatibility */}
               <Route path="daily-logs" element={<DailyLogs />} />
               <Route path="providers" element={<ServiceProviders />} />
-              <Route path="finance" element={<FinanceManagement />} />
             </Route>
 
             {/* Public Routes */}
@@ -102,7 +104,7 @@ const App = () => (
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/services/professional" element={<ProfessionalServices />} />
                     <Route path="/services/professional/:serviceId" element={<ServiceBooking />} />
-                    <Route path="/booking/:serviceId" element={<ServiceBooking />} />
+                    <Route path="/service-booking" element={<ServiceBooking />} />
                     <Route path="/services/holiday-home" element={<HolidayHome />} />
                     <Route path="/services/holiday-home/:serviceId" element={<ServiceBooking />} />
                     <Route path="/services/corporate" element={<CorporateSolution />} />

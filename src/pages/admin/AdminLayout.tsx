@@ -47,24 +47,21 @@ const AdminSidebar = () => {
       title: 'Booking & Operations',
       items: [
         { name: 'Bookings', href: '/admin/bookings', icon: Calendar },
-        { name: 'Task Manager', href: '/admin/tasks', icon: FileText },
-        { name: 'Scheduling', href: '/admin/scheduling', icon: Calendar }
+        { name: 'Daily Logs', href: '/admin/daily-logs', icon: FileText },
       ]
     },
     {
       title: 'Services & Providers',
       items: [
         { name: 'Service Catalog', href: '/admin/services', icon: Package },
+        { name: 'Service Providers', href: '/admin/service-providers', icon: UserCheck },
         { name: 'Finance Management', href: '/admin/finance', icon: DollarSign },
       ]
     },
     {
       title: 'Finance & Accounting',
       items: [
-        { name: 'Invoices', href: '/admin/invoices', icon: FileText },
-        { name: 'Payments', href: '/admin/payments', icon: DollarSign },
-        { name: 'Ledger', href: '/admin/ledger', icon: TrendingUp },
-        { name: 'VAT Management', href: '/admin/vat', icon: FileText }
+        { name: 'Reports', href: '/admin/reports', icon: TrendingUp },
       ]
     },
     {
@@ -72,7 +69,6 @@ const AdminSidebar = () => {
       items: [
         { name: 'Promotions', href: '/admin/promotions', icon: Package },
         { name: 'Reports', href: '/admin/reports', icon: TrendingUp },
-        { name: 'Analytics', href: '/admin/analytics', icon: TrendingUp }
       ]
     },
     {

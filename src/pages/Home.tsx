@@ -34,6 +34,9 @@ const Home = () => {
     "/lovable-uploads/5a4a612f-8971-4ca5-b85c-298b721a9f60.png"
   ];
 
+  // Use dynamic services from database
+  const featuredServices = getServicesByCategory('Home').slice(0, 3);
+
   const stats = [
     { icon: Users, value: "10,000+", label: "Happy Customers" },
     { icon: CheckCircle, value: "50,000+", label: "Services Completed" },
@@ -155,9 +158,17 @@ const Home = () => {
 
           <Carousel className="w-full">
             <CarouselContent className="-ml-2 md:-ml-4">
-              {heroServices.map((service, index) => (
+              {featuredServices.map((service, index) => (
                 <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-                  <ServiceCard {...service} />
+                  <ServiceCard 
+                    title={service.name}
+                    description={service.description}
+                    image={service.image_url || "/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.png"}
+                    price={`AED ${service.base_price}`}
+                    duration={`${Math.round(service.duration_minutes / 60)} hours`}
+                    features={service.features}
+                    href={`/service-booking?service=${service.id}`}
+                  />
                 </CarouselItem>
               ))}
             </CarouselContent>

@@ -1,10 +1,17 @@
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import ServiceCard from "@/components/ServiceCard";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { CheckCircle, Clock, Star, Shield, Zap, Users } from "lucide-react";
+import { useServices } from "@/hooks/useServices";
 
 const ProfessionalServices = () => {
-  const services = [
+  const { services: allServices, getServicesByCategory, getAddonServices, loading } = useServices();
+  const homeServices = getServicesByCategory('Home');
+  const addonServices = getAddonServices();
+
+  const staticServices = [
     {
       title: "Maid Service",
       description: "Professional and reliable maid service for regular home maintenance and cleaning.",
@@ -173,7 +180,7 @@ const ProfessionalServices = () => {
 
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
-          {services.map((service, index) => (
+          {staticServices.map((service, index) => (
             <ServiceCard key={index} {...service} />
           ))}
         </div>
