@@ -37,8 +37,7 @@ const Home = () => {
       description: "Comprehensive pest control solutions to keep your home safe and pest-free.",
       image: "/lovable-uploads/9470a896-617e-4470-8f48-1b686adc6cc3.png",
       price: "AED 200",
-      rating: 4.9,
-      duration: "1-2 hours",
+           duration: "1-2 hours",
       features: ["Safe Chemicals", "Long-lasting", "Follow-up Service"],
       href: "/booking/pest-control"
     },
