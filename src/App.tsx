@@ -15,6 +15,11 @@ import Contact from "./pages/Contact";
 import ProfessionalServices from "./pages/services/ProfessionalServices";
 import HolidayHome from "./pages/services/HolidayHome";
 import CorporateSolution from "./pages/services/CorporateSolution";
+import PestControl from "./pages/services/PestControl";
+import UpholsteryCleaningService from "./pages/services/UpholsteryCleaningService";
+import CarpetCleaningService from "./pages/services/CarpetCleaningService";
+import KitchenDeepCleaningService from "./pages/services/KitchenDeepCleaningService";
+import BathroomDeepCleaningService from "./pages/services/BathroomDeepCleaningService";
 import ServiceBooking from "./pages/ServiceBooking";
 import NotFound from "./pages/NotFound";
 import AdminLayout from "./pages/admin/AdminLayout";
@@ -105,6 +110,13 @@ const App = () => (
                     <Route path="/services/holiday-home/:serviceId" element={<ServiceBooking />} />
                     <Route path="/services/corporate" element={<CorporateSolution />} />
                     <Route path="/services/corporate/:serviceId" element={<ServiceBooking />} />
+                    
+                    {/* Individual Service Pages */}
+                    <Route path="/services/pest-control" element={<PestControl />} />
+                    <Route path="/services/upholstery-cleaning" element={<UpholsteryCleaningService />} />
+                    <Route path="/services/carpet-cleaning" element={<CarpetCleaningService />} />
+                    <Route path="/services/kitchen-deep-cleaning" element={<KitchenDeepCleaningService />} />
+                    <Route path="/services/bathroom-deep-cleaning" element={<BathroomDeepCleaningService />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </main>

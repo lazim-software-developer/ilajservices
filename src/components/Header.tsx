@@ -13,27 +13,17 @@ const Header = () => {
     {
       title: "Professional Home Service",
       href: "/services/professional",
-      description: "Comprehensive home maintenance and cleaning services delivered by trained professionals",
-      services: [
-        "Maid Service", "Deep Cleaning", "Upholstery Cleaning", "Carpet Cleaning",
-        "Kitchen Deep Cleaning", "Bathroom Deep Cleaning", "AC Service", "Pest Control"
-      ]
+      description: "Comprehensive home maintenance and cleaning services delivered by trained professionals"
     },
     {
       title: "Holiday Home",
       href: "/services/holiday-home",
-      description: "Specialized cleaning and maintenance for vacation properties",
-      services: [
-        "One-Time Cleaning", "Basic Pack", "Standard Pack", "Custom-Tailored Pack"
-      ]
+      description: "Specialized cleaning and maintenance for vacation properties"
     },
     {
       title: "Corporate Solution", 
       href: "/services/corporate",
-      description: "Professional cleaning solutions for offices and commercial spaces",
-      services: [
-        "Basic Package", "Essential Package", "Comprehensive Package", "Custom Solutions"
-      ]
+      description: "Professional cleaning solutions for offices and commercial spaces"
     }
   ];
 
@@ -102,43 +92,24 @@ const Header = () => {
                   Services
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="grid w-[700px] gap-8 p-8 md:w-[900px] md:grid-cols-3">
+                  <div className="grid w-[500px] gap-6 p-6 md:w-[600px] md:grid-cols-3">
                     {services.map((service) => (
-                      <div key={service.title} className="space-y-4 group">
-                        <div>
-                          <Link
-                            to={service.href}
-                            className="block text-base font-semibold leading-tight text-primary hover:underline group-hover:text-primary-hover transition-colors"
-                          >
-                            {service.title}
-                          </Link>
-                          <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                            {service.description}
-                          </p>
-                        </div>
-                        <div className="space-y-2">
-                          <p className="text-xs font-medium text-foreground/80 uppercase tracking-wide">
-                            Popular Services
-                          </p>
-                          <ul className="space-y-1.5">
-                            {service.services.slice(0, 4).map((item) => (
-                              <li key={item}>
-                                <Link
-                                  to={`${service.href}#${item.toLowerCase().replace(/\s+/g, '-').replace(/[()&]/g, '')}`}
-                                  className="text-sm text-muted-foreground hover:text-foreground transition-colors block py-0.5"
-                                >
-                                  {item}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                          <Link
-                            to={service.href}
-                            className="inline-flex items-center text-xs text-primary hover:text-primary-hover font-medium mt-2 group-hover:underline"
-                          >
-                            View All Services →
-                          </Link>
-                        </div>
+                      <div key={service.title} className="space-y-3">
+                        <Link
+                          to={service.href}
+                          className="block text-base font-semibold leading-tight text-primary hover:underline transition-colors"
+                        >
+                          {service.title}
+                        </Link>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {service.description}
+                        </p>
+                        <Link
+                          to={service.href}
+                          className="inline-flex items-center text-sm text-primary hover:text-primary-hover font-medium"
+                        >
+                          Book Service →
+                        </Link>
                       </div>
                     ))}
                   </div>
