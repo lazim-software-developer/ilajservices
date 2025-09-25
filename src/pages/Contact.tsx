@@ -6,6 +6,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Phone, Mail, MapPin, Clock, MessageSquare, Users } from "lucide-react";
+import { Link } from "react-router-dom";
+import EnquiryModal from "@/components/EnquiryModal";
 
 const Contact = () => {
   const contactInfo = [
@@ -216,12 +218,16 @@ const Contact = () => {
             and experience the ILAJ difference.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-secondary hover:bg-secondary-hover text-secondary-foreground">
-              <a href="/services/professional-services">Book Service Online</a>
-            </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
-              Get Free Quote
-            </Button>
+            <Link to="/services/professional">
+              <Button size="lg" className="bg-secondary hover:bg-secondary-hover text-secondary-foreground">
+                Book Service Online
+              </Button>
+            </Link>
+            <EnquiryModal>
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
+                Get Free Quote
+              </Button>
+            </EnquiryModal>
           </div>
         </div>
       </div>

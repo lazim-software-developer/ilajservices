@@ -13,24 +13,26 @@ const Header = () => {
     {
       title: "Professional Home Service",
       href: "/services/professional",
-      items: [
+      description: "Comprehensive home maintenance and cleaning services delivered by trained professionals",
+      services: [
         "Maid Service", "Deep Cleaning", "Upholstery Cleaning", "Carpet Cleaning",
-        "Kitchen Deep Cleaning", "Bathroom Deep Cleaning", "AC Service", "AC Coil Cleaning",
-        "AC Duct Cleaning", "AC Duct & Coil Cleaning", "Pest Control", "Painting", "Packers & Movers"
+        "Kitchen Deep Cleaning", "Bathroom Deep Cleaning", "AC Service", "Pest Control"
       ]
     },
     {
       title: "Holiday Home",
       href: "/services/holiday-home",
-      items: [
+      description: "Specialized cleaning and maintenance for vacation properties",
+      services: [
         "One-Time Cleaning", "Basic Pack", "Standard Pack", "Custom-Tailored Pack"
       ]
     },
     {
-      title: "Corporate Solution",
+      title: "Corporate Solution", 
       href: "/services/corporate",
-      items: [
-        "Basic Cleaning", "Deep Cleaning", "Premium Cleaning", "Other Services"
+      description: "Professional cleaning solutions for offices and commercial spaces",
+      services: [
+        "Basic Package", "Essential Package", "Comprehensive Package", "Custom Solutions"
       ]
     }
   ];
@@ -100,37 +102,43 @@ const Header = () => {
                   Services
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="grid w-[600px] gap-6 p-6 md:w-[800px] md:grid-cols-3">
+                  <div className="grid w-[700px] gap-8 p-8 md:w-[900px] md:grid-cols-3">
                     {services.map((service) => (
-                      <div key={service.title} className="space-y-3">
-                        <Link
-                          to={service.href}
-                          className="block text-sm font-medium leading-none text-primary hover:underline"
-                        >
-                          {service.title}
-                        </Link>
-                        <ul className="space-y-1">
-                          {service.items.slice(0, 4).map((item) => (
-                            <li key={item}>
-                              <Link
-                                to={`${service.href}/${item.toLowerCase().replace(/\s+/g, '-').replace(/[()&]/g, '')}`}
-                                className="text-xs text-muted-foreground hover:text-foreground"
-                              >
-                                {item}
-                              </Link>
-                            </li>
-                          ))}
-                          {service.items.length > 4 && (
-                            <li>
-                              <Link
-                                to={service.href}
-                                className="text-xs text-secondary hover:underline"
-                              >
-                                +{service.items.length - 4} more services
-                              </Link>
-                            </li>
-                          )}
-                        </ul>
+                      <div key={service.title} className="space-y-4 group">
+                        <div>
+                          <Link
+                            to={service.href}
+                            className="block text-base font-semibold leading-tight text-primary hover:underline group-hover:text-primary-hover transition-colors"
+                          >
+                            {service.title}
+                          </Link>
+                          <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                            {service.description}
+                          </p>
+                        </div>
+                        <div className="space-y-2">
+                          <p className="text-xs font-medium text-foreground/80 uppercase tracking-wide">
+                            Popular Services
+                          </p>
+                          <ul className="space-y-1.5">
+                            {service.services.slice(0, 4).map((item) => (
+                              <li key={item}>
+                                <Link
+                                  to={`${service.href}#${item.toLowerCase().replace(/\s+/g, '-').replace(/[()&]/g, '')}`}
+                                  className="text-sm text-muted-foreground hover:text-foreground transition-colors block py-0.5"
+                                >
+                                  {item}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                          <Link
+                            to={service.href}
+                            className="inline-flex items-center text-xs text-primary hover:text-primary-hover font-medium mt-2 group-hover:underline"
+                          >
+                            View All Services →
+                          </Link>
+                        </div>
                       </div>
                     ))}
                   </div>

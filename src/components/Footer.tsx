@@ -3,12 +3,13 @@ import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter, Linkedin } fr
 
 const Footer = () => {
   const services = [
-    { name: "Deep Cleaning", href: "/services/professional/deep-cleaning" },
-    { name: "AC Service", href: "/services/professional/ac-service" },
-    { name: "Maid Service", href: "/services/professional/maid-service" },
-    { name: "Pest Control", href: "/services/professional/pest-control" },
-    { name: "Holiday Home", href: "/services/holiday-home" },
-    { name: "Corporate Solution", href: "/services/corporate" }
+    { name: "Professional Home Service", href: "/services/professional" },
+    { name: "Deep Cleaning", href: "/services/professional#deep-cleaning" },
+    { name: "Maid Service", href: "/services/professional#maid-service" },
+    { name: "AC Service", href: "/services/professional#ac-service" },
+    { name: "Pest Control", href: "/services/professional#pest-control" },
+    { name: "Holiday Home Care", href: "/services/holiday-home" },
+    { name: "Corporate Solutions", href: "/services/corporate" }
   ];
 
   const quickLinks = [
