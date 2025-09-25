@@ -22,6 +22,9 @@ import Dashboard from "./pages/admin/Dashboard";
 import DailyLogs from "./pages/admin/DailyLogs";
 import CustomerManagement from "./pages/admin/CustomerManagement";
 import AllCustomers from "./pages/admin/customers/AllCustomers";
+import AddCustomer from "./pages/admin/customers/AddCustomer";
+import CustomerDetail from "./pages/admin/customers/CustomerDetail";
+import CustomerEdit from "./pages/admin/customers/CustomerEdit";
 import BookingManagement from "./pages/admin/BookingManagement";
 import ServiceManagement from "./pages/admin/ServiceManagement";
 import ServiceProviders from "./pages/admin/ServiceProviders";
@@ -43,6 +46,9 @@ const App = () => (
               
               {/* Customer Management */}
               <Route path="customers" element={<AllCustomers />} />
+              <Route path="customers/add" element={<AddCustomer />} />
+              <Route path="customers/:id" element={<CustomerDetail />} />
+              <Route path="customers/:id/edit" element={<CustomerEdit />} />
               <Route path="customers/b2c" element={<CustomerManagement />} />
               <Route path="customers/holiday-homes" element={<CustomerManagement />} />
               <Route path="customers/corporate" element={<CustomerManagement />} />

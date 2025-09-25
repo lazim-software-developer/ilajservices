@@ -147,14 +147,14 @@ const AllCustomers = () => {
           <h1 className="text-3xl font-bold">All Customers</h1>
           <p className="text-muted-foreground">Manage your customers across all types</p>
         </div>
-        <Button>
+        <Button onClick={() => window.location.href = '/admin/customers/add'}>
           <Plus className="h-4 w-4 mr-2" />
           Add Customer
         </Button>
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
@@ -175,6 +175,18 @@ const AllCustomers = () => {
                 <p className="text-2xl font-bold">{activeCustomers}</p>
               </div>
               <Users className="h-8 w-8 text-green-600" />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">Lead Stage</p>
+                <p className="text-2xl font-bold">{customers.filter(c => c.status === 'Lead').length}</p>
+              </div>
+              <Building className="h-8 w-8 text-orange-600" />
             </div>
           </CardContent>
         </Card>
@@ -282,13 +294,30 @@ const AllCustomers = () => {
                   <TableCell>{customer.lastBooking || 'Never'}</TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => window.location.href = `/admin/customers/${customer.id}`}
+                      >
                         <Eye className="h-4 w-4" />
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => window.location.href = `/admin/customers/${customer.id}/edit`}
+                      >
                         <Edit className="h-4 w-4" />
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => {
+                          if (confirm('Are you sure you want to delete this customer?')) {
+                            // Handle delete logic here
+                            console.log('Delete customer:', customer.id);
+                          }
+                        }}
+                      >
                         <Trash2 className="h-4 w-4" />
                       </Button>
                     </div>
