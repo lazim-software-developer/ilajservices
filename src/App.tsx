@@ -31,6 +31,7 @@ import ServiceManagement from "./pages/admin/ServiceManagement";
 import ServiceProviders from "./pages/admin/ServiceProviders";
 import FinanceManagement from "./pages/admin/FinanceManagement";
 import Reports from "./pages/admin/Reports";
+import ThankYou from "./pages/ThankYou";
 
 const queryClient = new QueryClient();
 
@@ -109,6 +110,7 @@ const App = () => (
                     <Route path="/services/holiday-home/:serviceId" element={<ServiceBooking />} />
                     <Route path="/services/corporate" element={<CorporateSolution />} />
                     <Route path="/services/corporate/:serviceId" element={<ServiceBooking />} />
+                    <Route path="/thank-you" element={<ThankYou />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </main>
