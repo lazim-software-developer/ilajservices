@@ -86,7 +86,7 @@ const Gallery = () => {
             See Our Quality in Action
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Explore our portfolio of completed projects and see the transformation 
+            Explore our portfolio of completed services and see the transformation 
             we bring to homes and offices across the UAE.
           </p>
         </div>
@@ -129,7 +129,7 @@ const Gallery = () => {
         </Tabs>
 
         {/* CTA Section */}
-        <div className="mt-20 bg-gradient-secondary rounded-2xl text-white p-8 lg:p-12 text-center">
+        <div className="mt-20 bg-gradient-secondary rounded-2xl text-#085B86 p-8 lg:p-12 text-center">
           <h2 className="text-2xl lg:text-4xl font-bold mb-4">
             Ready to Transform Your Space?
           </h2>
