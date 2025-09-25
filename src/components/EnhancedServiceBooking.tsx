@@ -6,14 +6,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarIcon, Clock, MapPin, Plus, Minus, CheckCircle, X, Info } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
 
 interface ServiceBookingProps {
   serviceData: {
@@ -28,20 +27,10 @@ interface ServiceBookingProps {
 }
 
 const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
-  const { toast } = useToast();
   const [selectedDate, setSelectedDate] = useState<Date>();
   const [selectedTime, setSelectedTime] = useState<string>();
+  const [addOns, setAddOns] = useState<string[]>([]);
   const [customizations, setCustomizations] = useState<Record<string, any>>({});
-  const [customerData, setCustomerData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    unitNumber: "",
-    buildingName: "",
-    location: "",
-    specialRequests: ""
-  });
-  const [isProcessing, setIsProcessing] = useState(false);
 
   // Service-specific configurations
   const getServiceConfig = () => {
@@ -155,6 +144,14 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
     "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM"
   ];
 
+  const addOnOptions = [
+    { id: "window-cleaning", name: "Window Cleaning", price: 50 },
+    { id: "appliance-cleaning", name: "Appliance Deep Clean", price: 30 },
+    { id: "balcony-cleaning", name: "Balcony Cleaning", price: 25 },
+    { id: "cabinet-cleaning", name: "Cabinet Interior Clean", price: 40 },
+    { id: "mattress-cleaning", name: "Mattress Sanitization", price: 35 }
+  ];
+
   const inclusions = [
     "Professional trained staff",
     "All cleaning equipment provided",
@@ -199,52 +196,25 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
       });
     }
     
+    // Add-ons
+    addOns.forEach(addonId => {
+      const addon = addOnOptions.find(a => a.id === addonId);
+      if (addon) total += addon.price;
+    });
+    
     return total;
+  };
+
+  const handleAddOnChange = (addonId: string, checked: boolean) => {
+    if (checked) {
+      setAddOns([...addOns, addonId]);
+    } else {
+      setAddOns(addOns.filter(id => id !== addonId));
+    }
   };
 
   const handleCustomizationChange = (key: string, value: any) => {
     setCustomizations(prev => ({ ...prev, [key]: value }));
-  };
-
-  const handlePayment = async () => {
-    if (!selectedDate || !customerData.name || !customerData.phone || !customerData.location) {
-      toast({
-        title: "Missing Information",
-        description: "Please fill in all required fields",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    setIsProcessing(true);
-    try {
-      const { data, error } = await supabase.functions.invoke('create-payment', {
-        body: {
-          amount: calculateTotal(),
-          serviceName: serviceData.title,
-          customerData: {
-            name: customerData.name,
-            email: customerData.email,
-            phone: customerData.phone,
-            location: customerData.location
-          }
-        }
-      });
-
-      if (error) throw error;
-
-      if (data?.url) {
-        window.open(data.url, '_blank');
-      }
-    } catch (error: any) {
-      toast({
-        title: "Payment Error",
-        description: error.message || "Failed to process payment",
-        variant: "destructive"
-      });
-    } finally {
-      setIsProcessing(false);
-    }
   };
 
   return (
@@ -400,56 +370,54 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
                       </div>
                     </div>
 
+                    {/* Add-on Services */}
+                    <div>
+                      <Label className="text-base font-semibold">Add-on Services</Label>
+                      <div className="space-y-3 mt-3">
+                        {addOnOptions.map((addon) => (
+                          <div key={addon.id} className="flex items-center justify-between p-3 border rounded-lg">
+                            <div className="flex items-center space-x-3">
+                              <Checkbox
+                                id={addon.id}
+                                checked={addOns.includes(addon.id)}
+                                onCheckedChange={(checked) => handleAddOnChange(addon.id, checked as boolean)}
+                              />
+                              <label htmlFor={addon.id} className="font-medium cursor-pointer">
+                                {addon.name}
+                              </label>
+                            </div>
+                            <Badge className="bg-secondary text-secondary-foreground">
+                              +AED {addon.price}
+                            </Badge>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
                     {/* Customer Details */}
                     <div className="space-y-4 border-t pt-6">
                       <h3 className="text-lg font-semibold">Customer Details</h3>
                       <div className="grid md:grid-cols-2 gap-4">
                         <div>
                           <Label htmlFor="customerName">Full Name *</Label>
-                          <Input 
-                            id="customerName" 
-                            placeholder="Enter your full name" 
-                            value={customerData.name}
-                            onChange={(e) => setCustomerData(prev => ({ ...prev, name: e.target.value }))}
-                          />
+                          <Input id="customerName" placeholder="Enter your full name" />
                         </div>
                         <div>
                           <Label htmlFor="phone">Phone Number *</Label>
-                          <Input 
-                            id="phone" 
-                            placeholder="600 562624"
-                            value={customerData.phone}
-                            onChange={(e) => setCustomerData(prev => ({ ...prev, phone: e.target.value }))}
-                          />
+                          <Input id="phone" placeholder="600 562624" />
                         </div>
                         <div>
                           <Label htmlFor="email">Email Address</Label>
-                          <Input 
-                            id="email" 
-                            type="email" 
-                            placeholder="info@ilaj.ae"
-                            value={customerData.email}
-                            onChange={(e) => setCustomerData(prev => ({ ...prev, email: e.target.value }))}
-                          />
+                          <Input id="email" type="email" placeholder="info@ilaj.ae" />
                         </div>
                         <div>
                           <Label htmlFor="unitNumber">Unit Number</Label>
-                          <Input 
-                            id="unitNumber" 
-                            placeholder="Apartment/Villa number"
-                            value={customerData.unitNumber}
-                            onChange={(e) => setCustomerData(prev => ({ ...prev, unitNumber: e.target.value }))}
-                          />
+                          <Input id="unitNumber" placeholder="Apartment/Villa number" />
                         </div>
                       </div>
                       <div>
                         <Label htmlFor="buildingName">Building Name</Label>
-                        <Input 
-                          id="buildingName" 
-                          placeholder="Building or complex name"
-                          value={customerData.buildingName}
-                          onChange={(e) => setCustomerData(prev => ({ ...prev, buildingName: e.target.value }))}
-                        />
+                        <Input id="buildingName" placeholder="Building or complex name" />
                       </div>
                       <div>
                         <Label htmlFor="location">Location *</Label>
@@ -457,19 +425,11 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
                           id="location"
                           placeholder="Street, area, city, emirate"
                           rows={2}
-                          value={customerData.location}
-                          onChange={(e) => setCustomerData(prev => ({ ...prev, location: e.target.value }))}
                         />
                       </div>
                       <div>
-                        <Label htmlFor="specialRequests">Special Requests</Label>
-                        <Textarea 
-                          id="specialRequests"
-                          placeholder="Any special requirements or instructions"
-                          rows={3}
-                          value={customerData.specialRequests}
-                          onChange={(e) => setCustomerData(prev => ({ ...prev, specialRequests: e.target.value }))}
-                        />
+                        <Label htmlFor="landmark">Landmark</Label>
+                        <Input id="landmark" placeholder="Nearby landmark for easy location" />
                       </div>
                     </div>
                   </CardContent>
@@ -479,16 +439,16 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
               <TabsContent value="inclusions">
                 <Card>
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <CheckCircle className="h-5 w-5 text-primary" />
-                      What's Included
+                    <CardTitle className="flex items-center gap-2 text-green-700">
+                      <CheckCircle className="h-5 w-5" />
+                      Service Inclusions
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-3">
+                    <ul className="space-y-2">
                       {inclusions.map((item, index) => (
-                        <li key={index} className="flex items-start gap-3">
-                          <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                        <li key={index} className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -500,16 +460,16 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
               <TabsContent value="exclusions">
                 <Card>
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <X className="h-5 w-5 text-destructive" />
-                      What's Not Included
+                    <CardTitle className="flex items-center gap-2 text-red-700">
+                      <X className="h-5 w-5" />
+                      Service Exclusions
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-3">
+                    <ul className="space-y-2">
                       {exclusions.map((item, index) => (
-                        <li key={index} className="flex items-start gap-3">
-                          <X className="h-5 w-5 text-destructive mt-0.5 flex-shrink-0" />
+                        <li key={index} className="flex items-center gap-2">
+                          <X className="h-4 w-4 text-red-600 flex-shrink-0" />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -522,20 +482,20 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
                 <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                      <Info className="h-5 w-5 text-blue-500" />
+                      <Info className="h-5 w-5" />
                       Terms & Conditions
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="prose prose-sm max-w-none">
-                    <ul className="space-y-2 text-sm">
-                      <li>• Service must be booked at least 24 hours in advance</li>
-                      <li>• Payment is required before service completion</li>
-                      <li>• Cancellations made less than 12 hours before service time may incur charges</li>
-                      <li>• Additional charges apply for services beyond agreed scope</li>
-                      <li>• Service provider will arrive within agreed time window</li>
-                      <li>• Customer must provide access to all areas to be cleaned</li>
-                      <li>• Fragile or valuable items should be removed or secured by customer</li>
-                    </ul>
+                  <CardContent className="space-y-4">
+                    <div className="space-y-2 text-sm">
+                      <p>• 24-hour advance booking required for all services</p>
+                      <p>• Payment required upon service completion</p>
+                      <p>• Cancellation allowed up to 4 hours before scheduled time</p>
+                      <p>• Customer must provide clear access to service areas</p>
+                      <p>• Additional charges apply for services beyond agreed scope</p>
+                      <p>• 100% satisfaction guarantee - we'll re-do if not satisfied</p>
+                      <p>• All staff are insured and background verified</p>
+                    </div>
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -553,8 +513,20 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
                 <div className="space-y-3">
                   <div className="flex justify-between">
                     <span>Base Service</span>
-                    <span>AED {calculateTotal()}</span>
+                    <span>AED {calculateTotal() - addOns.reduce((sum, id) => {
+                      const addon = addOnOptions.find(a => a.id === id);
+                      return sum + (addon?.price || 0);
+                    }, 0)}</span>
                   </div>
+                  {addOns.map(addonId => {
+                    const addon = addOnOptions.find(a => a.id === addonId);
+                    return addon ? (
+                      <div key={addon.id} className="flex justify-between text-sm text-muted-foreground">
+                        <span>{addon.name}</span>
+                        <span>AED {addon.price}</span>
+                      </div>
+                    ) : null;
+                  })}
                 </div>
                 <div className="border-t pt-3">
                   <div className="flex justify-between font-semibold text-lg">
@@ -569,21 +541,23 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
             <Button 
               size="lg" 
               className="w-full bg-gradient-primary hover:bg-primary-hover text-lg py-6"
-              onClick={handlePayment}
-              disabled={isProcessing}
+              onClick={() => {
+                // This would integrate with payment gateway
+                alert("Redirecting to payment gateway...\n\nNote: For full functionality including payment processing and booking storage, please connect to Supabase using the integration in the top-right corner.");
+              }}
             >
-              {isProcessing ? "Processing..." : `Proceed to Payment - AED ${calculateTotal()}`}
+              Proceed to Payment - AED {calculateTotal()}
             </Button>
 
-            {/* Contact Information */}
-            <Card>
-              <CardContent className="p-4 text-center space-y-2">
-                <p className="text-sm text-muted-foreground">Need Help?</p>
-                <div className="flex items-center justify-center gap-2">
-                  <MapPin className="h-4 w-4 text-primary" />
-                  <span className="text-sm font-medium">Call: +971 600 562624</span>
+            {/* Contact Info */}
+            <Card className="bg-muted/30">
+              <CardContent className="p-4">
+                <div className="text-center text-sm space-y-2">
+                  <div className="font-semibold">Need Help?</div>
+                  <div>Phone: 600 562624</div>
+                  <div>WhatsApp: 600 562624</div>
+                  <div>Email: info@ilaj.ae</div>
                 </div>
-                <p className="text-xs text-muted-foreground">Mon-Sun: 8:00 AM - 10:00 PM</p>
               </CardContent>
             </Card>
           </div>

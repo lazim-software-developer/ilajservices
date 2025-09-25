@@ -236,6 +236,43 @@ const CorporateSolution = () => {
           </div>
         </div>
 
+        {/* Other Services */}
+        <div className="mb-20">
+          <h2 className="text-3xl font-bold text-center mb-12">Other Services</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {otherServices.map((service, index) => (
+              <Card key={index} className="group hover:shadow-medium transition-all duration-300">
+                <CardContent className="p-6">
+                  <div className="flex justify-between items-start mb-3">
+                    <h3 className="font-semibold group-hover:text-primary transition-colors">{service.title}</h3>
+                    <Badge variant="outline" className="text-xs">{service.price}</Badge>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-4">{service.description}</p>
+                  <Button variant="outline" size="sm" className="w-full">
+                    Learn More
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Popular Add-On Services */}
+        <div className="mb-20">
+          <h2 className="text-3xl font-bold text-center mb-12">Popular Add-On Services</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {addOnServices.map((addon, index) => (
+              <div key={index} className="flex items-center justify-between p-4 bg-muted/30 rounded-lg">
+                <div className="flex-1">
+                  <h4 className="font-medium text-sm">{addon.name}</h4>
+                  <p className="text-xs text-muted-foreground">{addon.description}</p>
+                </div>
+                <Badge className="bg-secondary text-secondary-foreground ml-2">{addon.price}</Badge>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Pricing Information */}
         <Card className="mb-20">
           <CardHeader>
@@ -275,6 +312,56 @@ const CorporateSolution = () => {
           </CardContent>
         </Card>
 
+        {/* Testimonials */}
+        <div className="mb-20">
+          <h2 className="text-3xl font-bold text-center mb-12">What Our Corporate Clients Say</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className="p-6">
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-secondary text-secondary" />
+                ))}
+              </div>
+              <p className="text-muted-foreground mb-4 text-sm">
+                "ILAJ has transformed our office environment. Professional, reliable, and always exceeding expectations."
+              </p>
+              <div>
+                <p className="font-semibold">Sarah Al-Mahmoud</p>
+                <p className="text-xs text-muted-foreground">Facility Manager, Tech Corp Dubai</p>
+              </div>
+            </Card>
+            
+            <Card className="p-6">
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-secondary text-secondary" />
+                ))}
+              </div>
+              <p className="text-muted-foreground mb-4 text-sm">
+                "The attention to detail and flexibility with our schedule makes ILAJ our preferred cleaning partner."
+              </p>
+              <div>
+                <p className="font-semibold">Ahmed Hassan</p>
+                <p className="text-xs text-muted-foreground">Operations Director, Finance Plus</p>
+              </div>
+            </Card>
+            
+            <Card className="p-6">
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-secondary text-secondary" />
+                ))}
+              </div>
+              <p className="text-muted-foreground mb-4 text-sm">
+                "Excellent service quality and competitive pricing. Our employees love the clean work environment."
+              </p>
+              <div>
+                <p className="font-semibold">Maria Rodriguez</p>
+                <p className="text-xs text-muted-foreground">HR Manager, Global Solutions</p>
+              </div>
+            </Card>
+          </div>
+        </div>
 
         {/* CTA Section */}
         <div className="bg-gradient-primary rounded-2xl text-white p-8 lg:p-12 text-center">
