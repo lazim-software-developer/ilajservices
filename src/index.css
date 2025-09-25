@@ -108,4 +108,40 @@ Brand Colors: Deep blue-green #085B86 & Vibrant orange #F59121
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Optimized spacing for better content flow */
+  .space-y-4 > * + * {
+    margin-top: 1rem;
+  }
+  
+  .space-y-6 > * + * {
+    margin-top: 1.25rem;
+  }
+
+  .space-y-8 > * + * {
+    margin-top: 1.5rem;
+  }
+
+  /* Compact sections */
+  .section-compact {
+    @apply py-12;
+  }
+
+  .section-regular {
+    @apply py-16;
+  }
+
+  /* Card spacing optimization */
+  .card-compact .card-header {
+    @apply pb-3;
+  }
+
+  .card-compact .card-content {
+    @apply pt-2;
+  }
+
+  /* Table row hover effects */
+  .table-row-hover:hover {
+    @apply bg-muted/30 transition-colors;
+  }
 }

@@ -55,9 +55,7 @@ const AdminSidebar = () => {
       title: 'Services & Providers',
       items: [
         { name: 'Service Catalog', href: '/admin/services', icon: Package },
-        { name: 'Vendors', href: '/admin/vendors', icon: UserCheck },
-        { name: 'Workers', href: '/admin/workers', icon: UserCheck },
-        { name: 'Pricing Rules', href: '/admin/pricing', icon: DollarSign }
+        { name: 'Finance Management', href: '/admin/finance', icon: DollarSign },
       ]
     },
     {

@@ -6,8 +6,21 @@ import ServiceCard from "@/components/ServiceCard";
 import { ChevronLeft, ChevronRight, CheckCircle, Users, Clock, Shield, Star } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
+import { useServices } from '@/hooks/useServices';
+
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { services, getServicesByCategory } = useServices();
+
+  const heroServices = getServicesByCategory('Home').slice(0, 3).map(service => ({
+    title: service.name,
+    description: service.description,
+    image: service.image_url || "/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.png",
+    price: `AED ${service.base_price}`,
+    duration: `${service.duration_minutes} minutes`,
+    features: service.features,
+    href: `/booking/${service.id}`
+  }));
 
   const heroImages = [
     "/lovable-uploads/9c656186-628c-46d9-b263-7e372f0a8bf7.png",
@@ -19,36 +32,6 @@ const Home = () => {
     "/lovable-uploads/f44c00a2-be13-45d3-a1f6-b197c16afabb.png",
     "/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.png",
     "/lovable-uploads/5a4a612f-8971-4ca5-b85c-298b721a9f60.png"
-  ];
-
-  const heroServices = [
-    {
-      title: "Deep Cleaning Service",
-      description: "Complete deep cleaning for your home with professional equipment and eco-friendly products.",
-      image: "/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.png",
-      price: "AED 150",
-      duration: "3-4 hours",
-      features: ["Deep Kitchen Clean", "Bathroom Sanitization", "Floor Care"],
-      href: "/booking/deep-cleaning"
-    },
-    {
-      title: "Pest Control Service",
-      description: "Comprehensive pest control solutions to keep your home safe and pest-free.",
-      image: "/lovable-uploads/9470a896-617e-4470-8f48-1b686adc6cc3.png",
-      price: "AED 200",
-      duration: "1-2 hours",
-      features: ["Safe Chemicals", "Long-lasting", "Follow-up Service"],
-      href: "/booking/pest-control"
-    },
-    {
-      title: "AC Duct Cleaning",
-      description: "Professional AC duct cleaning service for improved air quality and system efficiency.",
-      image: "/lovable-uploads/e8bf1a42-abdc-4be6-92ec-5e86dafa7f90.png",
-      price: "AED 250",
-      duration: "2-3 hours",
-      features: ["Deep Duct Clean", "Improved Air Quality", "System Efficiency"],
-      href: "/booking/ac-duct-cleaning"
-    }
   ];
 
   const stats = [
@@ -84,7 +67,7 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-hero text-white py-20 lg:py-32">
+      <section className="relative bg-gradient-hero text-white section-regular">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
@@ -156,7 +139,7 @@ const Home = () => {
       </section>
 
       {/* Featured Services */}
-      <section className="py-20 bg-muted/30">
+      <section className="section-compact bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-4 mb-16">
             <Badge className="bg-primary/10 text-primary border-primary/20">
@@ -191,7 +174,7 @@ const Home = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20">
+      <section className="section-compact">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-4 mb-16">
             <Badge className="bg-secondary/10 text-secondary border-secondary/20">
@@ -222,7 +205,7 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-primary text-white py-20">
+      <section className="bg-gradient-primary text-white section-compact">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto space-y-8">
             <h2 className="text-3xl lg:text-5xl font-bold">
