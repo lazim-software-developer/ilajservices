@@ -2,57 +2,73 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Building, Users, Shield, Clock, Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 
 const CorporateSolution = () => {
+  const navigate = useNavigate();
   const cleaningPackages = [
     {
-      title: "Basic Cleaning",
-      price: "AED 15/m²",
-      frequency: "Daily/Weekly",
-      description: "Essential office maintenance",
+      id: "basic-package",
+      title: "Basic Package",
+      subtitle: "Cleaning Only",
+      price: "AED 272.00",
+      frequency: "Monthly",
+      description: "Essential office cleaning service - 4 visits per month",
       features: [
+        "2 hours cleaning per visit",
+        "4 visits per month (weekly)",
+        "Desk & surface cleaning",
         "Trash removal & emptying",
-        "Desk & surface wiping",
         "Vacuum carpeted areas",
         "Basic restroom cleaning",
         "Kitchen area tidying",
-        "Floor mopping (hard floors)"
+        "Floor mopping"
       ],
-      ideal: "Small offices, startups"
+      ideal: "Small offices up to 1000 sq ft",
+      baseOfficeSize: "1000 SQ.FT"
     },
     {
-      title: "Deep Cleaning",
-      price: "AED 25/m²",
-      frequency: "Weekly/Bi-weekly",
-      description: "Comprehensive office cleaning",
+      id: "essential-package", 
+      title: "Essential Package",
+      subtitle: "Cleaning + AC Maintenance",
+      price: "AED 256.00",
+      frequency: "Monthly + Quarterly AC",
+      description: "Complete cleaning with AC maintenance service",
       features: [
-        "All basic cleaning services",
-        "Window cleaning (interior)",
-        "Detailed restroom sanitization",
-        "Kitchen deep clean",
-        "Chair & furniture cleaning",
-        "Air vent dusting",
-        "Conference room setup"
+        "All Basic Package services",
+        "2 hours cleaning per visit",
+        "4 visits per month (weekly)",
+        "AC Servicing (4 times yearly)",
+        "Visit every 3 months",
+        "AED 150.00 per AC unit",
+        "Filters & grills cleaning",
+        "Thermostat checking"
       ],
-      ideal: "Medium offices, clinics",
-      popular: true
+      ideal: "Medium offices with AC systems",
+      popular: true,
+      baseOfficeSize: "1000 SQ.FT"
     },
     {
-      title: "Premium Cleaning",
-      price: "AED 35/m²",
-      frequency: "Daily",
-      description: "Executive-level maintenance",
+      id: "comprehensive-package",
+      title: "Comprehensive Package", 
+      subtitle: "Cleaning + AC + Pest Control + Duct Cleaning",
+      price: "AED 240.00",
+      frequency: "Complete facility management",
+      description: "All-inclusive facility management solution",
       features: [
-        "All deep cleaning services",
-        "Carpet steam cleaning",
-        "Upholstery cleaning",
-        "Window cleaning (exterior)",
-        "Disinfection services",
-        "Executive office detailing",
-        "24/7 maintenance support"
+        "All Essential Package services",
+        "2 hours cleaning per visit",
+        "4 visits per month (weekly)",
+        "AC Servicing (4 times yearly)", 
+        "AED 150.00 per AC unit",
+        "Pest Control (2 times yearly)",
+        "AED 420.00 per year",
+        "AC Duct Cleaning (yearly)",
+        "AED 250.00 per unit"
       ],
-      ideal: "Corporate headquarters, banks"
+      ideal: "Large corporate offices",
+      baseOfficeSize: "1000 SQ.FT"
     }
   ];
 
@@ -210,8 +226,9 @@ const CorporateSolution = () => {
                   </div>
                   <Button 
                     className={`w-full ${pkg.popular ? 'bg-primary hover:bg-primary-hover' : 'bg-secondary hover:bg-secondary-hover'}`}
+                    onClick={() => navigate(`/services/corporate/${pkg.id}`)}
                   >
-                    Get Quote
+                    Book Now
                   </Button>
                 </CardContent>
               </Card>

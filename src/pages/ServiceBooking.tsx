@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import GamifiedServiceBooking from "@/components/GamifiedServiceBooking";
+import CorporateServiceBooking from "@/components/CorporateServiceBooking";
 
 const ServiceBooking = () => {
   const { serviceId } = useParams();
@@ -141,6 +142,34 @@ const ServiceBooking = () => {
         duration: "Per hour",
         category: "Professional Service",
         serviceType: "handyman"
+      },
+      // Corporate Services
+      "basic-package": {
+        title: "Basic Package",
+        description: "Essential office cleaning service - 4 visits per month with 2 hours per visit for comprehensive office maintenance.",
+        basePrice: 272,
+        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop",
+        duration: "2 hours per visit",
+        category: "Corporate Service",
+        serviceType: "basic-package"
+      },
+      "essential-package": {
+        title: "Essential Package", 
+        description: "Complete cleaning with AC maintenance - Monthly cleaning service plus quarterly AC servicing for optimal office environment.",
+        basePrice: 256,
+        image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600&h=400&fit=crop",
+        duration: "2 hours cleaning + AC service",
+        category: "Corporate Service",
+        serviceType: "essential-package"
+      },
+      "comprehensive-package": {
+        title: "Comprehensive Package",
+        description: "All-inclusive facility management - Complete cleaning, AC maintenance, pest control, and duct cleaning for total office care.",
+        basePrice: 240,
+        image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600&h=400&fit=crop", 
+        duration: "Complete facility management",
+        category: "Corporate Service",
+        serviceType: "comprehensive-package"
       }
     };
 
@@ -148,6 +177,13 @@ const ServiceBooking = () => {
   };
 
   const serviceData = getServiceData(serviceId || "deep-cleaning");
+
+  // Check if this is a corporate service
+  const isCorporateService = ['basic-package', 'essential-package', 'comprehensive-package'].includes(serviceId || '');
+
+  if (isCorporateService) {
+    return <CorporateServiceBooking serviceData={serviceData} />;
+  }
 
   return <GamifiedServiceBooking serviceData={serviceData} />;
 };
