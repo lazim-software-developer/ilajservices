@@ -86,7 +86,7 @@ const Gallery = () => {
             See Our Quality in Action
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Explore our portfolio of completed services and see the transformation 
+            Explore our portfolio of completed projects and see the transformation 
             we bring to homes and offices across the UAE.
           </p>
         </div>
@@ -133,15 +133,15 @@ const Gallery = () => {
           <h2 className="text-2xl lg:text-4xl font-bold mb-4">
             Ready to Transform Your Space?
           </h2>
-          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-#085B86/90 mb-8 max-w-2xl mx-auto">
             Join thousands of satisfied customers who have experienced the ILAJ difference. 
             Book your service today and see the quality for yourself.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-3 bg-white text-secondary font-semibold rounded-lg hover:bg-gray-50 transition-colors">
+            <button className="px-8 py-3 bg-#085B86 text-secondary font-semibold rounded-lg hover:bg-gray-50 transition-colors">
               Book Service Now
             </button>
-            <button className="px-8 py-3 border border-white text-white rounded-lg hover:bg-white hover:text-secondary transition-colors">
+            <button className="px-8 py-3 border border-#085B86 text-#085B86 rounded-lg hover:bg-white hover:text-secondary transition-colors">
               Get Free Quote
             </button>
           </div>
