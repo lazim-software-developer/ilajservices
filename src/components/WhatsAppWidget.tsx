@@ -2,7 +2,7 @@ import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const WhatsAppWidget = () => {
-  const phoneNumber = "600562624";
+  const phoneNumber = "971600562624";
   const message = "Hi! I'd like to know more about your services.";
   
   const handleWhatsAppClick = () => {
