@@ -45,10 +45,6 @@ const About = () => {
       icon: Users,
       title: "Creating Comfort, Building Smiles",
       description: "More than cleaning — we create spaces that feel welcoming, safe, and alive."
-    }, {
-      icon: Users,
-      title: "trust you can rely on",
-      description: "More than cleaning — we create spaces that feel welcoming, safe, and alive."
     }
   ];
 
