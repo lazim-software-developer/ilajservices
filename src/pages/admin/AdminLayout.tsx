@@ -21,16 +21,64 @@ const AdminLayout = () => {
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const navigation = [
-    { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-    { name: 'Daily Logs', href: '/admin/daily-logs', icon: FileText },
-    { name: 'Customer Management', href: '/admin/customers', icon: Users },
-    { name: 'Service Providers', href: '/admin/providers', icon: UserCheck },
-    { name: 'Services & Pricing', href: '/admin/services', icon: Package },
-    { name: 'Finance', href: '/admin/finance', icon: DollarSign },
-    { name: 'Revenue Tracking', href: '/admin/revenue', icon: TrendingUp },
-    { name: 'Task Management', href: '/admin/tasks', icon: Calendar },
-    { name: 'Settings', href: '/admin/settings', icon: Settings },
+  const navigationSections = [
+    {
+      title: 'Overview',
+      items: [
+        { name: 'Dashboard', href: '/admin', icon: LayoutDashboard }
+      ]
+    },
+    {
+      title: 'Customer Management',
+      items: [
+        { name: 'All Customers', href: '/admin/customers', icon: Users },
+        { name: 'B2C Customers', href: '/admin/customers/b2c', icon: Users },
+        { name: 'Holiday Homes', href: '/admin/customers/holiday-homes', icon: Users },
+        { name: 'Corporate', href: '/admin/customers/corporate', icon: Users }
+      ]
+    },
+    {
+      title: 'Booking & Operations',
+      items: [
+        { name: 'Bookings', href: '/admin/bookings', icon: Calendar },
+        { name: 'Task Manager', href: '/admin/tasks', icon: FileText },
+        { name: 'Scheduling', href: '/admin/scheduling', icon: Calendar }
+      ]
+    },
+    {
+      title: 'Services & Providers',
+      items: [
+        { name: 'Service Catalog', href: '/admin/services', icon: Package },
+        { name: 'Vendors', href: '/admin/vendors', icon: UserCheck },
+        { name: 'Workers', href: '/admin/workers', icon: UserCheck },
+        { name: 'Pricing Rules', href: '/admin/pricing', icon: DollarSign }
+      ]
+    },
+    {
+      title: 'Finance & Accounting',
+      items: [
+        { name: 'Invoices', href: '/admin/invoices', icon: FileText },
+        { name: 'Payments', href: '/admin/payments', icon: DollarSign },
+        { name: 'Ledger', href: '/admin/ledger', icon: TrendingUp },
+        { name: 'VAT Management', href: '/admin/vat', icon: FileText }
+      ]
+    },
+    {
+      title: 'Marketing & Analytics',
+      items: [
+        { name: 'Promotions', href: '/admin/promotions', icon: Package },
+        { name: 'Reports', href: '/admin/reports', icon: TrendingUp },
+        { name: 'Analytics', href: '/admin/analytics', icon: TrendingUp }
+      ]
+    },
+    {
+      title: 'System',
+      items: [
+        { name: 'Notifications', href: '/admin/notifications', icon: Settings },
+        { name: 'Integrations', href: '/admin/integrations', icon: Settings },
+        { name: 'Settings', href: '/admin/settings', icon: Settings }
+      ]
+    }
   ];
 
   const isActive = (path: string) => {
@@ -66,28 +114,37 @@ const AdminLayout = () => {
           </Button>
         </div>
         
-        <nav className="mt-6 px-3">
-          <div className="space-y-1">
-            {navigation.map((item) => {
-              const Icon = item.icon;
-              return (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`
-                    flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors
-                    ${isActive(item.href)
-                      ? 'bg-primary text-primary-foreground'
-                      : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
-                    }
-                  `}
-                  onClick={() => setSidebarOpen(false)}
-                >
-                  <Icon className="mr-3 h-5 w-5" />
-                  {item.name}
-                </Link>
-              );
-            })}
+        <nav className="mt-6 px-3 pb-20 overflow-y-auto">
+          <div className="space-y-6">
+            {navigationSections.map((section) => (
+              <div key={section.title}>
+                <h3 className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                  {section.title}
+                </h3>
+                <div className="space-y-1">
+                  {section.items.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <Link
+                        key={item.name}
+                        to={item.href}
+                        className={`
+                          flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors
+                          ${isActive(item.href)
+                            ? 'bg-primary text-primary-foreground'
+                            : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                          }
+                        `}
+                        onClick={() => setSidebarOpen(false)}
+                      >
+                        <Icon className="mr-3 h-4 w-4" />
+                        {item.name}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
         </nav>
 

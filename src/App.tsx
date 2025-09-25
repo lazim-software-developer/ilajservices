@@ -21,6 +21,9 @@ import AdminLayout from "./pages/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
 import DailyLogs from "./pages/admin/DailyLogs";
 import CustomerManagement from "./pages/admin/CustomerManagement";
+import AllCustomers from "./pages/admin/customers/AllCustomers";
+import BookingManagement from "./pages/admin/BookingManagement";
+import ServiceManagement from "./pages/admin/ServiceManagement";
 import ServiceProviders from "./pages/admin/ServiceProviders";
 import FinanceManagement from "./pages/admin/FinanceManagement";
 
@@ -37,8 +40,42 @@ const App = () => (
             {/* Admin Routes */}
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<Dashboard />} />
+              
+              {/* Customer Management */}
+              <Route path="customers" element={<AllCustomers />} />
+              <Route path="customers/b2c" element={<CustomerManagement />} />
+              <Route path="customers/holiday-homes" element={<CustomerManagement />} />
+              <Route path="customers/corporate" element={<CustomerManagement />} />
+              
+              {/* Booking & Operations */}
+              <Route path="bookings" element={<BookingManagement />} />
+              <Route path="tasks" element={<DailyLogs />} />
+              <Route path="scheduling" element={<div className="p-6"><h1 className="text-3xl font-bold">Scheduling</h1><p>Scheduling management coming soon</p></div>} />
+              
+              {/* Services & Providers */}
+              <Route path="services" element={<ServiceManagement />} />
+              <Route path="vendors" element={<ServiceProviders />} />
+              <Route path="workers" element={<div className="p-6"><h1 className="text-3xl font-bold">Workers</h1><p>Worker management coming soon</p></div>} />
+              <Route path="pricing" element={<div className="p-6"><h1 className="text-3xl font-bold">Pricing Rules</h1><p>Dynamic pricing rules coming soon</p></div>} />
+              
+              {/* Finance & Accounting */}
+              <Route path="invoices" element={<div className="p-6"><h1 className="text-3xl font-bold">Invoices</h1><p>Invoice management coming soon</p></div>} />
+              <Route path="payments" element={<div className="p-6"><h1 className="text-3xl font-bold">Payments</h1><p>Payment management coming soon</p></div>} />
+              <Route path="ledger" element={<div className="p-6"><h1 className="text-3xl font-bold">Ledger</h1><p>General ledger coming soon</p></div>} />
+              <Route path="vat" element={<div className="p-6"><h1 className="text-3xl font-bold">VAT Management</h1><p>VAT management coming soon</p></div>} />
+              
+              {/* Marketing & Analytics */}
+              <Route path="promotions" element={<div className="p-6"><h1 className="text-3xl font-bold">Promotions</h1><p>Promotion management coming soon</p></div>} />
+              <Route path="reports" element={<div className="p-6"><h1 className="text-3xl font-bold">Reports</h1><p>Reporting dashboard coming soon</p></div>} />
+              <Route path="analytics" element={<div className="p-6"><h1 className="text-3xl font-bold">Analytics</h1><p>Business analytics coming soon</p></div>} />
+              
+              {/* System */}
+              <Route path="notifications" element={<div className="p-6"><h1 className="text-3xl font-bold">Notifications</h1><p>Notification management coming soon</p></div>} />
+              <Route path="integrations" element={<div className="p-6"><h1 className="text-3xl font-bold">Integrations</h1><p>Third-party integrations coming soon</p></div>} />
+              <Route path="settings" element={<div className="p-6"><h1 className="text-3xl font-bold">Settings</h1><p>System settings coming soon</p></div>} />
+              
+              {/* Legacy routes for backward compatibility */}
               <Route path="daily-logs" element={<DailyLogs />} />
-              <Route path="customers" element={<CustomerManagement />} />
               <Route path="providers" element={<ServiceProviders />} />
               <Route path="finance" element={<FinanceManagement />} />
             </Route>
