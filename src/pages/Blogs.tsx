@@ -5,6 +5,13 @@ import { Input } from "@/components/ui/input";
 import { Calendar, User, Clock, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
+import acDuctCleaningBlog from "@/assets/ac-duct-cleaning-blog.jpg";
+import holidayHomesBlog from "@/assets/holiday-homes-blog.jpg";
+import hireCleaningCompanyBlog from "@/assets/hire-cleaning-company-blog.jpg";
+import officeDeepCleaningBlog from "@/assets/office-deep-cleaning-blog.jpg";
+import pestControlSeasonalBlog from "@/assets/pest-control-seasonal-blog.jpg";
+import seasonalHandymanBlog from "@/assets/seasonal-handyman-blog.jpg";
+import acDuctsEnergyBillsBlog from "@/assets/ac-ducts-energy-bills-blog.jpg";
 
 const Blogs = () => {
   const [email, setEmail] = useState("");
@@ -22,69 +29,79 @@ const Blogs = () => {
   };
   const blogPosts = [
     {
-      title: "The Ultimate Guide to Deep Cleaning Your Home",
-      excerpt: "Learn professional tips and techniques for deep cleaning every room in your house, from kitchen to bathroom.",
-      image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=300&fit=crop",
+      title: "Beat the Heat and Dust: Get Ready for Summer with Our AC Duct Cleaning Service",
+      excerpt: "As the summer sun begins to blaze and the dust settles, prepare your home for intense summer months with our professional AC duct cleaning service.",
+      image: acDuctCleaningBlog,
       author: "ILAJ Team",
-      date: "March 15, 2024",
-      readTime: "5 min read",
-      category: "Cleaning Tips"
-    },
-    {
-      title: "AC Maintenance: Why Regular Service Matters",
-      excerpt: "Discover why regular AC maintenance is crucial for efficiency, air quality, and extending your unit's lifespan.",
-      image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&h=300&fit=crop",
-      author: "Ahmed Hassan",
-      date: "March 10, 2024",
-      readTime: "4 min read",
-      category: "HVAC Tips"
-    },
-    {
-      title: "Holiday Home Management: Complete Guide",
-      excerpt: "Everything you need to know about maintaining and preparing your holiday home for guests.",
-      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=300&fit=crop",
-      author: "Sarah Ahmed",
-      date: "March 5, 2024",
-      readTime: "7 min read",
-      category: "Property Management"
-    },
-    {
-      title: "Eco-Friendly Cleaning Products: Benefits & Tips",
-      excerpt: "Learn about the benefits of eco-friendly cleaning products and how to choose the right ones for your home.",
-      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&h=300&fit=crop",
-      author: "ILAJ Team",
-      date: "February 28, 2024",
+      date: "September 20, 2024",
       readTime: "6 min read",
-      category: "Green Living"
+      category: "HVAC Services"
     },
     {
-      title: "Pest Control: Prevention vs Treatment",
-      excerpt: "Understanding the difference between prevention and treatment in pest control and which approach is best.",
-      image: "https://images.unsplash.com/photo-1572020525351-3ca5c5962200?w=600&h=300&fit=crop",
-      author: "Mohamed Ali",
-      date: "February 20, 2024",
+      title: "Maximizing Profit: The Power of Holiday Homes in Dubai's Housekeeping Industry",
+      excerpt: "Dubai attracts millions of tourists every year. Discover how premium holiday homes can align with sustainability trends and wellness to maximize profitability.",
+      image: holidayHomesBlog,
+      author: "ILAJ Team",
+      date: "September 18, 2024",
       readTime: "5 min read",
+      category: "Holiday Homes"
+    },
+    {
+      title: "How to Hire a Cleaning Company for Your Office or Home: A Step-by-Step Guide",
+      excerpt: "Finding the right cleaning company can be daunting. Follow our comprehensive guide to make the best choice for your office or home cleaning needs.",
+      image: hireCleaningCompanyBlog,
+      author: "ILAJ Team",
+      date: "September 15, 2024",
+      readTime: "7 min read",
+      category: "Cleaning Guide"
+    },
+    {
+      title: "Office Deep Cleaning: Boosting Productivity with a Clean Workspace",
+      excerpt: "A clean workspace enhances employee morale, productivity, and well-being. Discover how office deep cleaning can elevate your business to global standards.",
+      image: officeDeepCleaningBlog,
+      author: "ILAJ Team",
+      date: "September 12, 2024",
+      readTime: "5 min read",
+      category: "Office Cleaning"
+    },
+    {
+      title: "Seasonal Pest Control: What to Expect and How to Prepare",
+      excerpt: "As temperatures rise and summer approaches, so does pest activity. Learn what pests to expect and effective tips for keeping them at bay this season.",
+      image: pestControlSeasonalBlog,
+      author: "ILAJ Team",
+      date: "September 10, 2024",
+      readTime: "6 min read",
       category: "Pest Control"
     },
     {
-      title: "Corporate Cleaning Standards: What to Expect",
-      excerpt: "A comprehensive guide to professional cleaning standards for offices and commercial spaces.",
-      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=300&fit=crop",
+      title: "Seasonal Handyman Checklist: What to Tackle Throughout the Year",
+      excerpt: "Breaking down home maintenance into seasonal checklists makes it manageable. Ensure your home stays in excellent condition year-round with our comprehensive guide.",
+      image: seasonalHandymanBlog,
       author: "ILAJ Team",
-      date: "February 15, 2024",
+      date: "September 8, 2024",
       readTime: "8 min read",
-      category: "Business"
+      category: "Home Maintenance"
+    },
+    {
+      title: "The Impact of Clean AC Ducts on Your Energy Bills",
+      excerpt: "Clean AC ducts contribute to healthier indoor air quality and have a significant impact on your energy bills. Learn how maintenance leads to cost savings.",
+      image: acDuctsEnergyBillsBlog,
+      author: "ILAJ Team",
+      date: "September 5, 2024",
+      readTime: "5 min read",
+      category: "Energy Efficiency"
     }
   ];
 
   const categories = [
     "All Posts",
-    "Cleaning Tips",
-    "HVAC Tips", 
-    "Property Management",
-    "Green Living",
+    "HVAC Services",
+    "Holiday Homes",
+    "Cleaning Guide",
+    "Office Cleaning",
     "Pest Control",
-    "Business"
+    "Home Maintenance",
+    "Energy Efficiency"
   ];
 
   return (
