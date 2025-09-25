@@ -364,8 +364,14 @@ const CustomerManagement = () => {
                 </Button>
               </div>
             </form>
-          </DialogContent>
-        </Dialog>
+            </DialogContent>
+          </Dialog>
+        </div>
+      </div>
+      
+      {/* Bulk Upload Section */}
+      <div className="mb-6">
+        <BulkCustomerUpload onUploadComplete={loadCustomers} />
       </div>
 
       {/* Filters */}

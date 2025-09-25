@@ -14,7 +14,321 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bookings: {
+        Row: {
+          addon_services: string[] | null
+          booking_date: string
+          booking_time: string | null
+          created_at: string
+          customer_id: string | null
+          discount_amount: number | null
+          final_amount: number
+          id: string
+          notes: string | null
+          payment_status: string | null
+          promo_code_id: string | null
+          service_id: string | null
+          status: string | null
+          total_amount: number
+          updated_at: string
+        }
+        Insert: {
+          addon_services?: string[] | null
+          booking_date: string
+          booking_time?: string | null
+          created_at?: string
+          customer_id?: string | null
+          discount_amount?: number | null
+          final_amount?: number
+          id?: string
+          notes?: string | null
+          payment_status?: string | null
+          promo_code_id?: string | null
+          service_id?: string | null
+          status?: string | null
+          total_amount?: number
+          updated_at?: string
+        }
+        Update: {
+          addon_services?: string[] | null
+          booking_date?: string
+          booking_time?: string | null
+          created_at?: string
+          customer_id?: string | null
+          discount_amount?: number | null
+          final_amount?: number
+          id?: string
+          notes?: string | null
+          payment_status?: string | null
+          promo_code_id?: string | null
+          service_id?: string | null
+          status?: string | null
+          total_amount?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_promo_code_id_fkey"
+            columns: ["promo_code_id"]
+            isOneToOne: false
+            referencedRelation: "promo_codes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      customers: {
+        Row: {
+          address: string | null
+          created_at: string
+          customer_type: string | null
+          email: string | null
+          id: string
+          lead_status: string | null
+          location: string | null
+          name: string
+          notes: string | null
+          phone: string | null
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string
+          customer_type?: string | null
+          email?: string | null
+          id?: string
+          lead_status?: string | null
+          location?: string | null
+          name: string
+          notes?: string | null
+          phone?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          created_at?: string
+          customer_type?: string | null
+          email?: string | null
+          id?: string
+          lead_status?: string | null
+          location?: string | null
+          name?: string
+          notes?: string | null
+          phone?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      enquiries: {
+        Row: {
+          assigned_to: string | null
+          created_at: string
+          customer_id: string | null
+          email: string
+          id: string
+          location: string | null
+          message: string | null
+          name: string
+          phone: string | null
+          response: string | null
+          service_type: string | null
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          created_at?: string
+          customer_id?: string | null
+          email: string
+          id?: string
+          location?: string | null
+          message?: string | null
+          name: string
+          phone?: string | null
+          response?: string | null
+          service_type?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          assigned_to?: string | null
+          created_at?: string
+          customer_id?: string | null
+          email?: string
+          id?: string
+          location?: string | null
+          message?: string | null
+          name?: string
+          phone?: string | null
+          response?: string | null
+          service_type?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "enquiries_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      promo_codes: {
+        Row: {
+          applicable_services: string[] | null
+          code: string
+          created_at: string
+          description: string | null
+          discount_type: string
+          discount_value: number
+          id: string
+          is_active: boolean | null
+          max_discount_amount: number | null
+          min_order_amount: number | null
+          updated_at: string
+          usage_limit: number | null
+          used_count: number | null
+          valid_from: string | null
+          valid_until: string | null
+        }
+        Insert: {
+          applicable_services?: string[] | null
+          code: string
+          created_at?: string
+          description?: string | null
+          discount_type: string
+          discount_value: number
+          id?: string
+          is_active?: boolean | null
+          max_discount_amount?: number | null
+          min_order_amount?: number | null
+          updated_at?: string
+          usage_limit?: number | null
+          used_count?: number | null
+          valid_from?: string | null
+          valid_until?: string | null
+        }
+        Update: {
+          applicable_services?: string[] | null
+          code?: string
+          created_at?: string
+          description?: string | null
+          discount_type?: string
+          discount_value?: number
+          id?: string
+          is_active?: boolean | null
+          max_discount_amount?: number | null
+          min_order_amount?: number | null
+          updated_at?: string
+          usage_limit?: number | null
+          used_count?: number | null
+          valid_from?: string | null
+          valid_until?: string | null
+        }
+        Relationships: []
+      }
+      seasonal_offers: {
+        Row: {
+          applicable_services: string[] | null
+          created_at: string
+          description: string | null
+          discount_percentage: number | null
+          id: string
+          is_active: boolean | null
+          title: string
+          updated_at: string
+          valid_from: string | null
+          valid_until: string | null
+        }
+        Insert: {
+          applicable_services?: string[] | null
+          created_at?: string
+          description?: string | null
+          discount_percentage?: number | null
+          id?: string
+          is_active?: boolean | null
+          title: string
+          updated_at?: string
+          valid_from?: string | null
+          valid_until?: string | null
+        }
+        Update: {
+          applicable_services?: string[] | null
+          created_at?: string
+          description?: string | null
+          discount_percentage?: number | null
+          id?: string
+          is_active?: boolean | null
+          title?: string
+          updated_at?: string
+          valid_from?: string | null
+          valid_until?: string | null
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          base_price: number
+          category: string
+          created_at: string
+          description: string | null
+          duration_minutes: number | null
+          features: string[] | null
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          is_addon: boolean | null
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          base_price?: number
+          category: string
+          created_at?: string
+          description?: string | null
+          duration_minutes?: number | null
+          features?: string[] | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          is_addon?: boolean | null
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          base_price?: number
+          category?: string
+          created_at?: string
+          description?: string | null
+          duration_minutes?: number | null
+          features?: string[] | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          is_addon?: boolean | null
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

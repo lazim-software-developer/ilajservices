@@ -1,1 +1,13 @@
 project_id = "ghaezdgqzagemjbsvdfp"
+
+[functions.bulk-customer-upload]
+verify_jwt = false
+
+[functions.validate-promo-code]
+verify_jwt = false
+
+[functions.create-booking]
+verify_jwt = false
+
+[functions.create-enquiry]
+verify_jwt = false
