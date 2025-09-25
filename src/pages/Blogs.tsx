@@ -84,7 +84,7 @@ const Blogs = () => {
     "Property Management",
     "Green Living",
     "Pest Control",
-    "Business"
+    "Corporate"
   ];
 
   return (
