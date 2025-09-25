@@ -129,19 +129,19 @@ const Gallery = () => {
         </Tabs>
 
         {/* CTA Section */}
-        <div className="mt-20 bg-gradient-secondary rounded-2xl text-#085B86 p-8 lg:p-12 text-center">
+        <div className="mt-20 bg-gradient-secondary rounded-2xl text-white p-8 lg:p-12 text-center">
           <h2 className="text-2xl lg:text-4xl font-bold mb-4">
             Ready to Transform Your Space?
           </h2>
-          <p className="text-lg text-#085B86/90 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
             Join thousands of satisfied customers who have experienced the ILAJ difference. 
             Book your service today and see the quality for yourself.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-3 bg-#085B86 text-secondary font-semibold rounded-lg hover:bg-gray-50 transition-colors">
+            <button className="px-8 py-3 bg-white text-secondary font-semibold rounded-lg hover:bg-gray-50 transition-colors">
               Book Service Now
             </button>
-            <button className="px-8 py-3 border border-#085B86 text-#085B86 rounded-lg hover:bg-white hover:text-secondary transition-colors">
+            <button className="px-8 py-3 border border-#085B86 text-#085B86 rounded-lg hover:bg-#085B86 hover:text-secondary transition-colors">
               Get Free Quote
             </button>
           </div>
