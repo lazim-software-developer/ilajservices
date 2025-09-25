@@ -13,17 +13,25 @@ const Header = () => {
     {
       title: "Professional Home Service",
       href: "/services/professional",
-      description: "Comprehensive home maintenance and cleaning services delivered by trained professionals"
+      items: [
+        "Maid Service", "Deep Cleaning", "Upholstery Cleaning", "Carpet Cleaning",
+        "Kitchen Deep Cleaning", "Bathroom Deep Cleaning", "AC Service", "AC Coil Cleaning",
+        "AC Duct Cleaning", "AC Duct & Coil Cleaning", "Pest Control", "Painting", "Packers & Movers"
+      ]
     },
     {
       title: "Holiday Home",
       href: "/services/holiday-home",
-      description: "Specialized cleaning and maintenance for vacation properties"
+      items: [
+        "One-Time Cleaning", "Basic Pack", "Standard Pack", "Custom-Tailored Pack"
+      ]
     },
     {
-      title: "Corporate Solution", 
+      title: "Corporate Solution",
       href: "/services/corporate",
-      description: "Professional cleaning solutions for offices and commercial spaces"
+      items: [
+        "Basic Cleaning", "Deep Cleaning", "Premium Cleaning", "Other Services"
+      ]
     }
   ];
 
@@ -92,24 +100,37 @@ const Header = () => {
                   Services
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="grid w-[500px] gap-6 p-6 md:w-[600px] md:grid-cols-3">
+                  <div className="grid w-[600px] gap-6 p-6 md:w-[800px] md:grid-cols-3">
                     {services.map((service) => (
                       <div key={service.title} className="space-y-3">
                         <Link
                           to={service.href}
-                          className="block text-base font-semibold leading-tight text-primary hover:underline transition-colors"
+                          className="block text-sm font-medium leading-none text-primary hover:underline"
                         >
                           {service.title}
                         </Link>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          {service.description}
-                        </p>
-                        <Link
-                          to={service.href}
-                          className="inline-flex items-center text-sm text-primary hover:text-primary-hover font-medium"
-                        >
-                          Book Service →
-                        </Link>
+                        <ul className="space-y-1">
+                          {service.items.slice(0, 4).map((item) => (
+                            <li key={item}>
+                              <Link
+                                to={`${service.href}/${item.toLowerCase().replace(/\s+/g, '-').replace(/[()&]/g, '')}`}
+                                className="text-xs text-muted-foreground hover:text-foreground"
+                              >
+                                {item}
+                              </Link>
+                            </li>
+                          ))}
+                          {service.items.length > 4 && (
+                            <li>
+                              <Link
+                                to={service.href}
+                                className="text-xs text-secondary hover:underline"
+                              >
+                                +{service.items.length - 4} more services
+                              </Link>
+                            </li>
+                          )}
+                        </ul>
                       </div>
                     ))}
                   </div>
