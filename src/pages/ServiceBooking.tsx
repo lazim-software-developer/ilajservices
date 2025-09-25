@@ -170,6 +170,34 @@ const ServiceBooking = () => {
         duration: "Complete facility management",
         category: "Corporate Service",
         serviceType: "comprehensive-package"
+      },
+      // Holiday Home Services
+      "one-time-cleaning": {
+        title: "One-Time Cleaning",
+        description: "One-time Service - Professional holiday home cleaning with premium after-cleaning air fragrance.",
+        basePrice: 180,
+        image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=600&h=400&fit=crop",
+        duration: "2-3 hours",
+        category: "Holiday Home Service",
+        serviceType: "one-time-cleaning"
+      },
+      "basic-pack": {
+        title: "Basic Pack",
+        description: "5 cleaning Service - Check-out cleanings with flexible scheduling and special price for additional services.",
+        basePrice: 500,
+        image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=600&h=400&fit=crop",
+        duration: "Valid for 6 months",
+        category: "Holiday Home Service",
+        serviceType: "basic-pack"
+      },
+      "mid-pack": {
+        title: "Mid Pack",
+        description: "10 cleaning Service - Check-out cleanings with dedicated account manager and special pricing.",
+        basePrice: 900,
+        image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=600&h=400&fit=crop",
+        duration: "Valid for 6 months",
+        category: "Holiday Home Service",
+        serviceType: "mid-pack"
       }
     };
 
@@ -180,9 +208,16 @@ const ServiceBooking = () => {
 
   // Check if this is a corporate service
   const isCorporateService = ['basic-package', 'essential-package', 'comprehensive-package'].includes(serviceId || '');
+  
+  // Check if this is a holiday home service
+  const isHolidayHomeService = ['one-time-cleaning', 'basic-pack', 'mid-pack'].includes(serviceId || '');
 
   if (isCorporateService) {
     return <CorporateServiceBooking serviceData={serviceData} />;
+  }
+  
+  if (isHolidayHomeService) {
+    return <GamifiedServiceBooking serviceData={serviceData} />;
   }
 
   return <GamifiedServiceBooking serviceData={serviceData} />;

@@ -218,7 +218,14 @@ const HolidayHome = () => {
                   </ul>
                   <Button
                     className={`w-full ${pkg.popular ? 'bg-secondary hover:bg-secondary-hover' : 'bg-primary hover:bg-primary-hover'}`}
-                    onClick={() => window.location.href = '/booking/holiday-home-additional'}
+                    onClick={() => {
+                      if (pkg.title === "Custom-Tailored Pack") {
+                        window.open('https://wa.me/971600562624', '_blank');
+                      } else {
+                        const serviceId = pkg.title.toLowerCase().replace(/[\s-]+/g, '-').replace(/[^\w-]/g, '');
+                        window.location.href = `/services/holiday-home/${serviceId}`;
+                      }
+                    }}
                   >
                     {pkg.title === "Custom-Tailored Pack" ? "Contact Us" : "Select Package"}
                   </Button>
