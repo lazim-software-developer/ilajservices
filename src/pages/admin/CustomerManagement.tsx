@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Plus, Search, Filter, Edit, Trash2, Eye, Upload } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import BulkCustomerUpload from '@/components/BulkCustomerUpload';
 
 type CustomerType = 'B2C' | 'Holiday Home' | 'Corporate';
 type LeadStatus = 'New' | 'Contacted' | 'Qualified' | 'Proposal Sent' | 'Negotiating' | 'Won' | 'Lost';
@@ -365,8 +366,7 @@ const CustomerManagement = () => {
               </div>
             </form>
             </DialogContent>
-          </Dialog>
-        </div>
+        </Dialog>
       </div>
       
       {/* Bulk Upload Section */}
