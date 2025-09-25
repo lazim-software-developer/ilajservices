@@ -67,22 +67,43 @@ const Contact = () => {
 
         {/* Contact Info Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {contactInfo.map((info, index) => (
-            <Card key={index} className="text-center group hover:shadow-medium transition-all duration-300">
-              <CardContent className="pt-8 pb-6">
-                <div className="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
-                  <info.icon className="h-8 w-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">{info.title}</h3>
-                <div className="space-y-1 mb-2">
-                  {info.details.map((detail, i) => (
-                    <p key={i} className="font-medium text-foreground">{detail}</p>
-                  ))}
-                </div>
-                <p className="text-sm text-muted-foreground">{info.description}</p>
-              </CardContent>
-            </Card>
-          ))}
+          {contactInfo.map((info, index) => {
+            const getClickHandler = () => {
+              switch(info.title) {
+                case "Call Us":
+                  return () => window.open(`tel:${info.details[0].replace(/\s/g, '')}`);
+                case "WhatsApp":
+                  return () => window.open(`https://wa.me/${info.details[0].replace(/\s/g, '')}?text=Hi! I'd like to know more about your services.`);
+                case "Email Us":
+                  return () => window.open(`mailto:${info.details[0]}`);
+                case "Visit Us":
+                  return () => window.open(`https://maps.google.com/?q=${encodeURIComponent(info.details[0])}`);
+                default:
+                  return () => {};
+              }
+            };
+
+            return (
+              <Card 
+                key={index} 
+                className="text-center group hover:shadow-medium transition-all duration-300 cursor-pointer"
+                onClick={getClickHandler()}
+              >
+                <CardContent className="pt-8 pb-6">
+                  <div className="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
+                    <info.icon className="h-8 w-8 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3">{info.title}</h3>
+                  <div className="space-y-1 mb-2">
+                    {info.details.map((detail, i) => (
+                      <p key={i} className="font-medium text-foreground">{detail}</p>
+                    ))}
+                  </div>
+                  <p className="text-sm text-muted-foreground">{info.description}</p>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
         {/* Contact Form & Map */}
@@ -157,49 +178,28 @@ const Contact = () => {
           {/* Quick Actions & Info */}
           <div className="space-y-6">
             {/* Quick Booking */}
-            <Card className="bg-gradient-secondary text-white">
+            <Card className="bg-gradient-primary text-white">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-bold mb-4">Quick Booking</h3>
                 <p className="text-white/90 mb-6">
                   Need immediate service? Call us directly for same-day booking and emergency services.
                 </p>
                 <div className="space-y-3">
-                  <Button className="w-full bg-white text-secondary hover:bg-gray-50">
+                  <Button 
+                    className="w-full bg-white text-primary hover:bg-gray-50"
+                    onClick={() => window.open('tel:600562624')}
+                  >
                     <Phone className="h-4 w-4 mr-2" />
                     Call Now: 600 562624
                   </Button>
-                  <Button variant="outline" className="w-full border-white text-white hover:bg-white hover:text-secondary">
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-white text-white hover:bg-white hover:text-primary"
+                    onClick={() => window.open('https://wa.me/600562624?text=Hi! I\'d like to know more about your services.')}
+                  >
                     <MessageSquare className="h-4 w-4 mr-2" />
                     WhatsApp Us
                   </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* FAQ */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Users className="h-6 w-6 text-primary" />
-                  Frequently Asked
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <h4 className="font-semibold mb-1">Do you provide same-day service?</h4>
-                  <p className="text-sm text-muted-foreground">Yes, we offer same-day service based on availability. Call us to check.</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Are your cleaning products eco-friendly?</h4>
-                  <p className="text-sm text-muted-foreground">Absolutely! We use only eco-friendly and safe cleaning products.</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Do you serve all areas in UAE?</h4>
-                  <p className="text-sm text-muted-foreground">We cover major areas in Dubai, Abu Dhabi, and expanding to other emirates.</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1">What if I'm not satisfied with the service?</h4>
-                  <p className="text-sm text-muted-foreground">We offer 100% satisfaction guarantee with free re-service if needed.</p>
                 </div>
               </CardContent>
             </Card>
@@ -217,7 +217,7 @@ const Contact = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-secondary hover:bg-secondary-hover text-secondary-foreground">
-              Book Service Online
+              <a href="/services/professional-services">Book Service Online</a>
             </Button>
             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
               Get Free Quote

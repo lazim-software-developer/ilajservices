@@ -1,9 +1,25 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Calendar, User, Clock, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { toast } from "@/hooks/use-toast";
 
 const Blogs = () => {
+  const [email, setEmail] = useState("");
+
+  const handleSubscribe = () => {
+    if (email.trim()) {
+      setTimeout(() => {
+        toast({
+          title: "Welcome to the ILAJ family!",
+          description: "You've successfully subscribed to our newsletter.",
+        });
+        setEmail("");
+      }, 500);
+    }
+  };
   const blogPosts = [
     {
       title: "The Ultimate Guide to Deep Cleaning Your Home",
@@ -166,12 +182,17 @@ const Blogs = () => {
             exclusive offers, and the latest cleaning techniques.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-            <input 
+            <Input 
               type="email" 
               placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="px-4 py-3 rounded-lg text-gray-900 flex-1"
             />
-            <Button className="bg-secondary hover:bg-secondary-hover text-secondary-foreground px-8">
+            <Button 
+              onClick={handleSubscribe}
+              className="bg-secondary hover:bg-secondary-hover text-secondary-foreground px-8"
+            >
               Subscribe
             </Button>
           </div>

@@ -17,29 +17,34 @@ const About = () => {
 
   const coreValues = [
     {
-      icon: Shield,
-      title: "Trust & Integrity",
-      description: "We deliver every service with honesty and transparency."
+      icon: Heart,
+      title: "Care with Heart",
+      description: "Every service is delivered with the same dedication we'd give to our own homes."
     },
     {
-      icon: Heart,
-      title: "Customer-Centricity",
-      description: "Every solution is tailored to meet individual needs."
+      icon: Shield,
+      title: "Trust You Can Feel",
+      description: "Insured, bonded, and transparent — giving you peace of mind at every step."
     },
     {
       icon: Star,
-      title: "Excellence",
-      description: "We maintain the highest standards in service quality."
+      title: "Excellence in Every Detail",
+      description: "From spotless finishes to complete checklists, perfection is in the little things."
     },
     {
       icon: CheckCircle,
-      title: "Safety & Protection",
-      description: "Customers and service providers are safeguarded at every step."
+      title: "Always Here for You",
+      description: "Flexible, dependable, and ready to serve whenever and wherever you need us."
     },
     {
       icon: Lightbulb,
-      title: "Innovation",
-      description: "We continuously improve to meet the evolving UAE market."
+      title: "Honesty at the Core",
+      description: "Clear pricing, open communication, and integrity guide all that we do."
+    },
+    {
+      icon: Users,
+      title: "Creating Comfort, Building Smiles",
+      description: "More than cleaning — we create spaces that feel welcoming, safe, and alive."
     }
   ];
 
@@ -174,8 +179,8 @@ const About = () => {
         <div className="mb-20">
           <div className="text-center space-y-4 mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-primary">Core Values</h2>
-            <p className="text-xl text-muted-foreground">
-              The principles that guide everything we do
+            <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
+              Every client has a story — a family to care for, guests to welcome, or a workplace to inspire. At ILAJ, we honor those unique needs with heartfelt service, delivering the comfort of convenience, the assurance of flexibility, and the promise of consistency you can always count on.
             </p>
           </div>
           
@@ -236,10 +241,10 @@ const About = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-secondary hover:bg-secondary-hover text-secondary-foreground">
-              Book Service Now
+              <a href="/services/professional-services">Book Service Now</a>
             </Button>
             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
-              Contact Us Today
+              <a href="/contact">Contact Us Today</a>
             </Button>
           </div>
         </div>

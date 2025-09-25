@@ -94,10 +94,10 @@ const Gallery = () => {
         {/* Gallery Tabs */}
         <Tabs defaultValue="deep-cleaning" className="w-full">
           <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 mb-8">
-            <TabsTrigger value="deep-cleaning">Deep Cleaning</TabsTrigger>
-            <TabsTrigger value="ac-service">AC Service</TabsTrigger>
-            <TabsTrigger value="upholstery">Upholstery & Carpet</TabsTrigger>
-            <TabsTrigger value="corporate">Corporate</TabsTrigger>
+            <TabsTrigger value="deep-cleaning">Home Services</TabsTrigger>
+            <TabsTrigger value="ac-service">Holiday Home Care</TabsTrigger>
+            <TabsTrigger value="upholstery">Corporate Care</TabsTrigger>
+            <TabsTrigger value="corporate">Our Heroes</TabsTrigger>
           </TabsList>
 
           {Object.entries(galleryItems).map(([category, items]) => (
