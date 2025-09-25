@@ -1,6 +1,18 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarProvider,
+  SidebarTrigger,
+  useSidebar,
+} from '@/components/ui/sidebar';
 import { 
   LayoutDashboard, 
   Users, 
@@ -11,15 +23,12 @@ import {
   TrendingUp,
   Calendar,
   Package,
-  LogOut,
-  Menu,
-  X
+  LogOut
 } from 'lucide-react';
-import { useState } from 'react';
 
-const AdminLayout = () => {
+const AdminSidebar = () => {
   const location = useLocation();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { open, setOpen } = useSidebar();
 
   const navigationSections = [
     {
@@ -32,9 +41,6 @@ const AdminLayout = () => {
       title: 'Customer Management',
       items: [
         { name: 'All Customers', href: '/admin/customers', icon: Users },
-        { name: 'B2C Customers', href: '/admin/customers/b2c', icon: Users },
-        { name: 'Holiday Homes', href: '/admin/customers/holiday-homes', icon: Users },
-        { name: 'Corporate', href: '/admin/customers/corporate', icon: Users }
       ]
     },
     {
@@ -87,98 +93,69 @@ const AdminLayout = () => {
     return false;
   };
 
+  const getNavClass = (path: string) => {
+    return isActive(path) ? "bg-accent text-accent-foreground font-medium" : "hover:bg-accent/50";
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Mobile sidebar backdrop */}
-      {sidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-
-      {/* Sidebar */}
-      <div className={`
-        fixed inset-y-0 left-0 z-50 w-72 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0
-        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-      `}>
-        <div className="flex items-center justify-between h-16 px-6 border-b">
-          <h1 className="text-xl font-bold text-primary">ILAJ Admin</h1>
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="lg:hidden"
-            onClick={() => setSidebarOpen(false)}
-          >
-            <X className="h-5 w-5" />
-          </Button>
-        </div>
-        
-        <nav className="mt-6 px-3 pb-20 overflow-y-auto">
-          <div className="space-y-6">
-            {navigationSections.map((section) => (
-              <div key={section.title}>
-                <h3 className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
-                  {section.title}
-                </h3>
-                <div className="space-y-1">
-                  {section.items.map((item) => {
-                    const Icon = item.icon;
-                    return (
-                      <Link
-                        key={item.name}
-                        to={item.href}
-                        className={`
-                          flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors
-                          ${isActive(item.href)
-                            ? 'bg-primary text-primary-foreground'
-                            : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
-                          }
-                        `}
-                        onClick={() => setSidebarOpen(false)}
-                      >
-                        <Icon className="mr-3 h-4 w-4" />
-                        {item.name}
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </div>
-        </nav>
-
-        <div className="absolute bottom-0 w-full p-4 border-t">
-          <Button variant="outline" className="w-full justify-start" asChild>
-            <Link to="/">
-              <LogOut className="mr-3 h-4 w-4" />
-              Back to Website
-            </Link>
-          </Button>
-        </div>
+    <Sidebar collapsible="icon">
+      <div className="flex items-center h-16 px-6 border-b">
+        <h1 className="text-xl font-bold text-primary">ILAJ Admin</h1>
       </div>
 
-      {/* Main content */}
-      <div className="lg:pl-72">
-        {/* Mobile header */}
-        <div className="lg:hidden flex items-center justify-between h-16 px-4 bg-white border-b">
-          <Button 
-            variant="ghost" 
-            size="sm"
-            onClick={() => setSidebarOpen(true)}
-          >
-            <Menu className="h-5 w-5" />
-          </Button>
-          <h1 className="text-lg font-semibold">ILAJ Admin</h1>
-          <div></div> {/* Placeholder for balance */}
-        </div>
+      <SidebarContent>
+        {navigationSections.map((section) => (
+          <SidebarGroup key={section.title}>
+            <SidebarGroupLabel>{section.title}</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {section.items.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <SidebarMenuItem key={item.name}>
+                      <SidebarMenuButton asChild>
+                        <Link to={item.href} className={getNavClass(item.href)}>
+                          <Icon className="h-4 w-4" />
+                          <span>{item.name}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        ))}
+      </SidebarContent>
 
-        {/* Page content */}
-        <main className="flex-1">
-          <Outlet />
-        </main>
+      <div className="absolute bottom-0 w-full p-4 border-t">
+        <Button variant="outline" className="w-full justify-start" asChild>
+          <Link to="/">
+            <LogOut className="h-4 w-4 mr-2" />
+            Back to Website
+          </Link>
+        </Button>
       </div>
-    </div>
+    </Sidebar>
+  );
+};
+
+const AdminLayout = () => {
+  return (
+    <SidebarProvider>
+      <div className="min-h-screen w-full flex">
+        <AdminSidebar />
+        <div className="flex-1 flex flex-col">
+          <header className="h-16 flex items-center border-b px-4">
+            <SidebarTrigger />
+            <h1 className="ml-4 text-lg font-semibold">Admin Dashboard</h1>
+          </header>
+          <main className="flex-1 overflow-auto">
+            <Outlet />
+          </main>
+        </div>
+      </div>
+    </SidebarProvider>
   );
 };
 
