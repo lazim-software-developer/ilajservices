@@ -28,7 +28,7 @@ const Home = () => {
     "/lovable-uploads/e8bf1a42-abdc-4be6-92ec-5e86dafa7f90.png",
     "/lovable-uploads/78a49ba5-8cb9-40d9-b04e-d409d61b4935.png",
     "/lovable-uploads/9470a896-617e-4470-8f48-1b686adc6cc3.png",
-    "/lovable-uploads/a90bd9f1-897a-4fa1-9933-b4bb1e94b9de.png",
+    "/lovable-uploads/painting.png",
     "/lovable-uploads/f44c00a2-be13-45d3-a1f6-b197c16afabb.png",
     "/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.png",
     "/lovable-uploads/5a4a612f-8971-4ca5-b85c-298b721a9f60.png"
