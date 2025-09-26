@@ -137,9 +137,10 @@ const About = () => {
           </div>
           <div className="relative">
             <img 
-              src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=600&fit=crop"
+              src="lovable-uploads/ilaj services.jpg"
               alt="Professional cleaning team"
               className="rounded-2xl shadow-medium w-full"
+              style={{ maxHeight: '500px', maxWidth: '540px', objectFit: 'cover' }}
             />
           </div>
         </div>

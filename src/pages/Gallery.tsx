@@ -57,19 +57,19 @@ const Gallery = () => {
     ],
     "corporate": [
       {
-        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop",
-        title: "Office Cleaning",
-        description: "Professional office cleaning and maintenance"
+        image: "lovable-uploads/dubaicleaningcompany.jpg",
+        title: "Super Heroes",
+        description: "Super Heros"
       },
       {
-        image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600&h=400&fit=crop",
-        title: "Conference Room Setup",
-        description: "Corporate space preparation and maintenance"
+        image: "lovable-uploads/best cleaning company in dubai.jpg",
+        title: "Rewarded Excellence",
+        description: "Going above and beyond"
       },
       {
-        image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop",
-        title: "Commercial Space",
-        description: "Large-scale commercial cleaning solutions"
+        image: "public/lovable-uploads/airbnbcleaning.jpg",
+        title: "Skilled Professionals",
+        description: "Not just cleaners, but skilled professionals"
       }
     ]
   };

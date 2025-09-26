@@ -45,6 +45,7 @@ const Contact = () => {
     "Corporate Cleaning",
     "Painting Services",
     "Packers & Movers",
+    "Handyman Services",
     "Other"
   ];
 
@@ -181,12 +182,12 @@ const Contact = () => {
             <Card className="bg-gradient-primary text-white">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-bold mb-4">Quick Booking</h3>
-                <p className="text-white/90 mb-6">
+                <p className="text-Deep blue-green/90 mb-6">
                   Need immediate service? Call us directly for same-day booking and emergency services.
                 </p>
                 <div className="space-y-3">
                   <Button 
-                    className="w-full bg-white text-primary hover:bg-gray-50"
+                    className="w-full bg-Vibrant orange text-primary hover:bg-gray-50"
                     onClick={() => window.open('tel:600562624')}
                   >
                     <Phone className="h-4 w-4 mr-2" />
@@ -194,7 +195,7 @@ const Contact = () => {
                   </Button>
                   <Button 
                     variant="outline" 
-                    className="w-full border-white text-white hover:bg-white hover:text-primary"
+                    className="w-full border-Vibrant orange text-Vibrant orange:bg-Vibrant orange hover:text-primary"
                     onClick={() => window.open('https://wa.me/600562624?text=Hi! I\'d like to know more about your services.')}
                   >
                     <MessageSquare className="h-4 w-4 mr-2" />
@@ -211,7 +212,7 @@ const Contact = () => {
           <h2 className="text-2xl lg:text-4xl font-bold mb-4">
             Ready to Get Started?
           </h2>
-          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-[white]/90 mb-8 max-w-2xl mx-auto">
             Join thousands of satisfied customers across the UAE. Book your service today 
             and experience the ILAJ difference.
           </p>

@@ -12,7 +12,7 @@ INSERT INTO public.services (name, category, description, base_price, duration_m
 ('Facility Management', 'Corporate', 'Complete facility management solutions for businesses and offices.', 1200, 480, ARRAY['24/7 Support', 'Multi-service', 'Professional Team'], '/lovable-uploads/78a49ba5-8cb9-40d9-b04e-d409d61b4935.png', true, false),
 
 -- Holiday Home Services
-('Holiday Home Cleaning', 'Holiday Home', 'Specialized cleaning service for vacation rentals and holiday homes.', 300, 300, ARRAY['Guest Turnover', 'Deep Clean', 'Linen Service'], '/lovable-uploads/a90bd9f1-897a-4fa1-9933-b4bb1e94b9de.png', true, false),
+('Holiday Home Cleaning', 'Holiday Home', 'Specialized cleaning service for vacation rentals and holiday homes.', 300, 300, ARRAY['Guest Turnover', 'Deep Clean', 'Linen Service'], '/lovable-uploads/painting.png', true, false),
 ('Property Management', 'Holiday Home', 'Complete property management for holiday homes and vacation rentals.', 600, 240, ARRAY['Key Management', 'Maintenance', 'Guest Support'], '/lovable-uploads/f44c00a2-be13-45d3-a1f6-b197c16afabb.png', true, false),
 ('Maintenance Service', 'Holiday Home', 'Regular maintenance and repair services for holiday properties.', 400, 180, ARRAY['Plumbing', 'Electrical', 'General Repairs'], '/lovable-uploads/5a4a612f-8971-4ca5-b85c-298b721a9f60.png', true, false),
 

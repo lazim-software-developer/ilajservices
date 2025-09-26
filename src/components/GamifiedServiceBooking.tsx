@@ -277,7 +277,7 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
           "Post-treatment cleaning",
           "Relocation of furniture",
           "Use of scaffolding or ladder equipment"
-        ]
+        ],
       },
       "painting": {
         description: "Liven up the atmosphere with a fresh coat of paint. Get rid of those stained and cracked walls with our professional painters and increase your standard of living with some new vibrant tones for your home.",
@@ -1124,7 +1124,7 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
             </Card>
 
             {/* Add-ons Section */}
-            <Card className={cn("transition-all duration-500", showAddOnPulse && "ring-2 ring-secondary animate-pulse")}>
+            {/* <Card className={cn("transition-all duration-500", showAddOnPulse && "ring-2 ring-secondary animate-pulse")}>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Sparkles className="h-5 w-5 text-secondary animate-spin" />
@@ -1197,7 +1197,7 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
                   ))}
                 </div>
               </CardContent>
-            </Card>
+            </Card> */}
 
             {/* Date & Time Selection */}
             <div className="grid md:grid-cols-2 gap-6">
