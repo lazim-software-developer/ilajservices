@@ -25,7 +25,6 @@ const Home = () => {
   const heroImages = [
     "/lovable-uploads/9c656186-628c-46d9-b263-7e372f0a8bf7.png",
     "/lovable-uploads/00d8abb5-8a1c-40c2-87ee-3aa6583cf8cf.png",
-    "/lovable-uploads/e8bf1a42-abdc-4be6-92ec-5e86dafa7f90.png",
     "/lovable-uploads/78a49ba5-8cb9-40d9-b04e-d409d61b4935.png",
     "/lovable-uploads/9470a896-617e-4470-8f48-1b686adc6cc3.png",
     "/lovable-uploads/painting.png",
