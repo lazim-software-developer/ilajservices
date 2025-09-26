@@ -114,7 +114,7 @@ const Header = () => {
                         >
                           {service.title}
                         </Link>
-                        <ul className="space-y-1">
+                        {/* <ul className="space-y-1">
                           {service.items.slice(0, 4).map((item) => (
                             <li key={item}>
                               <Link
@@ -135,7 +135,7 @@ const Header = () => {
                               </Link>
                             </li>
                           )}
-                        </ul>
+                        </ul> */}
                       </div>
                     ))}
                   </div>
