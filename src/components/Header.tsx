@@ -13,25 +13,28 @@ const Header = () => {
     {
       title: "Professional Home Service",
       href: "/services/professional",
-      items: [
-        "Maid Service", "Deep Cleaning", "Upholstery Cleaning", "Carpet Cleaning",
-        "Kitchen Deep Cleaning", "Bathroom Deep Cleaning", "AC Service", "AC Coil Cleaning",
-        "AC Duct Cleaning", "AC Duct & Coil Cleaning", "Pest Control", "Painting", "Packers & Movers"
-      ]
+      items: []
+      // items: [
+      //   "Maid Service", "Deep Cleaning", "Upholstery Cleaning", "Carpet Cleaning",
+      //   "Kitchen Deep Cleaning", "Bathroom Deep Cleaning", "AC Service", "AC Coil Cleaning",
+      //   "AC Duct Cleaning", "AC Duct & Coil Cleaning", "Pest Control", "Painting", "Packers & Movers"
+      // ]
     },
     {
       title: "Holiday Home",
       href: "/services/holiday-home",
-      items: [
-        "One-Time Cleaning", "Basic Pack", "Standard Pack", "Custom-Tailored Pack"
-      ]
+      items: []
+      // items: [
+      //   "One-Time Cleaning", "Basic Pack", "Standard Pack", "Custom-Tailored Pack"
+      // ]
     },
     {
       title: "Corporate Solution",
       href: "/services/corporate",
-      items: [
-        "Basic Cleaning", "Deep Cleaning", "Premium Cleaning", "Other Services"
-      ]
+      items: []
+      // items: [
+      //   "Basic Cleaning", "Deep Cleaning", "Premium Cleaning", "Other Services"
+      // ]
     }
   ];
 
@@ -41,7 +44,7 @@ const Header = () => {
     { name: "Gallery", href: "/gallery" },
     { name: "Blogs", href: "/blogs" },
     { name: "Contact", href: "/contact" },
-    { name: "Admin", href: "/admin" }
+    // { name: "Admin", href: "/admin" }
   ];
 
   return (
@@ -52,7 +55,9 @@ const Header = () => {
           <div className="flex items-center gap-4 text-muted-foreground">
             <div className="flex items-center gap-1">
               <Phone className="h-4 w-4" />
-              <span>600 562624</span>
+              <a href="tel:971600562624" target="_blank" rel="noopener noreferrer">
+                <span>600 562624</span>
+              </a>
             </div>
             <div className="flex items-center gap-1">
               <Mail className="h-4 w-4" />
@@ -68,9 +73,9 @@ const Header = () => {
         <div className="flex items-center justify-between py-4">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
-            <img 
-              src="/lovable-uploads/01b6ec03-1f3a-4290-aa3a-52202a2236e8.png" 
-              alt="Ilaj Services" 
+            <img
+              src="/lovable-uploads/01b6ec03-1f3a-4290-aa3a-52202a2236e8.png"
+              alt="Ilaj Services"
               className="h-10 w-auto"
             />
             <div className="hidden sm:block">
@@ -86,23 +91,23 @@ const Header = () => {
                 <NavigationMenuItem key={link.name}>
                   <Link
                     to={link.href}
-                    className={`px-4 py-2 text-sm font-medium transition-colors hover:text-primary ${
-                      location.pathname === link.href ? 'text-primary' : 'text-foreground'
-                    }`}
+                    className={`px-4 py-2 text-sm font-medium transition-colors hover:text-primary ${location.pathname === link.href ? 'text-primary' : 'text-foreground'
+                      }`}
                   >
                     {link.name}
                   </Link>
                 </NavigationMenuItem>
               ))}
-              
+
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="text-sm font-medium">
                   Services
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="grid w-[600px] gap-6 p-6 md:w-[800px] md:grid-cols-3">
+                  {/* <div className="grid w-[600px] gap-6 p-6 md:w-[800px] md:grid-cols-3"> */}
+                  <div className="flex flex-col w-[200px] gap-6 p-6 md:w-[200px]">
                     {services.map((service) => (
-                      <div key={service.title} className="space-y-3">
+                      <div key={service.title} className="space-y-6">
                         <Link
                           to={service.href}
                           className="block text-sm font-medium leading-none text-primary hover:underline"
@@ -158,14 +163,13 @@ const Header = () => {
                     key={link.name}
                     to={link.href}
                     onClick={() => setIsOpen(false)}
-                    className={`px-4 py-2 text-sm font-medium transition-colors hover:text-primary ${
-                      location.pathname === link.href ? 'text-primary' : 'text-foreground'
-                    }`}
+                    className={`px-4 py-2 text-sm font-medium transition-colors hover:text-primary ${location.pathname === link.href ? 'text-primary' : 'text-foreground'
+                      }`}
                   >
                     {link.name}
                   </Link>
                 ))}
-                
+
                 <div className="border-t pt-4">
                   <h3 className="px-4 py-2 text-sm font-semibold text-primary">Services</h3>
                   {services.map((service) => (
@@ -180,7 +184,7 @@ const Header = () => {
                     </div>
                   ))}
                 </div>
-                
+
                 <Button className="mt-4 bg-gradient-secondary hover:bg-secondary-hover">
                   Book Now
                 </Button>

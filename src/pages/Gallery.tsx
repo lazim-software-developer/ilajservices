@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -86,7 +87,7 @@ const Gallery = () => {
             See Our Quality in Action
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Explore our portfolio of completed projects and see the transformation 
+            Explore our portfolio of completed projects and see the transformation
             we bring to homes and offices across the UAE.
           </p>
         </div>
@@ -106,8 +107,8 @@ const Gallery = () => {
                 {items.map((item, index) => (
                   <Card key={index} className="group overflow-hidden hover:shadow-medium transition-all duration-300">
                     <div className="relative overflow-hidden">
-                      <img 
-                        src={item.image} 
+                      <img
+                        src={item.image}
                         alt={item.title}
                         className="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-105"
                       />
@@ -129,21 +130,23 @@ const Gallery = () => {
         </Tabs>
 
         {/* CTA Section */}
-        <div className="mt-20 bg-gradient-secondary rounded-2xl text-white p-8 lg:p-12 text-center">
+        <div className="bg-gradient-primary rounded-2xl text-white p-8 lg:p-12 text-center">
           <h2 className="text-2xl lg:text-4xl font-bold mb-4">
             Ready to Transform Your Space?
           </h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            Join thousands of satisfied customers who have experienced the ILAJ difference. 
+            Join thousands of satisfied customers who have experienced the ILAJ difference.
             Book your service today and see the quality for yourself.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-3 bg-white text-secondary font-semibold rounded-lg hover:bg-gray-50 transition-colors">
+            <Button size="lg" className="bg-secondary hover:bg-secondary-hover text-secondary-foreground" onClick={() => window.location.href = '/services/professional'}>
               Book Service Now
-            </button>
-            <button className="px-8 py-3 border border-#085B86 text-#085B86 rounded-lg hover:bg-#085B86 hover:text-secondary transition-colors">
-              Get Free Quote
-            </button>
+            </Button>
+            <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-primary">
+              <a href="tel:971600562624" target="_blank" rel="noopener noreferrer">
+                Contact Us Today
+              </a>
+            </Button>
           </div>
         </div>
       </div>

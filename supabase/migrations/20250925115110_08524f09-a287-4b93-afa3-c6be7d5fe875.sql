@@ -4,7 +4,7 @@ INSERT INTO public.services (name, category, description, base_price, duration_m
 -- Home Services
 ('Deep Cleaning Service', 'Home', 'Complete deep cleaning for your home with professional equipment and eco-friendly products.', 150, 240, ARRAY['Deep Kitchen Clean', 'Bathroom Sanitization', 'Floor Care'], '/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.png', true, false),
 ('Pest Control Service', 'Home', 'Comprehensive pest control solutions to keep your home safe and pest-free.', 200, 120, ARRAY['Safe Chemicals', 'Long-lasting', 'Follow-up Service'], '/lovable-uploads/9470a896-617e-4470-8f48-1b686adc6cc3.png', true, false),
-('AC Duct Cleaning', 'Home', 'Professional AC duct cleaning service for improved air quality and system efficiency.', 250, 180, ARRAY['Deep Duct Clean', 'Improved Air Quality', 'System Efficiency'], '/lovable-uploads/e8bf1a42-abdc-4be6-92ec-5e86daf7f90.png', true, false),
+('AC Duct Cleaning', 'Home', 'Professional AC duct cleaning service for improved air quality and system efficiency.', 250, 180, ARRAY['Deep Duct Clean', 'Improved Air Quality', 'System Efficiency'], '/lovable-uploads/ac_duct_cleaning_ilaj.png', true, false),
 
 -- Corporate Services  
 ('Office Deep Cleaning', 'Corporate', 'Comprehensive deep cleaning service for office spaces and commercial buildings.', 500, 480, ARRAY['Sanitization', 'Floor Care', 'Workspace Cleaning'], '/lovable-uploads/00d8abb5-8a1c-40c2-87ee-3aa6583cf8cf.png', true, false),
