@@ -28,9 +28,9 @@ const Footer = () => {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <img 
-                src="/lovable-uploads/01b6ec03-1f3a-4290-aa3a-52202a2236e8.png" 
-                alt="ILAJ Services" 
+              <img
+                src="/lovable-uploads/white_logo.png"
+                alt="ILAJ Services"
                 className="h-8 w-auto"
               />
               <div>
@@ -39,7 +39,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-sm text-primary-foreground/80 leading-relaxed">
-              Professional home services across the UAE. From cleaning to maintenance, 
+              Professional home services across the UAE. From cleaning to maintenance,
               we bring quality and reliability to your doorstep.
             </p>
             <div className="flex gap-3">
@@ -64,7 +64,7 @@ const Footer = () => {
             <ul className="space-y-2">
               {services.map((service, index) => (
                 <li key={index}>
-                  <Link 
+                  <Link
                     to={service.href}
                     className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
@@ -81,7 +81,7 @@ const Footer = () => {
             <ul className="space-y-2">
               {quickLinks.map((link, index) => (
                 <li key={index}>
-                  <Link 
+                  <Link
                     to={link.href}
                     className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
@@ -98,7 +98,9 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center gap-2 text-sm">
                 <Phone className="h-4 w-4 text-secondary" />
-                <span>600 562624</span>
+                <a href="tel:971600562624" target="_blank" rel="noopener noreferrer">
+                  <span>600 562624</span>
+                </a>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <Mail className="h-4 w-4 text-secondary" />

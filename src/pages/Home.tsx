@@ -79,25 +79,25 @@ const Home = () => {
                   #1 Home Service Provider in UAE
                 </Badge>
                 <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
-                  Your Property, 
+                  Your Property,
                   <span className="block text-secondary">Our Priority</span>
                 </h1>
                 <p className="text-xl text-white/90 leading-relaxed">
-                  We go beyond delivering services — we provide peace of mind. Whether it's a home, office, 
-                  or holiday home, our commitment is to care for every space with reliability, transparency, 
+                  We go beyond delivering services — we provide peace of mind. Whether it's a home, office,
+                  or holiday home, our commitment is to care for every space with reliability, transparency,
                   and attention to detail. With us, you can trust that your property is always in safe and professional hands.
                 </p>
               </div>
-              
+
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-secondary hover:bg-secondary-hover text-secondary-foreground">
+                <Button size="lg" className="bg-secondary hover:bg-secondary-hover text-secondary-foreground" onClick={() => window.location.href = '/contact'}>
                   Book Service Now
                 </Button>
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
+                <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-primary" onClick={() => window.location.href = '/services/professional'}>
                   View All Services
                 </Button>
               </div>
-              
+
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-8">
                 {stats.map((stat, index) => (
                   <div key={index} className="text-center">
@@ -108,14 +108,14 @@ const Home = () => {
                 ))}
               </div>
             </div>
-            
+
             <div className="relative">
               <Carousel className="w-full">
                 <CarouselContent>
                   {heroImages.map((image, index) => (
                     <CarouselItem key={index}>
-                      <img 
-                        src={image} 
+                      <img
+                        src={image}
                         alt={`Professional cleaning service ${index + 1}`}
                         className="rounded-2xl shadow-strong w-full h-[400px] lg:h-[500px] object-cover"
                       />
@@ -160,7 +160,7 @@ const Home = () => {
             <CarouselContent className="-ml-2 md:-ml-4">
               {featuredServices.map((service, index) => (
                 <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-                  <ServiceCard 
+                  <ServiceCard
                     title={service.name}
                     description={service.description}
                     image={service.image_url || "/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.png"}
@@ -177,7 +177,7 @@ const Home = () => {
           </Carousel>
 
           <div className="text-center mt-12">
-            <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+            <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground" onClick={() => window.location.href = '/services/professional'}>
               View All Services
             </Button>
           </div>
@@ -223,15 +223,17 @@ const Home = () => {
               Ready to Experience Professional Service?
             </h2>
             <p className="text-xl text-white/90">
-              Join thousands of satisfied customers who trust ILAJ for all their home service needs. 
+              Join thousands of satisfied customers who trust ILAJ for all their home service needs.
               Book your service today and experience the difference.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-secondary hover:bg-secondary-hover text-secondary-foreground">
+              <Button size="lg" className="bg-secondary hover:bg-secondary-hover text-secondary-foreground" onClick={() => window.location.href = '/services/professional'}>
                 Book Service Now
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
-                Call: +971 XX XXX XXXX
+              <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-primary">
+                <a href="tel:971600562624" target="_blank" rel="noopener noreferrer">
+                  Call: 600 562 624
+                </a>
               </Button>
             </div>
           </div>

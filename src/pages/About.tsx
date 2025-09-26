@@ -12,7 +12,7 @@ const About = () => {
     { number: "95k", label: "Services Completed" },
     { number: "4.6", label: "Google Rating", icon: "⭐" },
     { number: "100%", label: "Tailored Solutions" },
-    { number: "20+", label: "Years Experience" }
+    { number: "5+", label: "Years Experience" }
   ];
 
   const coreValues = [
@@ -244,8 +244,10 @@ const About = () => {
             <Button size="lg" className="bg-secondary hover:bg-secondary-hover text-secondary-foreground">
               <a href="/services/professional-services">Book Service Now</a>
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
-              <a href="/contact">Contact Us Today</a>
+            <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-primary">
+              <a href="tel:971600562624" target="_blank" rel="noopener noreferrer">
+                Contact Us Today
+              </a>
             </Button>
           </div>
         </div>
