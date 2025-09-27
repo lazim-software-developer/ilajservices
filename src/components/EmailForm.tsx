@@ -52,16 +52,13 @@ const EmailForm: React.FC = () => {
 
     // Format email payload
     const emailPayload = {
-      to: formData.email,
-      subject: `Service Inquiry from ${formData.firstName} ${formData.lastName}`,
-      text: `
-        Name: ${formData.firstName} ${formData.lastName}
-        Email: ${formData.email}
-        Phone: ${formData.phone}
-        Service: ${formData.service || 'Not specified'}
-        Location: ${formData.location || 'Not specified'}
-        Message: ${formData.message || 'No message provided'}
-      `,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: formData.phone,
+      service: formData.service,
+      location: formData.location,
+      message: formData.message
     };
 
     try {
