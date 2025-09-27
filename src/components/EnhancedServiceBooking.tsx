@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,8 +10,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CalendarIcon, Clock, MapPin, Plus, Minus, CheckCircle, X, Info } from "lucide-react";
-import { format } from "date-fns";
+import { CalendarIcon, Clock, Plus, Minus, CheckCircle, X, Info } from "lucide-react";
+import { format, formatISO } from "date-fns";
 import { cn } from "@/lib/utils";
 
 interface ServiceBookingProps {
@@ -24,29 +24,120 @@ interface ServiceBookingProps {
     category: string;
     serviceType?: string;
   };
+  /** Called with all data when user clicks Proceed to Payment */
+  onSubmit?: (payload: BookingPayload) => void;
 }
 
-const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
-  const [selectedDate, setSelectedDate] = useState<Date>();
-  const [selectedTime, setSelectedTime] = useState<string>();
-  const [addOns, setAddOns] = useState<string[]>([]);
-  const [customizations, setCustomizations] = useState<Record<string, any>>({});
+type FormState = {
+  schedule: {
+    date?: Date;
+    time?: string;
+  };
+  selections: {
+    unitType?: string;
+    customizations: Record<string, any>;
+    addOns: string[]; // addon ids
+  };
+  customer: {
+    fullName: string;
+    phone: string;
+    email?: string;
+    unitNumber?: string;
+    buildingName?: string;
+    location: string;
+    landmark?: string;
+  };
+};
 
-  // Service-specific configurations
+type BookingPayload = {
+  service: {
+    title: string;
+    serviceType?: string;
+    category: string;
+    description: string;
+    image: string;
+    basePrice: number;
+    duration: string;
+  };
+  schedule: {
+    date: string;        // yyyy-mm-dd
+    time: string;        // e.g. "10:00 AM"
+    datetimeISO: string; // combined ISO
+  };
+  selections: {
+    unitType?: string;
+    customizations: Record<string, any>;
+    addOns: Array<{ id: string; name: string; price: number }>;
+  };
+  pricing: {
+    baseService: number;
+    addOnsTotal: number;
+    grandTotal: number;
+    currency: "AED";
+    breakdown: Array<{ label: string; amount: number }>;
+  };
+  customer: FormState["customer"];
+  meta: { createdAtISO: string };
+};
+
+const EnhancedServiceBooking = ({ serviceData, onSubmit }: ServiceBookingProps) => {
+  // ---------- SINGLE STATE ----------
+  const [form, setForm] = useState<FormState>({
+    schedule: { date: undefined, time: undefined },
+    selections: { unitType: undefined, customizations: {}, addOns: [] },
+    customer: {
+      fullName: "",
+      phone: "",
+      email: "",
+      unitNumber: "",
+      buildingName: "",
+      location: "",
+      landmark: "",
+    },
+  });
+
+  // tiny helpers
+  const update = <K extends keyof FormState>(key: K, value: Partial<FormState[K]>) => {
+    setForm((prev) => ({ ...prev, [key]: { ...prev[key], ...value } }));
+  };
+
+  const setCustomization = (key: string, value: any) => {
+    setForm((prev) => ({
+      ...prev,
+      selections: {
+        ...prev.selections,
+        customizations: { ...prev.selections.customizations, [key]: value },
+      },
+    }));
+  };
+
+  const toggleAddon = (id: string, checked: boolean) => {
+    setForm((prev) => ({
+      ...prev,
+      selections: {
+        ...prev.selections,
+        addOns: checked
+          ? [...prev.selections.addOns, id]
+          : prev.selections.addOns.filter((x) => x !== id),
+      },
+    }));
+  };
+
+  // ---------- CONFIG ----------
   const getServiceConfig = () => {
     const { title, serviceType } = serviceData;
-    
+
     switch (serviceType || title.toLowerCase()) {
-      case 'maid-service':
+      case "maid-service":
         return {
           customOptions: {
             maids: { min: 1, max: 8, price: 80 },
-            hours: { min: 1, max: 12, price: 20 }
+            hours: { min: 1, max: 12, price: 20 },
           },
-          basePrice: 80
+          basePrice: 80,
         };
-      
-      case 'deep-cleaning':
+
+      case "deep-cleaning":
         return {
           unitTypes: [
             { label: "Studio", price: 150 },
@@ -59,11 +150,11 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
             { label: "3 BR Villa", price: 475 },
             { label: "4 BR Villa", price: 550 },
             { label: "5 BR Villa", price: 625 },
-            { label: "Penthouse", price: 700 }
-          ]
+            { label: "Penthouse", price: 700 },
+          ],
         };
-      
-      case 'kitchen-deep-cleaning':
+
+      case "kitchen-deep-cleaning":
         return {
           unitTypes: [
             { label: "Studio", price: 175 },
@@ -76,47 +167,41 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
             { label: "3 BR Villa", price: 310 },
             { label: "4 BR Villa", price: 310 },
             { label: "5 BR Villa", price: 310 },
-            { label: "Penthouse", price: 310 }
-          ]
+            { label: "Penthouse", price: 310 },
+          ],
         };
-      
-      case 'upholstery-sofa-cleaning':
+
+      case "upholstery-sofa-cleaning":
         return {
-          customOptions: {
-            seats: { min: 1, max: 20, price: 25 }
-          },
-          basePrice: 100
+          customOptions: { seats: { min: 1, max: 20, price: 25 } },
+          basePrice: 100,
         };
-      
-      case 'carpet-cleaning':
+
+      case "carpet-cleaning":
         return {
           customOptions: {
             size: [
               { label: "Small", price: 50 },
               { label: "Medium", price: 80 },
               { label: "Large", price: 120 },
-              { label: "Extra Large", price: 200 }
+              { label: "Extra Large", price: 200 },
             ],
-            quantity: { min: 1, max: 10, multiplier: true }
-          }
-        };
-      
-      case 'bathroom-deep-cleaning':
-        return {
-          customOptions: {
-            bathrooms: { min: 1, max: 5, price: 100 }
+            quantity: { min: 1, max: 10, multiplier: true },
           },
-          basePrice: 100
         };
-      
-      case 'ac-coil-cleaning':
+
+      case "bathroom-deep-cleaning":
         return {
-          customOptions: {
-            units: { min: 1, max: 8, price: 80 }
-          },
-          basePrice: 80
+          customOptions: { bathrooms: { min: 1, max: 5, price: 100 } },
+          basePrice: 100,
         };
-      
+
+      case "ac-coil-cleaning":
+        return {
+          customOptions: { units: { min: 1, max: 8, price: 80 } },
+          basePrice: 80,
+        };
+
       default:
         return {
           unitTypes: [
@@ -130,14 +215,15 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
             { label: "3 BR Villa", price: 600 },
             { label: "4 BR Villa", price: 700 },
             { label: "5 BR Villa", price: 800 },
-            { label: "Penthouse", price: 900 }
-          ]
+            { label: "Penthouse", price: 900 },
+          ],
         };
     }
   };
 
-  const serviceConfig = getServiceConfig();
-  
+  const serviceConfig = useMemo(getServiceConfig, [serviceData]);
+
+  // ---------- CONSTANTS ----------
   const timeSlots = [
     "08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM",
     "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM",
@@ -149,7 +235,7 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
     { id: "appliance-cleaning", name: "Appliance Deep Clean", price: 30 },
     { id: "balcony-cleaning", name: "Balcony Cleaning", price: 25 },
     { id: "cabinet-cleaning", name: "Cabinet Interior Clean", price: 40 },
-    { id: "mattress-cleaning", name: "Mattress Sanitization", price: 35 }
+    { id: "mattress-cleaning", name: "Mattress Sanitization", price: 35 },
   ];
 
   const inclusions = [
@@ -158,7 +244,7 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
     "Eco-friendly cleaning products",
     "Quality assurance guarantee",
     "Insurance coverage",
-    "Post-service inspection"
+    "Post-service inspection",
   ];
 
   const exclusions = [
@@ -166,55 +252,123 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
     "Moving heavy furniture",
     "Cleaning of valuable items",
     "Pest control treatment",
-    "Electrical work"
+    "Electrical work",
   ];
 
-  const calculateTotal = () => {
-    let total = serviceConfig.basePrice || serviceData.basePrice;
-    
-    // Handle unit-based pricing
-    if (serviceConfig.unitTypes && customizations.unitType) {
-      const selectedUnit = serviceConfig.unitTypes.find(unit => unit.label === customizations.unitType);
-      if (selectedUnit) total = selectedUnit.price;
+  // ---------- PRICING ----------
+  const { grandTotal, addOnsTotal, baseService } = useMemo(() => {
+    let total = serviceConfig.basePrice ?? serviceData.basePrice;
+
+    // unit-based
+    if (serviceConfig.unitTypes && form.selections.unitType) {
+      const u = serviceConfig.unitTypes.find((x) => x.label === form.selections.unitType);
+      if (u) total = u.price;
     }
-    
-    // Handle custom options
-    if (serviceConfig.customOptions) {
-      Object.entries(customizations).forEach(([key, value]) => {
-        const option = serviceConfig.customOptions[key];
-        if (option && value) {
-          if (option.price) {
-            total += option.price * (value as number);
-          } else if (option.multiplier && key === 'quantity') {
-            // For carpet cleaning quantity multiplier
-            total *= (value as number);
-          } else if (Array.isArray(option)) {
-            const selectedOption = option.find(opt => opt.label === value);
-            if (selectedOption) total = selectedOption.price * (customizations.quantity || 1);
+
+    // custom options
+    const cz = form.selections.customizations;
+    if ((serviceConfig as any).customOptions) {
+      Object.entries(cz).forEach(([key, value]) => {
+        const option: any = (serviceConfig as any).customOptions[key];
+        if (!option || value == null) return;
+
+        if (Array.isArray(option)) {
+          const selected = option.find((o: any) => o.label === value);
+          if (selected) {
+            const qty = Number(cz.quantity ?? 1);
+            total = selected.price * qty;
           }
+        } else if (option.multiplier && key === "quantity") {
+          total *= Number(value);
+        } else if (option.price) {
+          total += option.price * Number(value);
         }
       });
     }
-    
-    // Add-ons
-    addOns.forEach(addonId => {
-      const addon = addOnOptions.find(a => a.id === addonId);
-      if (addon) total += addon.price;
-    });
-    
-    return total;
-  };
 
-  const handleAddOnChange = (addonId: string, checked: boolean) => {
-    if (checked) {
-      setAddOns([...addOns, addonId]);
+    // add-ons
+    const addTotal = form.selections.addOns.reduce((sum, id) => {
+      const a = addOnOptions.find((x) => x.id === id);
+      return sum + (a?.price ?? 0);
+    }, 0);
+
+    return { grandTotal: total + addTotal, addOnsTotal: addTotal, baseService: total };
+  }, [form, serviceConfig, serviceData.basePrice]);
+
+  // ---------- SUBMIT ----------
+  const handleSubmit = () => {
+    // minimal validation
+    if (!form.customer.fullName.trim()) return alert("Please enter your full name.");
+    if (!form.customer.phone.trim()) return alert("Please enter your phone number.");
+    if (!form.customer.location.trim()) return alert("Please provide your location.");
+    if (!form.schedule.date) return alert("Please select a preferred date.");
+    if (!form.schedule.time) return alert("Please select a preferred time.");
+    console.log("fpr,,,,mmm", form);
+    // 12h -> 24h + ISO combine
+    const [time, mer] = (form.schedule.time as string).split(" ");
+    const [hhRaw, mmRaw] = time.split(":");
+    const hh = Number(hhRaw);
+    const mm = Number(mmRaw ?? 0);
+    const isPM = (mer || "").toUpperCase().startsWith("P");
+    const h24 = (hh % 12) + (isPM ? 12 : 0);
+
+    const combined = new Date(form.schedule.date!);
+    combined.setHours(h24, mm, 0, 0);
+
+    const payload: BookingPayload = {
+      service: {
+        title: serviceData.title,
+        serviceType: serviceData.serviceType,
+        category: serviceData.category,
+        description: serviceData.description,
+        image: serviceData.image,
+        basePrice: serviceData.basePrice,
+        duration: serviceData.duration,
+      },
+      schedule: {
+        date: format(form.schedule.date!, "yyyy-MM-dd"),
+        time: form.schedule.time!,
+        datetimeISO: formatISO(combined),
+      },
+      selections: {
+        unitType: form.selections.unitType,
+        customizations: form.selections.customizations,
+        addOns: form.selections.addOns.map((id) => {
+          const a = addOnOptions.find((x) => x.id === id)!;
+          return { id: a.id, name: a.name, price: a.price };
+        }),
+      },
+      pricing: {
+        baseService,
+        addOnsTotal,
+        grandTotal,
+        currency: "AED",
+        breakdown: [
+          { label: "Base Service", amount: baseService },
+          ...form.selections.addOns.map((id) => {
+            const a = addOnOptions.find((x) => x.id === id)!;
+            return { label: a.name, amount: a.price };
+          }),
+        ],
+      },
+      customer: {
+        fullName: form.customer.fullName.trim(),
+        phone: form.customer.phone.trim(),
+        email: form.customer.email?.trim() || "",
+        unitNumber: form.customer.unitNumber?.trim() || "",
+        buildingName: form.customer.buildingName?.trim() || "",
+        location: form.customer.location.trim(),
+        landmark: form.customer.landmark?.trim() || "",
+      },
+      meta: { createdAtISO: new Date().toISOString() },
+    };
+
+    if (onSubmit) {
+      onSubmit(payload);
     } else {
-      setAddOns(addOns.filter(id => id !== addonId));
+      // fallback demo
+      alert("Proceeding with payload:\n\n" + JSON.stringify(payload, null, 2));
     }
-  };
-
-  const handleCustomizationChange = (key: string, value: any) => {
-    setCustomizations(prev => ({ ...prev, [key]: value }));
   };
 
   return (
@@ -227,7 +381,8 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
             <Card>
               <CardContent className="p-6">
                 <div className="grid md:grid-cols-2 gap-6">
-                  <img 
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                     src={serviceData.image}
                     alt={serviceData.title}
                     className="w-full aspect-[4/3] object-cover rounded-lg"
@@ -244,7 +399,7 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
                         <span>{serviceData.duration}</span>
                       </div>
                       <div className="text-lg font-semibold text-primary">
-                        From AED {serviceConfig.basePrice || serviceData.basePrice}
+                        From AED {serviceConfig.basePrice ?? serviceData.basePrice}
                       </div>
                     </div>
                   </div>
@@ -258,21 +413,20 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
                 <TabsTrigger value="customize">Customize</TabsTrigger>
                 <TabsTrigger value="inclusions">Inclusions</TabsTrigger>
                 <TabsTrigger value="exclusions">Exclusions</TabsTrigger>
-                <TabsTrigger value="terms">T&C</TabsTrigger>
+                <TabsTrigger value="terms">T&amp;C</TabsTrigger>
               </TabsList>
 
               <TabsContent value="customize" className="space-y-6">
-                {/* Service Customization */}
                 <Card>
                   <CardHeader>
                     <CardTitle>Customize Your Service</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-6">
-                    {/* Unit Selection for applicable services */}
+                    {/* Unit Selection */}
                     {serviceConfig.unitTypes && (
                       <div>
                         <Label>Property Type</Label>
-                        <Select onValueChange={(value) => handleCustomizationChange('unitType', value)}>
+                        <Select onValueChange={(v) => update("selections", { unitType: v })}>
                           <SelectTrigger>
                             <SelectValue placeholder="Select property type" />
                           </SelectTrigger>
@@ -288,50 +442,63 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
                     )}
 
                     {/* Custom Options */}
-                    {serviceConfig.customOptions && Object.entries(serviceConfig.customOptions).map(([key, option]) => (
-                      <div key={key}>
-                        <Label className="capitalize">{key.replace(/([A-Z])/g, ' $1')}</Label>
-                        {Array.isArray(option) ? (
-                          <Select onValueChange={(value) => handleCustomizationChange(key, value)}>
-                            <SelectTrigger>
-                              <SelectValue placeholder={`Select ${key}`} />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {option.map((opt, index) => (
-                                <SelectItem key={index} value={opt.label}>
-                                  {opt.label} - AED {opt.price}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        ) : (
-                          <div className="flex items-center gap-3">
-                            <Button 
-                              variant="outline" 
-                              size="icon" 
-                              onClick={() => handleCustomizationChange(key, Math.max(option.min, (customizations[key] || option.min) - 1))}
-                            >
-                              <Minus className="h-4 w-4" />
-                            </Button>
-                            <span className="w-16 text-center font-medium">
-                              {customizations[key] || option.min}
-                            </span>
-                            <Button 
-                              variant="outline" 
-                              size="icon"
-                              onClick={() => handleCustomizationChange(key, Math.min(option.max, (customizations[key] || option.min) + 1))}
-                            >
-                              <Plus className="h-4 w-4" />
-                            </Button>
-                            <span className="text-sm text-muted-foreground">
-                              {option.price && `AED ${option.price} per ${key.slice(0, -1)}`}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-                    ))}
+                    {(serviceConfig as any).customOptions &&
+                      Object.entries((serviceConfig as any).customOptions).map(([key, option]: any) => (
+                        <div key={key}>
+                          <Label className="capitalize">{key.replace(/([A-Z])/g, " $1")}</Label>
+                          {Array.isArray(option) ? (
+                            <Select onValueChange={(v) => setCustomization(key, v)}>
+                              <SelectTrigger>
+                                <SelectValue placeholder={`Select ${key}`} />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {option.map((opt: any, idx: number) => (
+                                  <SelectItem key={idx} value={opt.label}>
+                                    {opt.label} - AED {opt.price}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                          ) : (
+                            <div className="flex items-center gap-3">
+                              <Button
+                                type="button"
+                                variant="outline"
+                                size="icon"
+                                onClick={() =>
+                                  setCustomization(
+                                    key,
+                                    Math.max(option.min, (form.selections.customizations[key] ?? option.min) - 1)
+                                  )
+                                }
+                              >
+                                <Minus className="h-4 w-4" />
+                              </Button>
+                              <span className="w-16 text-center font-medium">
+                                {form.selections.customizations[key] ?? option.min}
+                              </span>
+                              <Button
+                                type="button"
+                                variant="outline"
+                                size="icon"
+                                onClick={() =>
+                                  setCustomization(
+                                    key,
+                                    Math.min(option.max, (form.selections.customizations[key] ?? option.min) + 1)
+                                  )
+                                }
+                              >
+                                <Plus className="h-4 w-4" />
+                              </Button>
+                              <span className="text-sm text-muted-foreground">
+                                {option.price && `AED ${option.price} per ${key.slice(0, -1)}`}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      ))}
 
-                    {/* Date & Time Selection */}
+                    {/* Date & Time */}
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
                         <Label>Preferred Date</Label>
@@ -339,14 +506,14 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
                           <PopoverTrigger asChild>
                             <Button variant="outline" className="w-full justify-start text-left font-normal">
                               <CalendarIcon className="mr-2 h-4 w-4" />
-                              {selectedDate ? format(selectedDate, "PPP") : "Pick a date"}
+                              {form.schedule.date ? format(form.schedule.date, "PPP") : "Pick a date"}
                             </Button>
                           </PopoverTrigger>
                           <PopoverContent className="w-auto p-0" align="start">
                             <Calendar
                               mode="single"
-                              selected={selectedDate}
-                              onSelect={setSelectedDate}
+                              selected={form.schedule.date}
+                              onSelect={(d) => update("schedule", { date: d })}
                               initialFocus
                               className={cn("p-3 pointer-events-auto")}
                             />
@@ -355,7 +522,7 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
                       </div>
                       <div>
                         <Label>Preferred Time</Label>
-                        <Select onValueChange={setSelectedTime}>
+                        <Select onValueChange={(v) => update("schedule", { time: v })}>
                           <SelectTrigger>
                             <SelectValue placeholder="Select time" />
                           </SelectTrigger>
@@ -379,16 +546,14 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
                             <div className="flex items-center space-x-3">
                               <Checkbox
                                 id={addon.id}
-                                checked={addOns.includes(addon.id)}
-                                onCheckedChange={(checked) => handleAddOnChange(addon.id, checked as boolean)}
+                                checked={form.selections.addOns.includes(addon.id)}
+                                onCheckedChange={(c) => toggleAddon(addon.id, !!c)}
                               />
                               <label htmlFor={addon.id} className="font-medium cursor-pointer">
                                 {addon.name}
                               </label>
                             </div>
-                            <Badge className="bg-secondary text-secondary-foreground">
-                              +AED {addon.price}
-                            </Badge>
+                            <Badge className="bg-secondary text-secondary-foreground">+AED {addon.price}</Badge>
                           </div>
                         ))}
                       </div>
@@ -400,36 +565,69 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
                       <div className="grid md:grid-cols-2 gap-4">
                         <div>
                           <Label htmlFor="customerName">Full Name *</Label>
-                          <Input id="customerName" placeholder="Enter your full name" />
+                          <Input
+                            id="customerName"
+                            placeholder="Enter your full name"
+                            value={form.customer.fullName}
+                            onChange={(e) => update("customer", { fullName: e.target.value })}
+                          />
                         </div>
                         <div>
                           <Label htmlFor="phone">Phone Number *</Label>
-                          <Input id="phone" placeholder="600 562624" />
+                          <Input
+                            id="phone"
+                            placeholder="600 562624"
+                            value={form.customer.phone}
+                            onChange={(e) => update("customer", { phone: e.target.value })}
+                          />
                         </div>
                         <div>
                           <Label htmlFor="email">Email Address</Label>
-                          <Input id="email" type="email" placeholder="info@ilaj.ae" />
+                          <Input
+                            id="email"
+                            type="email"
+                            placeholder="info@ilaj.ae"
+                            value={form.customer.email}
+                            onChange={(e) => update("customer", { email: e.target.value })}
+                          />
                         </div>
                         <div>
                           <Label htmlFor="unitNumber">Unit Number</Label>
-                          <Input id="unitNumber" placeholder="Apartment/Villa number" />
+                          <Input
+                            id="unitNumber"
+                            placeholder="Apartment/Villa number"
+                            value={form.customer.unitNumber}
+                            onChange={(e) => update("customer", { unitNumber: e.target.value })}
+                          />
                         </div>
                       </div>
                       <div>
                         <Label htmlFor="buildingName">Building Name</Label>
-                        <Input id="buildingName" placeholder="Building or complex name" />
+                        <Input
+                          id="buildingName"
+                          placeholder="Building or complex name"
+                          value={form.customer.buildingName}
+                          onChange={(e) => update("customer", { buildingName: e.target.value })}
+                        />
                       </div>
                       <div>
                         <Label htmlFor="location">Location *</Label>
-                        <Textarea 
+                        <Textarea
                           id="location"
                           placeholder="Street, area, city, emirate"
                           rows={2}
+                          value={form.customer.location}
+                          onChange={(e) => update("customer", { location: e.target.value })}
                         />
                       </div>
                       <div>
                         <Label htmlFor="landmark">Landmark</Label>
-                        <Input id="landmark" placeholder="Nearby landmark for easy location" />
+                        <Input
+                          id="landmark"
+                          placeholder="Nearby landmark for easy location"
+                          value={form.customer.landmark}
+                          onChange={(e) => update("customer", { landmark: e.target.value })}
+                        />
                       </div>
                     </div>
                   </CardContent>
@@ -483,7 +681,7 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Info className="h-5 w-5" />
-                      Terms & Conditions
+                      Terms &amp; Conditions
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
@@ -504,7 +702,6 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
 
           {/* Order Summary Sidebar */}
           <div className="space-y-6">
-            {/* Total Summary */}
             <Card>
               <CardHeader>
                 <CardTitle>Order Summary</CardTitle>
@@ -513,13 +710,10 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
                 <div className="space-y-3">
                   <div className="flex justify-between">
                     <span>Base Service</span>
-                    <span>AED {calculateTotal() - addOns.reduce((sum, id) => {
-                      const addon = addOnOptions.find(a => a.id === id);
-                      return sum + (addon?.price || 0);
-                    }, 0)}</span>
+                    <span>AED {baseService}</span>
                   </div>
-                  {addOns.map(addonId => {
-                    const addon = addOnOptions.find(a => a.id === addonId);
+                  {form.selections.addOns.map((addonId) => {
+                    const addon = addOnOptions.find((a) => a.id === addonId);
                     return addon ? (
                       <div key={addon.id} className="flex justify-between text-sm text-muted-foreground">
                         <span>{addon.name}</span>
@@ -531,22 +725,19 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
                 <div className="border-t pt-3">
                   <div className="flex justify-between font-semibold text-lg">
                     <span>Total</span>
-                    <span className="text-primary">AED {calculateTotal()}</span>
+                    <span className="text-primary">AED {grandTotal}</span>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
             {/* Booking Actions */}
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="w-full bg-gradient-primary hover:bg-primary-hover text-lg py-6"
-              onClick={() => {
-                // This would integrate with payment gateway
-                alert("Redirecting to payment gateway...\n\nNote: For full functionality including payment processing and booking storage, please connect to Supabase using the integration in the top-right corner.");
-              }}
+              onClick={handleSubmit}
             >
-              Proceed to Payment - AED {calculateTotal()}
+              Proceed to Payment - AED {grandTotal}
             </Button>
 
             {/* Contact Info */}

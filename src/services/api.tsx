@@ -1,3 +1,4 @@
+import api from '@/axios/interceptor';
 import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL || '/api';
@@ -24,7 +25,7 @@ interface ApiError {
 
 export const sendEmail = async (emailData: EmailData): Promise<ApiResponse> => {
   try {
-    const response = await axios.post<ApiResponse>(`${API_URL}/contact-us`, emailData);
+    const response = await api.post<ApiResponse>(`api/contact-us`, emailData);
     return response.data;
   } catch (error: any) {
     throw error.response?.data as ApiError;
