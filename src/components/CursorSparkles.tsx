@@ -14,16 +14,20 @@ const CursorSparkles = () => {
   const [sparkles, setSparkles] = useState<Sparkle[]>([]);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  const colors = ['#085B86', '#F59121', '#ffffff', '#38bdf8', '#fbbf24'];
+  const colors = [
+    '#085B86', '#F59121', '#ffffff', '#38bdf8', '#fbbf24', 
+    '#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#f0932b',
+    '#eb4d4b', '#6c5ce7', '#a29bfe', '#fd79a8', '#fdcb6e'
+  ];
 
   const createSparkle = (x: number, y: number): Sparkle => ({
     id: Math.random(),
-    x: x + (Math.random() - 0.5) * 30,
-    y: y + (Math.random() - 0.5) * 30,
-    size: Math.random() * 8 + 4,
-    opacity: 1,
+    x: x + (Math.random() - 0.5) * 50,
+    y: y + (Math.random() - 0.5) * 50,
+    size: Math.random() * 12 + 6,
+    opacity: Math.random() * 0.8 + 0.2,
     color: colors[Math.floor(Math.random() * colors.length)],
-    duration: Math.random() * 1000 + 500
+    duration: Math.random() * 1500 + 800
   });
 
   useEffect(() => {
@@ -44,17 +48,20 @@ const CursorSparkles = () => {
 
       if (isInteractive && !isHovering) {
         isHovering = true;
-        // Create more frequent sparkles on hover
+        // Create much more frequent sparkles on hover
         sparkleInterval = setInterval(() => {
-          setSparkles(prev => [...prev, createSparkle(e.clientX, e.clientY)]);
-        }, 100);
+          // Create multiple sparkles at once for more dramatic effect
+          for (let i = 0; i < 3; i++) {
+            setSparkles(prev => [...prev, createSparkle(e.clientX, e.clientY)]);
+          }
+        }, 50);
       } else if (!isInteractive && isHovering) {
         isHovering = false;
         clearInterval(sparkleInterval);
       }
 
-      // Occasional sparkles during normal movement
-      if (Math.random() < 0.1 && !isHovering) {
+      // More frequent sparkles during normal movement
+      if (Math.random() < 0.3 && !isHovering) {
         setSparkles(prev => [...prev, createSparkle(e.clientX, e.clientY)]);
       }
     };
@@ -86,23 +93,37 @@ const CursorSparkles = () => {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
-      {/* Cursor Trail */}
+      {/* Enhanced Cursor Trail */}
       <div 
-        className="fixed w-8 h-8 pointer-events-none transition-all duration-100 ease-out"
+        className="fixed w-12 h-12 pointer-events-none transition-all duration-75 ease-out animate-pulse"
         style={{ 
-          left: mousePosition.x - 16, 
-          top: mousePosition.y - 16,
-          background: 'radial-gradient(circle, rgba(8, 91, 134, 0.3) 0%, rgba(245, 145, 33, 0.2) 50%, transparent 70%)',
+          left: mousePosition.x - 24, 
+          top: mousePosition.y - 24,
+          background: 'radial-gradient(circle, rgba(8, 91, 134, 0.6) 0%, rgba(245, 145, 33, 0.4) 40%, rgba(255, 255, 255, 0.2) 70%, transparent 100%)',
           borderRadius: '50%',
-          filter: 'blur(4px)'
+          filter: 'blur(2px)',
+          boxShadow: '0 0 20px rgba(245, 145, 33, 0.6), 0 0 40px rgba(8, 91, 134, 0.4)'
+        }}
+      />
+      
+      {/* Secondary glow effect */}
+      <div 
+        className="fixed w-6 h-6 pointer-events-none transition-all duration-50 ease-out"
+        style={{ 
+          left: mousePosition.x - 12, 
+          top: mousePosition.y - 12,
+          background: 'radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(245, 145, 33, 0.6) 50%, transparent 70%)',
+          borderRadius: '50%',
+          filter: 'blur(1px)',
+          boxShadow: '0 0 15px rgba(255, 255, 255, 0.8)'
         }}
       />
 
-      {/* Sparkles */}
+      {/* Enhanced Sparkles */}
       {sparkles.map(sparkle => (
         <div
           key={sparkle.id}
-          className="fixed pointer-events-none animate-sparkle"
+          className="fixed pointer-events-none"
           style={{
             left: sparkle.x,
             top: sparkle.y,
@@ -110,10 +131,26 @@ const CursorSparkles = () => {
             height: sparkle.size,
             backgroundColor: sparkle.color,
             borderRadius: '50%',
-            boxShadow: `0 0 ${sparkle.size * 2}px ${sparkle.color}`,
+            boxShadow: `
+              0 0 ${sparkle.size * 3}px ${sparkle.color},
+              0 0 ${sparkle.size * 6}px ${sparkle.color}80,
+              0 0 ${sparkle.size * 9}px ${sparkle.color}40,
+              inset 0 0 ${sparkle.size}px rgba(255, 255, 255, 0.8)
+            `,
+            filter: `brightness(1.5) saturate(1.8)`,
             animation: `sparkle-fade ${sparkle.duration}ms ease-out forwards`,
+            opacity: sparkle.opacity,
           }}
-        />
+        >
+          {/* Inner glow */}
+          <div 
+            className="absolute inset-0 rounded-full animate-pulse"
+            style={{
+              background: `radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, ${sparkle.color} 40%, transparent 70%)`,
+              filter: 'blur(1px)'
+            }}
+          />
+        </div>
       ))}
     </div>
   );
