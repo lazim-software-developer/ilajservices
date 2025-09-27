@@ -13,6 +13,7 @@ import ImageVideoGallery from "./pages/ImageVideoGallery";
 import Blogs from "./pages/Blogs";
 import BlogPost from "./pages/BlogPost";
 import Contact from "./pages/Contact";
+import Services from "./pages/Services";
 import ProfessionalServices from "./pages/services/ProfessionalServices";
 import HolidayHome from "./pages/services/HolidayHome";
 import CorporateSolution from "./pages/services/CorporateSolution";
@@ -104,6 +105,7 @@ const App = () => (
                     <Route path="/blogs" element={<Blogs />} />
                     <Route path="/blog/:slug" element={<BlogPost />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="/services" element={<Services />} />
                     <Route path="/services/professional" element={<ProfessionalServices />} />
                     <Route path="/services/professional/:serviceId" element={<ServiceBooking />} />
                     <Route path="/service-booking" element={<ServiceBooking />} />

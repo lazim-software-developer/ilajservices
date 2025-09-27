@@ -144,4 +144,19 @@ Brand Colors: Deep blue-green #085B86 & Vibrant orange #F59121
   .table-row-hover:hover {
     @apply bg-muted/30 transition-colors;
   }
+  
+  /* Custom Cursor for Services Page */
+  .services-page {
+    cursor: url('./assets/anime-cursor-small.png') 24 24, auto !important;
+  }
+
+  .services-page * {
+    cursor: url('./assets/anime-cursor-small.png') 24 24, auto !important;
+  }
+
+  .services-page a:hover,
+  .services-page button:hover,
+  .services-page [role="button"]:hover {
+    cursor: url('./assets/anime-cursor-small.png') 24 24, pointer !important;
+  }
 }
