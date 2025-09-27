@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import WhatsAppWidget from "./components/WhatsAppWidget";
+import CursorSparkles from "./components/CursorSparkles";
+import ClickParticles from "./components/ClickParticles";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Gallery from "./pages/Gallery";
@@ -13,6 +15,7 @@ import ImageVideoGallery from "./pages/ImageVideoGallery";
 import Blogs from "./pages/Blogs";
 import BlogPost from "./pages/BlogPost";
 import Contact from "./pages/Contact";
+import Services from "./pages/Services";
 import ProfessionalServices from "./pages/services/ProfessionalServices";
 import HolidayHome from "./pages/services/HolidayHome";
 import CorporateSolution from "./pages/services/CorporateSolution";
@@ -43,6 +46,8 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <div className="min-h-screen bg-background">
+          <CursorSparkles />
+          <ClickParticles />
           <Routes>
             {/* Admin Routes */}
             <Route path="/admin" element={<AdminLayout />}>
@@ -104,6 +109,7 @@ const App = () => (
                     <Route path="/blogs" element={<Blogs />} />
                     <Route path="/blog/:slug" element={<BlogPost />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="/services" element={<Services />} />
                     <Route path="/services/professional" element={<ProfessionalServices />} />
                     <Route path="/services/professional/:serviceId" element={<ServiceBooking />} />
                     <Route path="/service-booking" element={<ServiceBooking />} />

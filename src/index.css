@@ -144,4 +144,91 @@ Brand Colors: Deep blue-green #085B86 & Vibrant orange #F59121
   .table-row-hover:hover {
     @apply bg-muted/30 transition-colors;
   }
+  
+  /* Custom Cursor for Services Page */
+  .services-page {
+    cursor: url('./assets/anime-cursor-small.png') 24 24, auto !important;
+  }
+
+  .services-page * {
+    cursor: url('./assets/anime-cursor-small.png') 24 24, auto !important;
+  }
+
+  .services-page a:hover,
+  .services-page button:hover,
+  .services-page [role="button"]:hover {
+    cursor: url('./assets/anime-cursor-small.png') 24 24, pointer !important;
+  }
+
+  /* Sparkle Animation Keyframes */
+  @keyframes sparkle-fade {
+    0% {
+      opacity: 1;
+      transform: scale(0) rotate(0deg);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1) rotate(180deg);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.5) rotate(360deg);
+    }
+  }
+
+  @keyframes sparkle {
+    0%, 100% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-sparkle {
+    animation: sparkle 0.8s ease-in-out;
+  }
+
+  /* Glitter effect for interactive elements */
+  .glitter-hover {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glitter-hover:hover::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, transparent 30%, rgba(245, 145, 33, 0.2) 50%, transparent 70%);
+    border-radius: inherit;
+    animation: glitter-shine 1.5s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  @keyframes glitter-shine {
+    0% {
+      transform: translateX(-100%) skewX(-15deg);
+    }
+    50% {
+      transform: translateX(100%) skewX(-15deg);
+    }
+    100% {
+      transform: translateX(200%) skewX(-15deg);
+    }
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 }
