@@ -145,7 +145,7 @@ const Header = () => {
           </NavigationMenu>
 
           {/* CTA Button */}
-          <Button className="hidden md:flex bg-gradient-secondary hover:bg-secondary-hover">
+          <Button className="hidden md:flex bg-gradient-secondary hover:bg-secondary-hover" onClick={() => window.location.href = '/services/professional'}>
             Book Now
           </Button>
 
@@ -185,7 +185,7 @@ const Header = () => {
                   ))}
                 </div>
 
-                <Button className="mt-4 bg-gradient-secondary hover:bg-secondary-hover">
+                <Button className="mt-4 bg-gradient-secondary hover:bg-secondary-hover" onClick={() => window.location.href = '/services/professional'}>
                   Book Now
                 </Button>
               </nav>

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
-
+import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
+import TiktokIcon from "./TiktokIcon";
 const Footer = () => {
   const services = [
     { name: "Deep Cleaning", href: "/services/professional/deep-cleaning" },
@@ -42,7 +42,7 @@ const Footer = () => {
               Professional home services across the UAE. From cleaning to maintenance,
               we bring quality and reliability to your doorstep.
             </p>
-            <div className="flex gap-3">
+            {/* <div className="flex gap-3">
               <div className="bg-primary-foreground/10 hover:bg-primary-foreground/20 p-2 rounded-full cursor-pointer transition-colors">
                 <Facebook className="h-4 w-4" />
               </div>
@@ -55,92 +55,119 @@ const Footer = () => {
               <div className="bg-primary-foreground/10 hover:bg-primary-foreground/20 p-2 rounded-full cursor-pointer transition-colors">
                 <Linkedin className="h-4 w-4" />
               </div>
+            </div> */}
+            <div className="flex gap-3">
+              <a href="https://www.facebook.com/Ilajservices" target="_blank" rel="noopener noreferrer"> 
+                <div className="bg-primary-foreground/10 hover:bg-primary-foreground/20 p-2 rounded-full cursor-pointer transition-colors">
+                  <Facebook className="h-4 w-4" />
+                </div>
+              </a>
+              <a href="https://www.instagram.com/ilaj_services/" target="_blank" rel="noopener noreferrer">
+                <div className="bg-primary-foreground/10 hover:bg-primary-foreground/20 p-2 rounded-full cursor-pointer transition-colors">
+                  <Instagram className="h-4 w-4" />
+                </div>
+              </a>
+              <a href="https://www.linkedin.com/company/ilajservices/posts/?feedView=all" target="_blank" rel="noopener noreferrer">
+                <div className="bg-primary-foreground/10 hover:bg-primary-foreground/20 p-2 rounded-full cursor-pointer transition-colors">
+                  <Linkedin className="h-4 w-4" />
+                </div>
+              </a>
+              <a href="https://www.youtube.com/@ilajservices" target="_blank" rel="noopener noreferrer">
+                <div className="bg-primary-foreground/10 hover:bg-primary-foreground/20 p-2 rounded-full cursor-pointer transition-colors">
+                  <Youtube className="h-4 w-4" />
+                </div>
+              </a>
+              <a href="https://www.tiktok.com/@ilajservices" target="_blank" rel="noopener noreferrer">
+                <div className="bg-primary-foreground/10 hover:bg-primary-foreground/20 p-2 rounded-full cursor-pointer transition-colors">
+                  <TiktokIcon className="h-4 w-4" />
+                </div>
+              </a>
             </div>
           </div>
 
-          {/* Services */}
-          <div>
-            <h4 className="font-semibold text-lg mb-4">Our Services</h4>
-            <ul className="space-y-2">
-              {services.map((service, index) => (
-                <li key={index}>
-                  <Link
-                    to={service.href}
-                    className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-                  >
-                    {service.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* Services */}
+        <div>
+          <h4 className="font-semibold text-lg mb-4">Our Services</h4>
+          <ul className="space-y-2">
+            {services.map((service, index) => (
+              <li key={index}>
+                <Link
+                  to={service.href}
+                  className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                >
+                  {service.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-semibold text-lg mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              {quickLinks.map((link, index) => (
-                <li key={index}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* Quick Links */}
+        <div>
+          <h4 className="font-semibold text-lg mb-4">Quick Links</h4>
+          <ul className="space-y-2">
+            {quickLinks.map((link, index) => (
+              <li key={index}>
+                <Link
+                  to={link.href}
+                  className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-          {/* Contact Info */}
-          <div>
-            <h4 className="font-semibold text-lg mb-4">Contact Info</h4>
-            <div className="space-y-3">
-              <div className="flex items-center gap-2 text-sm">
-                <Phone className="h-4 w-4 text-secondary" />
-                <a href="tel:971600562624" target="_blank" rel="noopener noreferrer">
-                  <span>600 562624</span>
-                </a>
-              </div>
-              <div className="flex items-center gap-2 text-sm">
-                <Mail className="h-4 w-4 text-secondary" />
-                <span>info@ilaj.ae</span>
-              </div>
-              <div className="flex items-start gap-2 text-sm">
-                <MapPin className="h-4 w-4 text-secondary mt-0.5" />
-                <span>1001, Suntech Tower, DSO, Dubai</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm">
-                <Clock className="h-4 w-4 text-secondary" />
-                <span>Mon-Sat: 9AM-6PM</span>
-              </div>
+        {/* Contact Info */}
+        <div>
+          <h4 className="font-semibold text-lg mb-4">Contact Info</h4>
+          <div className="space-y-3">
+            <div className="flex items-center gap-2 text-sm">
+              <Phone className="h-4 w-4 text-secondary" />
+              <a href="tel:971600562624" target="_blank" rel="noopener noreferrer">
+                <span>600 562624</span>
+              </a>
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <Mail className="h-4 w-4 text-secondary" />
+              <span>info@ilaj.ae</span>
+            </div>
+            <div className="flex items-start gap-2 text-sm">
+              <MapPin className="h-4 w-4 text-secondary mt-0.5" />
+              <span>1001, Suntech Tower, DSO, Dubai</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <Clock className="h-4 w-4 text-secondary" />
+              <span>Mon-Sat: 9AM-6PM</span>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-primary-foreground/10">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-sm text-primary-foreground/60">
-              © 2024 ILAJ Services. All rights reserved.
-            </div>
-            <div className="flex gap-6 text-sm text-primary-foreground/60">
-              <Link to="/privacy" className="hover:text-primary-foreground transition-colors">
-                Privacy Policy
-              </Link>
-              <Link to="/terms" className="hover:text-primary-foreground transition-colors">
-                Terms of Service
-              </Link>
-              <Link to="/refund" className="hover:text-primary-foreground transition-colors">
-                Refund Policy
-              </Link>
-            </div>
-          </div>
+      {/* Bottom Bar */ }
+  <div className="border-t border-primary-foreground/10">
+    <div className="container mx-auto px-4 py-6">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="text-sm text-primary-foreground/60">
+          © 2024 ILAJ Services. All rights reserved.
+        </div>
+        <div className="flex gap-6 text-sm text-primary-foreground/60">
+          <Link to="/privacy" className="hover:text-primary-foreground transition-colors">
+            Privacy Policy
+          </Link>
+          <Link to="/terms" className="hover:text-primary-foreground transition-colors">
+            Terms of Service
+          </Link>
+          <Link to="/refund" className="hover:text-primary-foreground transition-colors">
+            Refund Policy
+          </Link>
         </div>
       </div>
-    </footer>
+    </div>
+  </div>
+    </footer >
   );
 };
 

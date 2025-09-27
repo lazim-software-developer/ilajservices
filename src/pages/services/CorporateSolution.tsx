@@ -29,7 +29,7 @@ const CorporateSolution = () => {
       baseOfficeSize: "1000 SQ.FT"
     },
     {
-      id: "essential-package", 
+      id: "essential-package",
       title: "Essential Package",
       subtitle: "Cleaning + AC Maintenance",
       price: "AED 256.00",
@@ -51,7 +51,7 @@ const CorporateSolution = () => {
     },
     {
       id: "comprehensive-package",
-      title: "Comprehensive Package", 
+      title: "Comprehensive Package",
       subtitle: "Cleaning + AC + Pest Control + Duct Cleaning",
       price: "AED 240.00",
       frequency: "Complete facility management",
@@ -60,7 +60,7 @@ const CorporateSolution = () => {
         "All Essential Package services",
         "2 hours cleaning per visit",
         "4 visits per month (weekly)",
-        "AC Servicing (4 times yearly)", 
+        "AC Servicing (4 times yearly)",
         "AED 150.00 per AC unit",
         "Pest Control (2 times yearly)",
         "AED 420.00 per year",
@@ -122,7 +122,7 @@ const CorporateSolution = () => {
     },
     {
       icon: Users,
-      title: "Trained Teams", 
+      title: "Trained Teams",
       description: "Professional staff trained in corporate etiquette and confidentiality"
     },
     {
@@ -175,7 +175,7 @@ const CorporateSolution = () => {
             Professional Corporate Cleaning
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Comprehensive cleaning and facility management solutions for offices, corporate buildings, 
+            Comprehensive cleaning and facility management solutions for offices, corporate buildings,
             and commercial spaces. Maintain a professional environment that impresses clients and employees.
           </p>
         </div>
@@ -224,7 +224,7 @@ const CorporateSolution = () => {
                   <div className="text-center">
                     <Badge variant="outline" className="text-xs">{pkg.ideal}</Badge>
                   </div>
-                  <Button 
+                  <Button
                     className={`w-full ${pkg.popular ? 'bg-primary hover:bg-primary-hover' : 'bg-secondary hover:bg-secondary-hover'}`}
                     onClick={() => navigate(`/services/corporate/${pkg.id}`)}
                   >
@@ -237,7 +237,7 @@ const CorporateSolution = () => {
         </div>
 
         {/* Other Services */}
-        <div className="mb-20">
+        {/* <div className="mb-20">
           <h2 className="text-3xl font-bold text-center mb-12">Other Services</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {otherServices.map((service, index) => (
@@ -255,10 +255,10 @@ const CorporateSolution = () => {
               </Card>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Popular Add-On Services */}
-        <div className="mb-20">
+        {/* <div className="mb-20">
           <h2 className="text-3xl font-bold text-center mb-12">Popular Add-On Services</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {addOnServices.map((addon, index) => (
@@ -271,7 +271,7 @@ const CorporateSolution = () => {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Pricing Information */}
         <Card className="mb-20">
@@ -293,7 +293,7 @@ const CorporateSolution = () => {
                 ))}
               </ul>
             </div>
-            
+
             <div className="bg-primary/10 p-4 rounded-lg">
               <h4 className="font-semibold text-primary mb-2">Contract Terms:</h4>
               <ul className="text-sm space-y-1">
@@ -303,7 +303,7 @@ const CorporateSolution = () => {
                 <li>• Custom pricing for large facilities (10,000+ sq ft)</li>
               </ul>
             </div>
-            
+
             <div className="text-center">
               <Button size="lg" className="bg-gradient-primary hover:bg-primary-hover">
                 Request Detailed Quote
@@ -313,7 +313,7 @@ const CorporateSolution = () => {
         </Card>
 
         {/* Testimonials */}
-        <div className="mb-20">
+        {/* <div className="mb-20">
           <h2 className="text-3xl font-bold text-center mb-12">What Our Corporate Clients Say</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <Card className="p-6">
@@ -361,7 +361,7 @@ const CorporateSolution = () => {
               </div>
             </Card>
           </div>
-        </div>
+        </div> */}
 
         {/* CTA Section */}
         <div className="bg-gradient-primary rounded-2xl text-white p-8 lg:p-12 text-center">
@@ -369,15 +369,25 @@ const CorporateSolution = () => {
             Ready to Elevate Your Workplace?
           </h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            Create a professional environment that impresses clients and boosts employee morale. 
+            Create a professional environment that impresses clients and boosts employee morale.
             Let our corporate cleaning experts handle the details while you focus on your business.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          {/* <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-secondary hover:bg-secondary-hover text-secondary-foreground">
               Schedule Site Visit
             </Button>
             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
               Get Custom Proposal
+            </Button>
+          </div> */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="bg-secondary hover:bg-secondary-hover text-secondary-foreground" onClick={() => window.location.href = '/services/professional'}>
+              Book Service Online
+            </Button>
+            <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-primary">
+              <a href="tel:971600562624" target="_blank" rel="noopener noreferrer">
+                Contact Us Today
+              </a>
             </Button>
           </div>
         </div>

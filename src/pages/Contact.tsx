@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Phone, Mail, MapPin, Clock, MessageSquare, Users } from "lucide-react";
 import { redirect } from "react-router-dom";
+import EmailForm from '@/components/EmailForm';
 
 const Contact = () => {
   const contactInfo = [
@@ -112,7 +113,7 @@ const Contact = () => {
         {/* Contact Form & Map */}
         <div className="grid lg:grid-cols-2 gap-12 mb-16">
           {/* Contact Form */}
-          <Card>
+          {/* <Card>
             <CardHeader>
               <CardTitle className="text-2xl flex items-center gap-2">
                 <MessageSquare className="h-6 w-6 text-primary" />
@@ -176,7 +177,8 @@ const Contact = () => {
                 Send Message
               </Button>
             </CardContent>
-          </Card>
+          </Card> */}
+          <EmailForm />
 
           {/* Quick Actions & Info */}
           <div className="space-y-6">
