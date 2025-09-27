@@ -222,4 +222,13 @@ Brand Colors: Deep blue-green #085B86 & Vibrant orange #F59121
       transform: translateX(200%) skewX(-15deg);
     }
   }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 }
