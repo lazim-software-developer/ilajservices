@@ -321,7 +321,7 @@ const HolidayHome = () => {
         </Card>
 
         {/* CTA Section */}
-        <div className="bg-gradient-secondary rounded-2xl text-white p-8 lg:p-12 text-center">
+        {/* <div className="bg-gradient-secondary rounded-2xl text-white p-8 lg:p-12 text-center">
           <h2 className="text-2xl lg:text-4xl font-bold mb-4">
             Ready to Maximize Your Property's Potential?
           </h2>
@@ -335,6 +335,34 @@ const HolidayHome = () => {
             </Button>
             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-secondary">
               Schedule Consultation
+            </Button>
+          </div>
+        </div> */}
+        
+                <div className="bg-gradient-primary rounded-2xl text-white p-8 lg:p-12 text-center">
+          <h2 className="text-2xl lg:text-4xl font-bold mb-4">
+            Ready to Maximize Your Property's Potential?
+          </h2>
+          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+            Join hundreds of property managers who trust ILAJ for their holiday home management.
+            While booking any package, you can request additional services on the next page.
+          </p>
+          {/* <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="bg-secondary hover:bg-secondary-hover text-secondary-foreground">
+              Schedule Site Visit
+            </Button>
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
+              Get Custom Proposal
+            </Button>
+          </div> */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="bg-secondary hover:bg-secondary-hover text-secondary-foreground" onClick={() => window.location.href = '/services/professional'}>
+              Book Service Online
+            </Button>
+            <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-primary">
+              <a href="tel:971600562624" target="_blank" rel="noopener noreferrer">
+                Contact Us Today
+              </a>
             </Button>
           </div>
         </div>
