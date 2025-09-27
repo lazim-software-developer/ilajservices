@@ -23,7 +23,7 @@ const ClickParticles = () => {
   const createParticle = (x: number, y: number): Particle => {
     const angle = Math.random() * Math.PI * 2;
     const velocity = Math.random() * 3 + 2;
-    const lifetime = Math.random() * 600 + 600; // 0.6-1.2 seconds in ms
+    const lifetime = Math.random() * 500 + 1000; // 1-1.5 seconds in ms
     
     return {
       id: Math.random(),
@@ -41,7 +41,7 @@ const ClickParticles = () => {
   };
 
   const createParticleBurst = (x: number, y: number) => {
-    const particleCount = Math.floor(Math.random() * 11) + 15; // 15-25 particles
+    const particleCount = Math.floor(Math.random() * 16) + 25; // 25-40 particles
     const newParticles = Array.from({ length: particleCount }, () => createParticle(x, y));
     setParticles(prev => [...prev, ...newParticles]);
   };
