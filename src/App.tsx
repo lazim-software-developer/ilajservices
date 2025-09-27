@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import WhatsAppWidget from "./components/WhatsAppWidget";
+import CursorSparkles from "./components/CursorSparkles";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Gallery from "./pages/Gallery";
@@ -44,6 +45,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <div className="min-h-screen bg-background">
+          <CursorSparkles />
           <Routes>
             {/* Admin Routes */}
             <Route path="/admin" element={<AdminLayout />}>
