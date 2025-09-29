@@ -35,7 +35,7 @@ const ProfessionalServices = () => {
     {
       title: "Upholstery (Sofa) Cleaning",
       description: "Specialized cleaning for sofas and furniture using advanced stain removal techniques.",
-      image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=600&h=400&fit=crop",
+      image: "../../../images/upholstery-cleaning.jpg",
       price: "AED 100",
       rating: 4.8,
       duration: "1-2 hours",

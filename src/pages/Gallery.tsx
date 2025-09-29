@@ -7,34 +7,34 @@ const Gallery = () => {
   const galleryItems = {
     "deep-cleaning": [
       {
-        image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=400&fit=crop",
+        image: "/lovable-uploads/bestmaidserviceindubai.png",
         title: "Kitchen Deep Clean - Before & After",
         description: "Complete kitchen transformation with degreasing and sanitization"
       },
       {
-        image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop",
+        image: "/lovable-uploads/bathroom_deep_cleaning.png",
         title: "Bathroom Deep Clean",
         description: "Mold removal and complete bathroom sanitization"
       },
       {
-        image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&h=400&fit=crop",
+        image: "/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.png",
         title: "Living Room Deep Clean",
         description: "Comprehensive cleaning including furniture and floor care"
       }
     ],
     "ac-service": [
       {
-        image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&h=400&fit=crop",
+        image: "/lovable-uploads/gallary_images/holiday_home_cleaning.jpg",
         title: "AC Unit Maintenance",
         description: "Professional AC cleaning and maintenance service"
       },
       {
-        image: "https://images.unsplash.com/photo-1562408590-e32931084e23?w=600&h=400&fit=crop",
+        image: "/lovable-uploads/gallary_images/holiday_home.jpg",
         title: "AC Coil Cleaning",
         description: "Detailed coil cleaning for improved efficiency"
       },
       {
-        image: "https://images.unsplash.com/photo-1631450002405-1ad2078e6b34?w=600&h=400&fit=crop",
+        image: "/lovable-uploads/gallary_images/holiday_home_cleaning_out_view.jpg",
         title: "Duct Cleaning Process",
         description: "Professional duct cleaning for better air quality"
       }
@@ -129,8 +129,9 @@ const Gallery = () => {
           ))}
         </Tabs>
 
+
         {/* CTA Section */}
-        <div className="bg-gradient-primary rounded-2xl text-white p-8 lg:p-12 text-center">
+        <div className="bg-gradient-primary mt rounded-2xl text-white p-8 lg:p-12 text-center mt-16">
           <h2 className="text-2xl lg:text-4xl font-bold mb-4">
             Ready to Transform Your Space?
           </h2>
