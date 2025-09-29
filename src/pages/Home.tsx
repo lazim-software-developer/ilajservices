@@ -121,8 +121,8 @@ const Home = () => {
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <CarouselPrevious className="left-4" />
-                <CarouselNext className="right-4" />
+                <CarouselPrevious className="text-primary left-4" />
+                <CarouselNext className="text-primary right-4" />
               </Carousel>
               <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-medium animate-fade-in">
                 <div className="flex items-center gap-3">
