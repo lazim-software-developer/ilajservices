@@ -54,12 +54,9 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
             { label: "2 BR", price: 275 },
             { label: "3 BR", price: 350 },
             { label: "4 BR", price: 425 },
-            { label: "5 BR", price: 500 },
             { label: "2 BR Villa", price: 400 },
             { label: "3 BR Villa", price: 475 },
-            { label: "4 BR Villa", price: 550 },
-            { label: "5 BR Villa", price: 625 },
-            { label: "Penthouse", price: 700 }
+            { label: "4 BR Villa", price: 550 }
           ]
         };
       
@@ -71,12 +68,9 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
             { label: "2 BR", price: 275 },
             { label: "3 BR", price: 275 },
             { label: "4 BR", price: 275 },
-            { label: "5 BR", price: 300 },
             { label: "2 BR Villa", price: 310 },
             { label: "3 BR Villa", price: 310 },
-            { label: "4 BR Villa", price: 310 },
-            { label: "5 BR Villa", price: 310 },
-            { label: "Penthouse", price: 310 }
+            { label: "4 BR Villa", price: 310 }
           ]
         };
       
@@ -125,12 +119,9 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
             { label: "2 BR", price: 350 },
             { label: "3 BR", price: 450 },
             { label: "4 BR", price: 550 },
-            { label: "5 BR", price: 650 },
             { label: "2 BR Villa", price: 500 },
             { label: "3 BR Villa", price: 600 },
-            { label: "4 BR Villa", price: 700 },
-            { label: "5 BR Villa", price: 800 },
-            { label: "Penthouse", price: 900 }
+            { label: "4 BR Villa", price: 700 }
           ]
         };
     }
@@ -542,11 +533,33 @@ const EnhancedServiceBooking = ({ serviceData }: ServiceBookingProps) => {
               size="lg" 
               className="w-full bg-gradient-primary hover:bg-primary-hover text-lg py-6"
               onClick={() => {
-                // This would integrate with payment gateway
-                alert("Redirecting to payment gateway...\n\nNote: For full functionality including payment processing and booking storage, please connect to Supabase using the integration in the top-right corner.");
+                if (!selectedDate || !selectedTime || !customizations.unitType) {
+                  alert("Please complete all required fields");
+                  return;
+                }
+                
+                const bookingDetails = `
+🏠 *ILAJ Service Booking*
+
+📋 *Service:* ${serviceData.title}
+🏘️ *Property:* ${customizations.unitType || 'N/A'}
+📅 *Date:* ${selectedDate ? format(selectedDate, "PPP") : 'Not selected'}
+⏰ *Time:* ${selectedTime || 'Not selected'}
+💰 *Total Amount:* AED ${calculateTotal()}
+
+👤 *Customer Details:*
+Name: [Please provide]
+Phone: [Please provide]
+Location: [Please provide]
+
+✅ Add-ons: ${addOns.length > 0 ? addOns.map(id => addOnOptions.find(a => a.id === id)?.name).join(', ') : 'None'}
+                `.trim();
+                
+                const whatsappUrl = `https://wa.me/971600562624?text=${encodeURIComponent(bookingDetails)}`;
+                window.open(whatsappUrl, '_blank');
               }}
             >
-              Proceed to Payment - AED {calculateTotal()}
+              Confirm Booking - AED {calculateTotal()}
             </Button>
 
             {/* Contact Info */}

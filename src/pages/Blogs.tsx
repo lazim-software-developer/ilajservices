@@ -101,16 +101,6 @@ const Blogs = () => {
     }
   ];
 
-  const categories = [
-    "All Posts",
-    "HVAC Services",
-    "Holiday Homes",
-    "Cleaning Guide",
-    "Office Cleaning",
-    "Pest Control",
-    "Home Maintenance",
-    "Energy Efficiency"
-  ];
 
   return (
     <div className="min-h-screen py-8">
@@ -129,19 +119,6 @@ const Blogs = () => {
           </p>
         </div>
 
-        {/* Categories */}
-        <div className="flex flex-wrap gap-2 justify-center mb-12">
-          {categories.map((category, index) => (
-            <Button 
-              key={index}
-              variant={index === 0 ? "default" : "outline"}
-              size="sm"
-              className={index === 0 ? "bg-primary hover:bg-primary-hover" : ""}
-            >
-              {category}
-            </Button>
-          ))}
-        </div>
 
         {/* Blog Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">

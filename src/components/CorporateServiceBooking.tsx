@@ -93,7 +93,34 @@ const CorporateServiceBooking = ({ serviceData }: CorporateServiceBookingProps) 
       return;
     }
 
-    const { totalPrice } = calculatePrice();
+    const { totalPrice, breakdown } = calculatePrice();
+    const sizeLabel = officeSizes.find(size => size.value === selectedOfficeSize)?.label;
+    
+    const bookingDetails = `
+🏢 *ILAJ Corporate Service Booking*
+
+📋 *Package:* ${serviceData.title}
+🏢 *Office Size:* ${sizeLabel}
+${(serviceData.serviceType === 'essential-package' || serviceData.serviceType === 'comprehensive-package') ? `❄️ *AC Units:* ${selectedACUnits}` : ''}
+📅 *Preferred Date:* ${formData.preferredDate}
+⏰ *Preferred Time:* ${formData.preferredTime}
+
+🏛️ *Company Details:*
+Company: ${formData.companyName}
+Contact Person: ${formData.contactPerson}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Address: ${formData.address}
+
+💰 *Pricing Breakdown:*
+${breakdown.join('\n')}
+*Total Monthly: AED ${totalPrice.toFixed(2)}*
+
+${formData.specialRequirements ? `📝 *Special Requirements:*\n${formData.specialRequirements}` : ''}
+    `.trim();
+    
+    const whatsappUrl = `https://wa.me/971600562624?text=${encodeURIComponent(bookingDetails)}`;
+    window.open(whatsappUrl, '_blank');
     
     toast.success("Booking request submitted successfully! We'll contact you within 24 hours to confirm your corporate service.", {
       description: `Total estimated cost: AED ${totalPrice.toFixed(2)}`
@@ -358,7 +385,7 @@ const CorporateServiceBooking = ({ serviceData }: CorporateServiceBookingProps) 
                   </div>
 
                   <Button type="submit" size="lg" className="w-full">
-                    Submit Corporate Service Request
+                    Confirm Booking
                   </Button>
                 </form>
               </CardContent>

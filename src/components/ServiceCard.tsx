@@ -32,19 +32,6 @@ const ServiceCard = ({
           alt={title}
           className="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        <div className="absolute top-4 left-4">
-          <Badge variant="secondary" className="bg-secondary text-secondary-foreground">
-            <Shield className="h-3 w-3 mr-1" />
-            Verified
-          </Badge>
-        </div>
-        {price && (
-          <div className="absolute top-4 right-4">
-            <Badge className="bg-primary text-primary-foreground font-semibold">
-              From {price}
-            </Badge>
-          </div>
-        )}
       </div>
       
       <CardHeader className="pb-2">

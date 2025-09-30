@@ -1379,20 +1379,53 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
                 size="lg"
                 disabled={!selectedDate || !selectedTime || !customerInfo.name || !customerInfo.phone}
                 onClick={() => {
-                  // Navigate to payment gateway
+                  if (!selectedDate || !selectedTime || !customerInfo.name || !customerInfo.phone || !customerInfo.location) {
+                    toast({
+                      title: "Missing Information",
+                      description: "Please fill in all required fields",
+                      variant: "destructive"
+                    });
+                    return;
+                  }
+                  
+                  const bookingDetails = `
+🏠 *ILAJ Service Booking*
+
+📋 *Service:* ${serviceData.title}
+${propertyType ? `🏘️ *Property:* ${propertyType}` : ''}
+${numberOfUnits > 1 ? `🔢 *Units:* ${numberOfUnits}` : ''}
+${quantity > 1 ? `🔢 *Quantity:* ${quantity}` : ''}
+📅 *Date:* ${selectedDate ? format(selectedDate, "PPP") : 'Not selected'}
+⏰ *Time:* ${selectedTime || 'Not selected'}
+💰 *Total Amount:* AED ${getFinalPrice().toFixed(2)}
+
+👤 *Customer Details:*
+Name: ${customerInfo.name}
+Phone: ${customerInfo.phone}
+Email: ${customerInfo.email || 'Not provided'}
+Location: ${customerInfo.location}
+Building: ${customerInfo.buildingName || 'Not provided'}
+Unit: ${customerInfo.unitNumber || 'Not provided'}
+
+${addOns.length > 0 ? `✅ *Add-ons:* ${addOns.join(', ')}` : ''}
+${specialRequests ? `📝 *Special Requests:* ${specialRequests}` : ''}
+                  `.trim();
+                  
+                  const whatsappUrl = `https://wa.me/971600562624?text=${encodeURIComponent(bookingDetails)}`;
+                  window.open(whatsappUrl, '_blank');
+                  
                   toast({
-                    title: "Redirecting to Payment 💳",
-                    description: "Please wait while we prepare your secure payment...",
+                    title: "Booking Sent! ✅",
+                    description: "Your booking details have been sent via WhatsApp",
                   });
-                  // Here you would redirect to payment gateway
                 }}
               >
                 <ShoppingCart className="h-4 w-4 mr-2 group-hover:animate-bounce" />
-                Proceed to Payment - AED {getFinalPrice().toFixed(2)}
+                Confirm Booking - AED {getFinalPrice().toFixed(2)}
               </Button>
               
               <div className="text-center text-xs text-muted-foreground">
-                🔒 Secure payment powered by trusted partners
+                🔒 Secure booking via WhatsApp
               </div>
             </CardContent>
           </Card>

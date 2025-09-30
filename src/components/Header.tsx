@@ -100,7 +100,9 @@ const Header = () => {
               ))}
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-sm font-medium">
+                <NavigationMenuTrigger className={`text-sm font-medium ${
+                  location.pathname.startsWith('/services') ? 'text-primary' : ''
+                }`}>
                   Services
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>

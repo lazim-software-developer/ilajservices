@@ -8,43 +8,64 @@ const HolidayHome = () => {
   const packages = [
     {
       title: "One-Time Cleaning",
-      price: "AED 180",
-      originalPrice: "AED 240",
+      price: "Starting AED 180",
+      originalPrice: "",
       description: "One-time Service",
       features: [
-        "1 cleaning Session",
-        "Save AED 60"
+        "Studio – AED 180",
+        "1 BR – AED 200",
+        "2 BR – AED 230",
+        "3 BR – AED 250",
+        "4 BR – AED 280",
+        "2 BR Villa – AED 240",
+        "3 BR Villa – AED 260",
+        "4 BR Villa – AED 290",
+        "5 BR Villa – AED 320"
       ],
       popular: false
     },
     {
       title: "Basic Pack",
-      price: "AED 500",
-      originalPrice: "AED 1080",
+      price: "Starting AED 750",
+      originalPrice: "",
       description: "5 cleaning Service",
       features: [
         "5 Check-out cleanings",
-        "AED 100 per cleaning",
+        "Studio - AED 150",
+        "1 BR - AED 170",
+        "2 BR - AED 190",
+        "3 BR - AED 220",
+        "4 BR - AED 250",
+        "2 BR Villa - AED 240",
+        "3 BR Villa - AED 250",
+        "4 BR Villa - AED 265",
+        "5 BR Villa - AED 295",
         "Valid for 6 months",
         "Flexible scheduling",
-        "Special Price for Additional Services",
-        "Save AED 580"
+        "Special Price for Additional Services"
       ],
       popular: false
     },
     {
       title: "Mid Pack",
-      price: "AED 900",
-      originalPrice: "AED 1800",
+      price: "Starting AED 1,200",
+      originalPrice: "",
       description: "10 cleaning Service",
       features: [
         "10 Check-out cleanings",
-        "AED 90 per cleaning",
+        "Studio - AED 120",
+        "1 BR - AED 140",
+        "2 BR - AED 150",
+        "3 BR - AED 185",
+        "4 BR - AED 220",
+        "2 BR Villa - AED 230",
+        "3 BR Villa - AED 240",
+        "4 BR Villa - AED 255",
+        "5 BR Villa - AED 275",
         "Valid for 6 months",
         "Flexible scheduling",
         "Dedicated account manager",
-        "Special Price for additional Services",
-        "Save AED 900"
+        "Special Price for additional Services"
       ],
       popular: true
     },

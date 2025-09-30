@@ -163,10 +163,17 @@ const Home = () => {
                     title={service.name}
                     description={service.description}
                     image={service.image_url || "/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.png"}
-                    price={`AED ${service.base_price}`}
                     duration={`${Math.round(service.duration_minutes / 60)} hours`}
                     features={service.features}
-                    href={`/service-booking?service=${service.id}`}
+                    href={
+                      service.name === "AC Duct Cleaning" 
+                        ? "/services/professional/ac-duct-cleaning"
+                        : service.name === "Deep Cleaning"
+                        ? "/services/professional/deep-cleaning"
+                        : service.name === "Pest Control"
+                        ? "/services/professional/pest-control"
+                        : `/service-booking?service=${service.id}`
+                    }
                   />
                 </CarouselItem>
               ))}
