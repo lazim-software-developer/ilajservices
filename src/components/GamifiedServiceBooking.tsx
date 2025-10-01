@@ -14,6 +14,7 @@ import { CalendarIcon, Clock, MapPin, Star, Plus, Minus, ShoppingCart, Sparkles,
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface GamifiedServiceBookingProps {
   serviceData: {
@@ -1410,13 +1411,30 @@ Unit: ${customerInfo.unitNumber || 'Not provided'}
 ${addOns.length > 0 ? `✅ *Add-ons:* ${addOns.join(', ')}` : ''}
 ${specialRequests ? `📝 *Special Requests:* ${specialRequests}` : ''}
                   `.trim();
+
+                  // Send email notification
+                  supabase.functions.invoke('send-booking-email', {
+                    body: {
+                      customerName: customerInfo.name,
+                      customerEmail: customerInfo.email || "",
+                      customerPhone: customerInfo.phone,
+                      serviceType: serviceData.title,
+                      serviceDetails: bookingDetails,
+                      totalAmount: getFinalPrice(),
+                      bookingType: 'professional'
+                    }
+                  }).then(({ error }) => {
+                    if (error) {
+                      console.error("Error sending email:", error);
+                    }
+                  });
                   
                   const whatsappUrl = `https://wa.me/971600562624?text=${encodeURIComponent(bookingDetails)}`;
                   window.open(whatsappUrl, '_blank');
                   
                   toast({
                     title: "Booking Sent! ✅",
-                    description: "Your booking details have been sent via WhatsApp",
+                    description: "Your booking details have been sent via WhatsApp and email",
                   });
                 }}
               >
