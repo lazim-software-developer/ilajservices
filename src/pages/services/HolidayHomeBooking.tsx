@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Minus, Plus, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 interface PropertySelection {
   type: string;
@@ -93,7 +94,7 @@ export default function HolidayHomeBooking() {
     return properties.reduce((sum, p) => sum + (p.quantity * p.pricePerUnit), 0);
   };
 
-  const handleConfirmBooking = () => {
+  const handleConfirmBooking = async () => {
     if (!customerName || !customerPhone) {
       toast.error("Please fill in your name and phone number");
       return;
@@ -104,10 +105,37 @@ export default function HolidayHomeBooking() {
       return;
     }
 
+    // Send email via edge function
+    try {
+      const { data, error } = await supabase.functions.invoke('send-booking-email', {
+        body: {
+          customerName,
+          customerEmail,
+          customerPhone,
+          packageTitle: packageInfo.title,
+          packageSessions: packageInfo.sessions,
+          properties,
+          totalAmount: calculateTotal()
+        }
+      });
+
+      if (error) {
+        console.error("Error sending email:", error);
+        toast.error("Booking created but email notification failed");
+      } else {
+        console.log("Email sent successfully:", data);
+      }
+    } catch (error) {
+      console.error("Error invoking email function:", error);
+    }
+
+    // Open WhatsApp
     const message = `*Holiday Home Booking*\n\n*Package:* ${packageInfo.title}\n*Sessions:* ${packageInfo.sessions}\n\n*Customer Details:*\nName: ${customerName}\nEmail: ${customerEmail || "Not provided"}\nPhone: ${customerPhone}\n\n*Properties:*\n${properties.map(p => `${p.type} x ${p.quantity} = AED ${p.quantity * p.pricePerUnit}`).join("\n")}\n\n*Total Amount:* AED ${calculateTotal()}`;
     
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/971600562624?text=${encodedMessage}`, "_blank");
+    
+    toast.success("Booking confirmed! Email sent to info@ilaj.ae");
   };
 
   return (
