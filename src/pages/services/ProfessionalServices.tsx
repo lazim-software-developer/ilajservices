@@ -14,16 +14,16 @@ const ProfessionalServices = () => {
   const staticServices = [
     {
       title: "Maid Service",
-      description: "Professional and reliable maid service for regular home maintenance and cleaning.",
+      description: "Professional and reliable maid service for regular home maintenance and cleaning. AED 34/hr (without materials) or AED 45/hr (with materials).",
       image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=600&h=400&fit=crop",
       rating: 4.7,
-      duration: "2-6 hours",
+      duration: "Hourly",
       features: ["Regular Cleaning", "Flexible Schedule", "Trained Staff"],
       href: "/services/professional/maid-service"
     },
     {
       title: "Deep Cleaning",
-      description: "Comprehensive deep cleaning service for your entire home using professional equipment.",
+      description: "Comprehensive deep cleaning service for your entire home. Apartments from AED 345, Villas from AED 745.",
       image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=400&fit=crop",
       rating: 4.9,
       duration: "3-4 hours",
@@ -32,7 +32,7 @@ const ProfessionalServices = () => {
     },
     {
       title: "Upholstery (Sofa) Cleaning",
-      description: "Specialized cleaning for sofas and furniture using advanced stain removal techniques.",
+      description: "Specialized cleaning for sofas and furniture. Fabric AED 30/seat, Leather AED 46/seat.",
       image: "../../../images/upholstery-cleaning.jpg",
       rating: 4.8,
       duration: "1-2 hours",
@@ -41,7 +41,7 @@ const ProfessionalServices = () => {
     },
     {
       title: "Carpet Cleaning",
-      description: "Professional carpet cleaning service to remove deep stains and restore carpet freshness.",
+      description: "Professional carpet cleaning service. Small (5x10ft) AED 75, Medium (8x12ft) AED 105, Large (10x15ft) AED 150.",
       image: "https://images.unsplash.com/photo-1562813733-b31f71025d54?w=600&h=400&fit=crop",
       rating: 4.7,
       duration: "1-2 hours",
@@ -50,7 +50,7 @@ const ProfessionalServices = () => {
     },
     {
       title: "Kitchen Deep Cleaning",
-      description: "Thorough kitchen cleaning including appliances, cabinets, and deep degreasing.",
+      description: "Thorough kitchen cleaning. Small (below 100 sq.ft) AED 170, Medium (100-200 sq.ft) AED 230, Large (above 200 sq.ft) AED 345.",
       image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop",
       rating: 4.8,
       duration: "2-3 hours",
@@ -59,7 +59,7 @@ const ProfessionalServices = () => {
     },
     {
       title: "Bathroom Deep Cleaning",
-      description: "Complete bathroom sanitization and deep cleaning with mold and mildew removal.",
+      description: "Complete bathroom sanitization and deep cleaning. AED 170 per bathroom.",
       image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&h=400&fit=crop",
       rating: 4.8,
       duration: "1-2 hours",
@@ -68,7 +68,7 @@ const ProfessionalServices = () => {
     },
     {
       title: "AC Service",
-      description: "Complete AC maintenance including cleaning, filter replacement, and performance check.",
+      description: "Complete AC maintenance and servicing. AED 150 per AC unit.",
       image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&h=400&fit=crop",
       rating: 4.8,
       duration: "2-3 hours",
@@ -77,7 +77,7 @@ const ProfessionalServices = () => {
     },
     {
       title: "AC Coil Cleaning",
-      description: "Specialized AC coil cleaning to improve efficiency and air quality.",
+      description: "Specialized AC coil cleaning to improve efficiency. AED 375 per AC unit.",
       image: "https://images.unsplash.com/photo-1562408590-e32931084e23?w=600&h=400&fit=crop",
       rating: 4.7,
       duration: "1-2 hours",
@@ -86,7 +86,7 @@ const ProfessionalServices = () => {
     },
     {
       title: "AC Duct Cleaning",
-      description: "Professional duct cleaning to remove dust, allergens, and improve air quality.",
+      description: "Professional duct cleaning to remove dust and allergens. AED 350 per AC unit.",
       image: "https://images.unsplash.com/photo-1631450002405-1ad2078e6b34?w=600&h=400&fit=crop",
       rating: 4.9,
       duration: "3-4 hours",
@@ -95,7 +95,7 @@ const ProfessionalServices = () => {
     },
     {
       title: "AC Duct & Coil Cleaning",
-      description: "Complete AC system cleaning including both ducts and coils for optimal performance.",
+      description: "Complete AC system cleaning including both ducts and coils. AED 475 per AC unit.",
       image: "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=600&h=400&fit=crop",
       rating: 4.9,
       duration: "4-5 hours",
@@ -104,7 +104,7 @@ const ProfessionalServices = () => {
     },
     {
       title: "Pest Control",
-      description: "Comprehensive pest control solutions to eliminate and prevent pest infestations.",
+      description: "Comprehensive pest control solutions. General pest control from AED 120, specialized treatments available.",
       image: "https://images.unsplash.com/photo-1572020525351-3ca5c5962200?w=600&h=400&fit=crop",
       rating: 4.9,
       duration: "1-2 hours",
@@ -113,7 +113,7 @@ const ProfessionalServices = () => {
     },
     {
       title: "Painting",
-      description: "Professional interior and exterior painting services with premium quality paints.",
+      description: "Professional interior and exterior painting. Apartments from AED 600, Villas from AED 1,450.",
       image: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&h=400&fit=crop",
       rating: 4.8,
       duration: "1-3 days",
@@ -122,12 +122,21 @@ const ProfessionalServices = () => {
     },
     {
       title: "Packers & Movers",
-      description: "Professional packing and moving services for homes and offices with care.",
+      description: "Professional packing and moving services. Dubai: Studio from AED 743, Abu Dhabi: Studio from AED 1,229.",
       image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop",
       rating: 4.7,
       duration: "4-8 hours",
       features: ["Safe Packing", "Insured", "Timely Delivery"],
       href: "/services/professional/packers-movers"
+    },
+    {
+      title: "Handyman Services",
+      description: "Professional handyman services for all your home repair needs. AED 150 per hour.",
+      image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=400&fit=crop",
+      rating: 4.8,
+      duration: "Hourly",
+      features: ["Expert Technicians", "All Repairs", "Flexible Scheduling"],
+      href: "/services/professional/handyman"
     }
   ];
 
