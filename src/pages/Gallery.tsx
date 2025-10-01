@@ -8,69 +8,57 @@ const Gallery = () => {
     "deep-cleaning": [
       {
         image: "/lovable-uploads/bestmaidserviceindubai.png",
-        title: "Kitchen Deep Clean - Before & After",
-        description: "Complete kitchen transformation with degreasing and sanitization"
+        title: "Kitchen Deep Clean"
       },
       {
         image: "/lovable-uploads/bathroom_deep_cleaning.png",
-        title: "Bathroom Deep Clean",
-        description: "Mold removal and complete bathroom sanitization"
+        title: "Bathroom Deep Clean"
       },
       {
         image: "/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.png",
-        title: "Living Room Deep Clean",
-        description: "Comprehensive cleaning including furniture and floor care"
+        title: "Living Room Deep Clean"
       }
     ],
     "ac-service": [
       {
         image: "/lovable-uploads/gallary_images/holiday_home_cleaning.jpg",
-        title: "AC Unit Maintenance",
-        description: "Professional AC cleaning and maintenance service"
+        title: "AC Unit Maintenance"
       },
       {
         image: "/lovable-uploads/gallary_images/holiday_home.jpg",
-        title: "AC Coil Cleaning",
-        description: "Detailed coil cleaning for improved efficiency"
+        title: "AC Coil Cleaning"
       },
       {
         image: "/lovable-uploads/gallary_images/holiday_home_cleaning_out_view.jpg",
-        title: "Duct Cleaning Process",
-        description: "Professional duct cleaning for better air quality"
+        title: "Duct Cleaning Process"
       }
     ],
     "upholstery": [
       {
-        image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=600&h=400&fit=crop",
-        title: "Sofa Deep Cleaning",
-        description: "Professional upholstery cleaning with stain removal"
+        image: "/lovable-uploads/corporate_cleaning_1.png",
+        title: "Office Cleaning Service"
       },
       {
-        image: "https://images.unsplash.com/photo-1562813733-b31f71025d54?w=600&h=400&fit=crop",
-        title: "Carpet Restoration",
-        description: "Steam cleaning and stain treatment for carpets"
+        image: "/lovable-uploads/corporate_cleaning_2.png",
+        title: "Corporate Workspace Cleaning"
       },
       {
-        image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=400&fit=crop",
-        title: "Curtain Cleaning",
-        description: "Professional curtain and drape cleaning service"
+        image: "/lovable-uploads/corporate_cleaning_3.png",
+        title: "Professional Office Maintenance"
       }
     ],
     "corporate": [
       {
         image: "lovable-uploads/dubaicleaningcompany.jpg",
-        title: "Super Heroes",
-        description: "Super Heros"
+        title: "Super Heroes"
       },
       {
         image: "lovable-uploads/best cleaning company in dubai.jpg",
-        title: "Rewarded Excellence",
-        description: "Going above and beyond"
+        title: "Rewarded Excellence"
       },
       {
         image: "public/lovable-uploads/airbnbcleaning.jpg",
-        title: "Skilled Professionals",
-        description: "Not just cleaners, but skilled professionals"
+        title: "Skilled Professionals"
       }
     ]
   };
@@ -115,12 +103,9 @@ const Gallery = () => {
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
                     </div>
                     <CardContent className="p-4">
-                      <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">
+                      <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">
                         {item.title}
                       </h3>
-                      <p className="text-muted-foreground text-sm">
-                        {item.description}
-                      </p>
                     </CardContent>
                   </Card>
                 ))}

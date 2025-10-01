@@ -105,17 +105,28 @@ export default function HolidayHomeBooking() {
       return;
     }
 
+    // Prepare service details for email
+    const propertiesText = properties.map(p => 
+      `${p.type} x ${p.quantity} = AED ${p.quantity * p.pricePerUnit}`
+    ).join('\n');
+    
+    const serviceDetails = `Package: ${packageInfo.title}
+Sessions: ${packageInfo.sessions}
+
+Properties:
+${propertiesText}`;
+
     // Send email via edge function
     try {
       const { data, error } = await supabase.functions.invoke('send-booking-email', {
         body: {
           customerName,
-          customerEmail,
+          customerEmail: customerEmail || "",
           customerPhone,
-          packageTitle: packageInfo.title,
-          packageSessions: packageInfo.sessions,
-          properties,
-          totalAmount: calculateTotal()
+          serviceType: packageInfo.title,
+          serviceDetails,
+          totalAmount: calculateTotal(),
+          bookingType: 'holiday-home'
         }
       });
 

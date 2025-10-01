@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ChevronDown } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 interface CorporateServiceData {
   title: string;
@@ -118,6 +119,23 @@ ${breakdown.join('\n')}
 
 ${formData.specialRequirements ? `📝 *Special Requirements:*\n${formData.specialRequirements}` : ''}
     `.trim();
+
+    // Send email notification
+    supabase.functions.invoke('send-booking-email', {
+      body: {
+        customerName: formData.contactPerson,
+        customerEmail: formData.email,
+        customerPhone: formData.phone,
+        serviceType: serviceData.title,
+        serviceDetails: bookingDetails,
+        totalAmount: totalPrice,
+        bookingType: 'corporate'
+      }
+    }).then(({ error }) => {
+      if (error) {
+        console.error("Error sending email:", error);
+      }
+    });
     
     const whatsappUrl = `https://wa.me/971600562624?text=${encodeURIComponent(bookingDetails)}`;
     window.open(whatsappUrl, '_blank');

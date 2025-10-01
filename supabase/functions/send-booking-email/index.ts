@@ -11,16 +11,12 @@ const corsHeaders = {
 
 interface BookingEmailRequest {
   customerName: string;
-  customerEmail: string;
+  customerEmail?: string;
   customerPhone: string;
-  packageTitle: string;
-  packageSessions: number;
-  properties: Array<{
-    type: string;
-    quantity: number;
-    pricePerUnit: number;
-  }>;
+  serviceType: string;
+  serviceDetails: string;
   totalAmount: number;
+  bookingType: 'holiday-home' | 'professional' | 'corporate';
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -31,61 +27,52 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     const bookingData: BookingEmailRequest = await req.json();
 
-    const propertiesHtml = bookingData.properties
-      .map(
-        (p) =>
-          `<tr>
-            <td style="padding: 8px; border: 1px solid #ddd;">${p.type}</td>
-            <td style="padding: 8px; border: 1px solid #ddd;">${p.quantity}</td>
-            <td style="padding: 8px; border: 1px solid #ddd;">AED ${p.pricePerUnit}</td>
-            <td style="padding: 8px; border: 1px solid #ddd;">AED ${p.quantity * p.pricePerUnit}</td>
-          </tr>`
-      )
-      .join("");
+    console.log("Received booking request:", bookingData);
+
+    const emailHtml = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h1 style="color: #333; border-bottom: 2px solid #4CAF50; padding-bottom: 10px;">
+          New ${bookingData.bookingType === 'holiday-home' ? 'Holiday Home' : bookingData.bookingType === 'corporate' ? 'Corporate' : 'Professional Service'} Booking
+        </h1>
+        
+        <h2 style="color: #4CAF50;">Service Details</h2>
+        <p><strong>Service:</strong> ${bookingData.serviceType}</p>
+        
+        <h2 style="color: #4CAF50;">Customer Information</h2>
+        <p><strong>Name:</strong> ${bookingData.customerName}</p>
+        <p><strong>Email:</strong> ${bookingData.customerEmail || "Not provided"}</p>
+        <p><strong>Phone:</strong> ${bookingData.customerPhone}</p>
+        
+        <h2 style="color: #4CAF50;">Booking Details</h2>
+        <div style="white-space: pre-wrap; font-family: monospace; background-color: #f5f5f5; padding: 15px; border-radius: 5px;">
+${bookingData.serviceDetails}
+        </div>
+        
+        <div style="background-color: #4CAF50; color: white; padding: 15px; margin-top: 20px; border-radius: 5px;">
+          <h2 style="margin: 0;">Total Amount: AED ${bookingData.totalAmount}</h2>
+        </div>
+        
+        <p style="margin-top: 30px; color: #666; font-size: 14px;">
+          This is an automated notification from your Ilaj Services booking system.
+        </p>
+      </div>
+    `;
+
+    // Array to hold email recipients
+    const recipients = ["info@ilaj.ae"];
+    
+    // Add customer email if provided
+    if (bookingData.customerEmail && bookingData.customerEmail.trim() !== "") {
+      recipients.push(bookingData.customerEmail);
+    }
+
+    console.log("Sending emails to:", recipients);
 
     const emailResponse = await resend.emails.send({
       from: "Ilaj Services <onboarding@resend.dev>",
-      to: ["info@ilaj.ae"],
-      subject: `New Holiday Home Booking - ${bookingData.packageTitle}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h1 style="color: #333; border-bottom: 2px solid #4CAF50; padding-bottom: 10px;">
-            New Holiday Home Booking
-          </h1>
-          
-          <h2 style="color: #4CAF50;">Package Details</h2>
-          <p><strong>Package:</strong> ${bookingData.packageTitle}</p>
-          <p><strong>Sessions:</strong> ${bookingData.packageSessions}</p>
-          
-          <h2 style="color: #4CAF50;">Customer Information</h2>
-          <p><strong>Name:</strong> ${bookingData.customerName}</p>
-          <p><strong>Email:</strong> ${bookingData.customerEmail || "Not provided"}</p>
-          <p><strong>Phone:</strong> ${bookingData.customerPhone}</p>
-          
-          <h2 style="color: #4CAF50;">Properties</h2>
-          <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
-            <thead>
-              <tr style="background-color: #f2f2f2;">
-                <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Property Type</th>
-                <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Quantity</th>
-                <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Price per Unit</th>
-                <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Subtotal</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${propertiesHtml}
-            </tbody>
-          </table>
-          
-          <div style="background-color: #4CAF50; color: white; padding: 15px; margin-top: 20px; border-radius: 5px;">
-            <h2 style="margin: 0;">Total Amount: AED ${bookingData.totalAmount}</h2>
-          </div>
-          
-          <p style="margin-top: 30px; color: #666; font-size: 14px;">
-            This is an automated notification from your Ilaj Services booking system.
-          </p>
-        </div>
-      `,
+      to: recipients,
+      subject: `New ${bookingData.bookingType === 'holiday-home' ? 'Holiday Home' : bookingData.bookingType === 'corporate' ? 'Corporate' : 'Professional Service'} Booking - ${bookingData.serviceType}`,
+      html: emailHtml,
     });
 
     console.log("Booking email sent successfully:", emailResponse);
