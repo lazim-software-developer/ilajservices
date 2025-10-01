@@ -305,7 +305,7 @@ const CorporateSolution = () => {
             </div>
 
             <div className="text-center">
-              <Button size="lg" className="bg-gradient-primary hover:bg-primary-hover">
+              <Button size="lg" className="bg-gradient-primary hover:bg-primary-hover" onClick={() => navigate('/contact')}>
                 Request Detailed Quote
               </Button>
             </div>

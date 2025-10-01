@@ -364,8 +364,8 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
   })();
 
   const propertyTypes = [
-    "Studio", "1 BR", "2 BR", "3 BR", "4 BR", "5 BR",
-    "2 BR villa", "3 BR villa", "4 BR villa", "5 BR villa", "Penthouse"
+    "Studio", "1 BR", "2 BR", "3 BR", "4 BR",
+    "2 BR villa", "3 BR villa", "4 BR villa", "5 BR villa"
   ];
 
   const calculatePrice = () => {
@@ -418,19 +418,19 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
                         
         const pestPrices = {
           general: {
-            "Studio": 120, "1 BR": 120, "2 BR": 150, "3 BR": 180, "4 BR": 240, "5 BR": 276,
+            "Studio": 120, "1 BR": 120, "2 BR": 150, "3 BR": 180, "4 BR": 240,
             "1 BR villa": 180, "2 BR villa": 228, "3 BR villa": 288, "4 BR villa": 348, "5 BR villa": 408
           },
           mosquito: {
-            "Studio": 150, "1 BR": 150, "2 BR": 200, "3 BR": 240, "4 BR": 280, "5 BR": 350,
+            "Studio": 150, "1 BR": 150, "2 BR": 200, "3 BR": 240, "4 BR": 280,
             "2 BR villa": 270, "3 BR villa": 300, "4 BR villa": 370, "5 BR villa": 380
           },
           bedbug: {
-            "Studio": 144, "1 BR": 156, "2 BR": 180, "3 BR": 228, "4 BR": 276, "5 BR": 300,
+            "Studio": 144, "1 BR": 156, "2 BR": 180, "3 BR": 228, "4 BR": 276,
             "1 BR villa": 240, "2 BR villa": 324, "3 BR villa": 348, "4 BR villa": 420, "5 BR villa": 480
           },
           rodent: {
-            "Studio": 170, "1 BR": 170, "2 BR": 250, "3 BR": 280, "4 BR": 320, "5 BR": 350,
+            "Studio": 170, "1 BR": 170, "2 BR": 250, "3 BR": 280, "4 BR": 320,
             "1 BR villa": 230, "2 BR villa": 265, "3 BR villa": 300, "4 BR villa": 350, "5 BR villa": 380
           }
         };
@@ -455,7 +455,7 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
         
       case "painting":
         const paintingPrices = {
-          "Studio": 600, "1 BR": 840, "2 BR": 1200, "3 BR": 1680, "4 BR": 2450, "5 BR": 2800,
+          "Studio": 600, "1 BR": 840, "2 BR": 1200, "3 BR": 1680, "4 BR": 2450,
           "1 BR villa": 1450, "2 BR villa": 1920, "3 BR villa": 2400, "4 BR villa": 3150, "5 BR villa": 3850
         };
         basePrice = paintingPrices[propertyType as keyof typeof paintingPrices] || 600;
@@ -465,7 +465,7 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
         const region = addOns.includes("abudhabi") ? "abudhabi" : "dubai";
         const moversPrices = {
           dubai: {
-            "Studio": 743, "1 BR": 943, "2 BR": 1657, "3 BR": 1900, "4 BR": 3095, "5 BR": 4571,
+            "Studio": 743, "1 BR": 943, "2 BR": 1657, "3 BR": 1900, "4 BR": 3095,
             "2 BR villa": 1857, "3 BR villa": 2810, "4 BR villa": 3762, "5 BR villa": 4714
           },
           abudhabi: {
