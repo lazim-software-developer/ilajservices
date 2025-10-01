@@ -107,7 +107,7 @@ export default function HolidayHomeBooking() {
     const message = `*Holiday Home Booking*\n\n*Package:* ${packageInfo.title}\n*Sessions:* ${packageInfo.sessions}\n\n*Customer Details:*\nName: ${customerName}\nEmail: ${customerEmail || "Not provided"}\nPhone: ${customerPhone}\n\n*Properties:*\n${properties.map(p => `${p.type} x ${p.quantity} = AED ${p.quantity * p.pricePerUnit}`).join("\n")}\n\n*Total Amount:* AED ${calculateTotal()}`;
     
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/971600562264?text=${encodedMessage}`, "_blank");
+    window.open(`https://wa.me/971600562624?text=${encodedMessage}`, "_blank");
   };
 
   return (

@@ -1,4 +1,3 @@
-import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const WhatsAppWidget = () => {
@@ -14,10 +13,14 @@ const WhatsAppWidget = () => {
     <div className="fixed bottom-6 right-6 z-50">
       <Button
         onClick={handleWhatsAppClick}
-        className="bg-green-500 hover:bg-green-600 text-white rounded-full w-14 h-14 p-0 shadow-lg hover:shadow-xl transition-all duration-300 group"
+        className="bg-transparent hover:opacity-80 rounded-full w-14 h-14 p-0 shadow-lg hover:shadow-xl transition-all duration-300 group border-0"
         aria-label="Chat on WhatsApp"
       >
-        <MessageCircle className="h-6 w-6 group-hover:scale-110 transition-transform" />
+        <img 
+          src="/lovable-uploads/whatsapp.png" 
+          alt="WhatsApp" 
+          className="h-14 w-14 group-hover:scale-110 transition-transform"
+        />
       </Button>
     </div>
   );

@@ -105,7 +105,7 @@ const ProfessionalServices = () => {
     {
       title: "Pest Control",
       description: "Comprehensive pest control solutions. General pest control from AED 120, specialized treatments available.",
-      image: "https://images.unsplash.com/photo-1572020525351-3ca5c5962200?w=600&h=400&fit=crop",
+      image: "/lovable-uploads/11_pestcontrol.png",
       rating: 4.9,
       duration: "1-2 hours",
       features: ["Safe Chemicals", "Long-lasting", "Follow-up Service"],
@@ -114,7 +114,7 @@ const ProfessionalServices = () => {
     {
       title: "Painting",
       description: "Professional interior and exterior painting. Apartments from AED 600, Villas from AED 1,450.",
-      image: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&h=400&fit=crop",
+      image: "/lovable-uploads/12_painting_service.png",
       rating: 4.8,
       duration: "1-3 days",
       features: ["Premium Paints", "Surface Preparation", "Clean Finish"],
@@ -123,7 +123,7 @@ const ProfessionalServices = () => {
     {
       title: "Packers & Movers",
       description: "Professional packing and moving services. Dubai: Studio from AED 743, Abu Dhabi: Studio from AED 1,229.",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop",
+      image: "/lovable-uploads/13_packers_and_movers.png",
       rating: 4.7,
       duration: "4-8 hours",
       features: ["Safe Packing", "Insured", "Timely Delivery"],
@@ -132,7 +132,7 @@ const ProfessionalServices = () => {
     {
       title: "Handyman Services",
       description: "Professional handyman services for all your home repair needs. AED 150 per hour.",
-      image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=400&fit=crop",
+      image: "/lovable-uploads/14_handyman_service.png",
       rating: 4.8,
       duration: "Hourly",
       features: ["Expert Technicians", "All Repairs", "Flexible Scheduling"],
