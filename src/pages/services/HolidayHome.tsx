@@ -8,80 +8,37 @@ const HolidayHome = () => {
   const packages = [
     {
       title: "One-Time Cleaning",
-      price: "Starting AED 180",
-      originalPrice: "",
-      description: "One-time Service",
+      price: "180",
+      subtitle: "One-time Service",
       features: [
-        "Studio – AED 180",
-        "1 BR – AED 200",
-        "2 BR – AED 230",
-        "3 BR – AED 250",
-        "4 BR – AED 280",
-        "2 BR Villa – AED 240",
-        "3 BR Villa – AED 260",
-        "4 BR Villa – AED 290",
-        "5 BR Villa – AED 320"
-      ],
-      popular: false
-    },
-    {
-      title: "Basic Pack",
-      price: "Starting AED 750",
-      originalPrice: "",
-      description: "5 cleaning Service",
-      features: [
-        "5 Check-out cleanings",
-        "Studio - AED 150",
-        "1 BR - AED 170",
-        "2 BR - AED 190",
-        "3 BR - AED 220",
-        "4 BR - AED 250",
-        "2 BR Villa - AED 240",
-        "3 BR Villa - AED 250",
-        "4 BR Villa - AED 265",
-        "5 BR Villa - AED 295",
         "Valid for 6 months",
         "Flexible scheduling",
         "Special Price for Additional Services"
       ],
-      popular: false
+      href: "/services/holiday-home/booking?package=onetime"
+    },
+    {
+      title: "Basic Pack",
+      price: "750",
+      subtitle: "5 cleaning Service",
+      features: [
+        "Valid for 6 months",
+        "Flexible scheduling",
+        "Special Price for Additional Services"
+      ],
+      href: "/services/holiday-home/booking?package=basic"
     },
     {
       title: "Mid Pack",
-      price: "Starting AED 1,200",
-      originalPrice: "",
-      description: "10 cleaning Service",
+      price: "1,200",
+      subtitle: "10 cleaning Service",
       features: [
-        "10 Check-out cleanings",
-        "Studio - AED 120",
-        "1 BR - AED 140",
-        "2 BR - AED 150",
-        "3 BR - AED 185",
-        "4 BR - AED 220",
-        "2 BR Villa - AED 230",
-        "3 BR Villa - AED 240",
-        "4 BR Villa - AED 255",
-        "5 BR Villa - AED 275",
         "Valid for 6 months",
         "Flexible scheduling",
         "Dedicated account manager",
         "Special Price for additional Services"
       ],
-      popular: true
-    },
-    {
-      title: "Custom-Tailored Pack",
-      price: "Contact Us",
-      originalPrice: "Special Price",
-      description: "Annual Contract",
-      features: [
-        "Valid for 12 months",
-        "Flexible scheduling",
-        "Dedicated account manager",
-        "Dedicated Housekeeping Team",
-        "Special Price for additional Services"
-      ],
-      popular: false
+      href: "/services/holiday-home/booking?package=mid"
     }
   ];
 
@@ -208,52 +165,34 @@ const HolidayHome = () => {
         {/* Service Packages */}
         <div className="mb-20">
           <h2 className="text-3xl font-bold text-center mb-4">Holiday Home Housekeeping Packages</h2>
-          <p className="text-center text-muted-foreground mb-12">Save money and schedule anytime with our flexible bulk packages</p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-3 gap-8">
             {packages.map((pkg, index) => (
-              <Card key={index} className={`relative ${pkg.popular ? 'border-secondary shadow-medium scale-105' : ''}`}>
-                {pkg.popular && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <Badge className="bg-secondary text-secondary-foreground px-4">Most Popular</Badge>
-                  </div>
-                )}
+              <Card key={index} className="relative overflow-hidden hover:shadow-lg transition-all duration-300">
                 <CardHeader className="text-center">
-                  <CardTitle className="text-xl">{pkg.title}</CardTitle>
-                  <div className="space-y-1">
-                    <div className="text-2xl font-bold text-primary">{pkg.price}</div>
-                    {pkg.originalPrice && pkg.originalPrice !== pkg.price && (
-                      <div className="text-sm text-muted-foreground line-through">{pkg.originalPrice}</div>
-                    )}
+                  <CardTitle className="text-2xl mb-2">{pkg.title}</CardTitle>
+                  <p className="text-muted-foreground mb-2">{pkg.subtitle}</p>
+                  <div className="text-3xl font-bold text-primary mb-4">
+                    Starting AED {pkg.price}
                   </div>
-                  <p className="text-sm text-muted-foreground">{pkg.description}</p>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <ul className="space-y-2">
-                    {pkg.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm">
-                        <CheckCircle className="h-4 w-4 text-secondary mt-0.5 flex-shrink-0" />
-                        <span>{feature}</span>
+                <CardContent>
+                  <ul className="space-y-3 mb-6">
+                    {pkg.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start gap-2">
+                        <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                        <span className="text-sm">{feature}</span>
                       </li>
-                    ))
-                    }
+                    ))}
                   </ul>
-                  <Button
-                    className={`w-full ${pkg.popular ? 'bg-secondary hover:bg-secondary-hover' : 'bg-primary hover:bg-primary-hover'}`}
-                    onClick={() => {
-                      if (pkg.title === "Custom-Tailored Pack") {
-                        window.open('https://wa.me/971600562624', '_blank');
-                      } else {
-                        const serviceId = pkg.title.toLowerCase().replace(/[\s-]+/g, '-').replace(/[^\w-]/g, '');
-                        window.location.href = `/services/holiday-home/${serviceId}`;
-                      }
-                    }}
+                  <Button 
+                    className="w-full bg-gradient-primary hover:bg-primary-hover"
+                    onClick={() => window.location.href = pkg.href}
                   >
-                    {pkg.title === "Custom-Tailored Pack" ? "Contact Us" : "Select Package"}
+                    Book Now
                   </Button>
                 </CardContent>
               </Card>
-            ))
-            }
+            ))}
           </div>
         </div>
 

@@ -18,6 +18,7 @@ import Contact from "./pages/Contact";
 import Services from "./pages/Services";
 import ProfessionalServices from "./pages/services/ProfessionalServices";
 import HolidayHome from "./pages/services/HolidayHome";
+import HolidayHomeBooking from "./pages/services/HolidayHomeBooking";
 import CorporateSolution from "./pages/services/CorporateSolution";
 import ServiceBooking from "./pages/ServiceBooking";
 import NotFound from "./pages/NotFound";
@@ -114,6 +115,7 @@ const App = () => (
                     <Route path="/services/professional/:serviceId" element={<ServiceBooking />} />
                     <Route path="/service-booking" element={<ServiceBooking />} />
                     <Route path="/services/holiday-home" element={<HolidayHome />} />
+                    <Route path="/services/holiday-home/booking" element={<HolidayHomeBooking />} />
                     <Route path="/services/holiday-home/:serviceId" element={<ServiceBooking />} />
                     <Route path="/services/corporate" element={<CorporateSolution />} />
                     <Route path="/services/corporate/:serviceId" element={<ServiceBooking />} />
