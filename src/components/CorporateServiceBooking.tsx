@@ -12,6 +12,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import { ChevronDown } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { sendBookingConfirmation } from '@/services/api';
 
 interface CorporateServiceData {
   title: string;
@@ -63,16 +64,16 @@ const CorporateServiceBooking = ({ serviceData }: CorporateServiceBookingProps) 
   const calculatePrice = () => {
     const sizeMultiplier = officeSizes.find(size => size.value === selectedOfficeSize)?.multiplier || 1;
     const cleaningPrice = serviceData.basePrice * sizeMultiplier;
-    
+
     let totalPrice = cleaningPrice;
     let breakdown = [`Cleaning Service: AED ${cleaningPrice.toFixed(2)}`];
-    
+
     if (serviceData.serviceType === 'essential-package' || serviceData.serviceType === 'comprehensive-package') {
       const acPrice = 150 * parseInt(selectedACUnits);
       totalPrice += acPrice;
       breakdown.push(`AC Servicing (${selectedACUnits} units): AED ${acPrice.toFixed(2)}`);
     }
-    
+
     if (serviceData.serviceType === 'comprehensive-package') {
       const pestPrice = 420;
       const ductPrice = 250 * parseInt(selectedACUnits);
@@ -80,23 +81,23 @@ const CorporateServiceBooking = ({ serviceData }: CorporateServiceBookingProps) 
       breakdown.push(`Pest Control (yearly): AED ${pestPrice.toFixed(2)}`);
       breakdown.push(`AC Duct Cleaning (${selectedACUnits} units): AED ${ductPrice.toFixed(2)}`);
     }
-    
+
     return { totalPrice, breakdown };
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validate required fields
-    if (!formData.companyName || !formData.contactPerson || !formData.email || 
-        !formData.phone || !formData.address || !formData.preferredDate || !formData.preferredTime) {
+    if (!formData.companyName || !formData.contactPerson || !formData.email ||
+      !formData.phone || !formData.address || !formData.preferredDate || !formData.preferredTime) {
       toast.error("Please fill in all required fields");
       return;
     }
 
     const { totalPrice, breakdown } = calculatePrice();
     const sizeLabel = officeSizes.find(size => size.value === selectedOfficeSize)?.label;
-    
+
     const bookingDetails = `
 🏢 *ILAJ Corporate Service Booking*
 
@@ -120,6 +121,19 @@ ${breakdown.join('\n')}
 ${formData.specialRequirements ? `📝 *Special Requirements:*\n${formData.specialRequirements}` : ''}
     `.trim();
 
+    const bookingData = {
+      customerName: formData.contactPerson,
+      customerEmail: formData.email,
+      customerPhone: formData.phone,
+      serviceType: serviceData.title,
+      serviceDetails: bookingDetails,
+      totalAmount: totalPrice,
+      bookingType: 'corporate'
+    };
+    
+    const result = sendBookingConfirmation(bookingData);
+    console.log("Booking confirmation result:", result);
+
     // Send email notification
     supabase.functions.invoke('send-booking-email', {
       body: {
@@ -136,10 +150,10 @@ ${formData.specialRequirements ? `📝 *Special Requirements:*\n${formData.speci
         console.error("Error sending email:", error);
       }
     });
-    
+
     const whatsappUrl = `https://wa.me/971600562624?text=${encodeURIComponent(bookingDetails)}`;
     window.open(whatsappUrl, '_blank');
-    
+
     toast.success("Booking request submitted successfully! We'll contact you within 24 hours to confirm your corporate service.", {
       description: `Total estimated cost: AED ${totalPrice.toFixed(2)}`
     });
@@ -152,7 +166,7 @@ ${formData.specialRequirements ? `📝 *Special Requirements:*\n${formData.speci
       scope: "Assessment of office cleaning requirements, performing all essential cleaning duties within allotted time, prioritizing high-traffic areas and common contact surfaces, summarizing completed activities.",
       inclusions: [
         "Office desk and surface cleaning",
-        "Restroom and kitchen cleaning", 
+        "Restroom and kitchen cleaning",
         "Trash removal and disposal",
         "Floor mopping with disinfectant",
         "Window cleaning (interior)",
@@ -167,7 +181,7 @@ ${formData.specialRequirements ? `📝 *Special Requirements:*\n${formData.speci
       terms: [
         "Minimum 6-month contract required",
         "24-hour advance booking for service changes",
-        "Full payment required before service delivery", 
+        "Full payment required before service delivery",
         "Service issues must be reported within 24 hours"
       ]
     },
@@ -198,7 +212,7 @@ ${formData.specialRequirements ? `📝 *Special Requirements:*\n${formData.speci
     "comprehensive-package": {
       scope: "Full facility management including cleaning assessment, AC system comprehensive maintenance, pest control inspection and treatment, duct cleaning and sanitization, complete reporting of all services.",
       inclusions: [
-        "All Essential Package services", 
+        "All Essential Package services",
         "Comprehensive pest inspection and treatment",
         "AC duct cleaning and sanitization",
         "Indoor air quality improvement",
@@ -208,13 +222,13 @@ ${formData.specialRequirements ? `📝 *Special Requirements:*\n${formData.speci
       ],
       exclusions: [
         "Structural pest damage repairs",
-        "HVAC system modifications or upgrades", 
+        "HVAC system modifications or upgrades",
         "Specialized pest treatments (termites require separate quote)",
         "Weekend emergency calls (additional charges apply)"
       ],
       terms: [
         "Annual contract with comprehensive coverage",
-        "Bi-annual pest control treatments", 
+        "Bi-annual pest control treatments",
         "Annual duct cleaning schedule",
         "24/7 emergency support hotline available"
       ]
@@ -241,8 +255,8 @@ ${formData.specialRequirements ? `📝 *Special Requirements:*\n${formData.speci
 
         {/* Service Image */}
         <div className="mb-8">
-          <img 
-            src={serviceData.image} 
+          <img
+            src={serviceData.image}
             alt={serviceData.title}
             className="w-full h-64 object-cover rounded-lg shadow-soft"
           />
@@ -301,14 +315,14 @@ ${formData.specialRequirements ? `📝 *Special Requirements:*\n${formData.speci
                   {/* Company Information */}
                   <div className="space-y-4">
                     <h3 className="font-semibold text-lg">Company Information</h3>
-                    
+
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="companyName">Company Name *</Label>
                         <Input
                           id="companyName"
                           value={formData.companyName}
-                          onChange={(e) => setFormData({...formData, companyName: e.target.value})}
+                          onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
                           placeholder="Enter company name"
                         />
                       </div>
@@ -317,7 +331,7 @@ ${formData.specialRequirements ? `📝 *Special Requirements:*\n${formData.speci
                         <Input
                           id="contactPerson"
                           value={formData.contactPerson}
-                          onChange={(e) => setFormData({...formData, contactPerson: e.target.value})}
+                          onChange={(e) => setFormData({ ...formData, contactPerson: e.target.value })}
                           placeholder="Enter contact person name"
                         />
                       </div>
@@ -330,7 +344,7 @@ ${formData.specialRequirements ? `📝 *Special Requirements:*\n${formData.speci
                           id="email"
                           type="email"
                           value={formData.email}
-                          onChange={(e) => setFormData({...formData, email: e.target.value})}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                           placeholder="Enter email address"
                         />
                       </div>
@@ -339,7 +353,7 @@ ${formData.specialRequirements ? `📝 *Special Requirements:*\n${formData.speci
                         <Input
                           id="phone"
                           value={formData.phone}
-                          onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                           placeholder="Enter phone number"
                         />
                       </div>
@@ -350,7 +364,7 @@ ${formData.specialRequirements ? `📝 *Special Requirements:*\n${formData.speci
                       <Textarea
                         id="address"
                         value={formData.address}
-                        onChange={(e) => setFormData({...formData, address: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                         placeholder="Enter complete office address"
                         rows={3}
                       />
@@ -362,7 +376,7 @@ ${formData.specialRequirements ? `📝 *Special Requirements:*\n${formData.speci
                   {/* Scheduling */}
                   <div className="space-y-4">
                     <h3 className="font-semibold text-lg">Preferred Schedule</h3>
-                    
+
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="preferredDate">Preferred Date *</Label>
@@ -371,12 +385,12 @@ ${formData.specialRequirements ? `📝 *Special Requirements:*\n${formData.speci
                           type="date"
                           min={getMinDate()}
                           value={formData.preferredDate}
-                          onChange={(e) => setFormData({...formData, preferredDate: e.target.value})}
+                          onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
                         />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="preferredTime">Preferred Time *</Label>
-                        <Select value={formData.preferredTime} onValueChange={(value) => setFormData({...formData, preferredTime: value})}>
+                        <Select value={formData.preferredTime} onValueChange={(value) => setFormData({ ...formData, preferredTime: value })}>
                           <SelectTrigger>
                             <SelectValue placeholder="Select time slot" />
                           </SelectTrigger>
@@ -396,7 +410,7 @@ ${formData.specialRequirements ? `📝 *Special Requirements:*\n${formData.speci
                     <Textarea
                       id="specialRequirements"
                       value={formData.specialRequirements}
-                      onChange={(e) => setFormData({...formData, specialRequirements: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, specialRequirements: e.target.value })}
                       placeholder="Any specific cleaning requirements, access instructions, or special considerations..."
                       rows={4}
                     />
@@ -424,7 +438,7 @@ ${formData.specialRequirements ? `📝 *Special Requirements:*\n${formData.speci
                     <p className="text-sm text-muted-foreground">{serviceData.duration}</p>
                   </div>
                 </div>
-                
+
                 <Separator />
 
                 <div className="space-y-2">

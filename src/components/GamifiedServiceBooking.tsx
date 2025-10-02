@@ -15,6 +15,7 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { sendBookingConfirmation } from '../services/api';
 
 interface GamifiedServiceBookingProps {
   serviceData: {
@@ -1351,7 +1352,7 @@ const GamifiedServiceBooking = ({ serviceData }: GamifiedServiceBookingProps) =>
                   <div className="flex justify-between text-green-600 animate-pulse">
                     <span className="flex items-center gap-1">
                       <Gift className="h-4 w-4" />
-                      Discount ({calculateDiscount(calculatePrice()) * 100}%)
+                      Discount ({(calculateDiscount(calculatePrice()) * 100).toFixed(2)}%)
                     </span>
                     <span>-AED {getDiscountAmount().toFixed(2)}</span>
                   </div>
@@ -1411,6 +1412,18 @@ Unit: ${customerInfo.unitNumber || 'Not provided'}
 ${addOns.length > 0 ? `✅ *Add-ons:* ${addOns.join(', ')}` : ''}
 ${specialRequests ? `📝 *Special Requests:* ${specialRequests}` : ''}
                   `.trim();
+                  const bookingData = {
+                      customerName: customerInfo.name,
+                      customerEmail: customerInfo.email || "",
+                      customerPhone: customerInfo.phone,
+                      serviceType: serviceData.title,
+                      serviceDetails: bookingDetails,
+                      totalAmount: getFinalPrice(),
+                      bookingType: 'professional'
+                    };
+                  const result = sendBookingConfirmation(bookingData);
+                    console.log("Booking confirmation result:", result);
+                    
 
                   // Send email notification
                   supabase.functions.invoke('send-booking-email', {
