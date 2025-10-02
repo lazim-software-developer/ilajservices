@@ -59,6 +59,13 @@ export default function HolidayHomeBooking() {
     { type: "5 BR Villa", price: 320 }
   ];
 
+  // Initialize with the first property type (Studio) selected
+  useEffect(() => {
+    if (properties.length === 0) {
+      setProperties([{ type: propertyTypes[0].type, quantity: 1, pricePerUnit: propertyTypes[0].price }]);
+    }
+  }, []);
+
   const addPropertyType = (type: string, price: number) => {
     const existing = properties.find(p => p.type === type);
     if (existing) {
@@ -91,7 +98,15 @@ export default function HolidayHomeBooking() {
   };
 
   const calculateTotal = () => {
-    return properties.reduce((sum, p) => sum + (p.quantity * p.pricePerUnit), 0);
+    if (properties.length === 0) {
+      return 0;
+    }
+    // Use the price of the first selected property multiplied by sessions as the base
+    // const firstProperty = properties[0];
+    // const baseTotal = firstProperty.pricePerUnit * packageInfo.sessions;
+    // Add additional costs from all properties (including the first)
+    const propertiesTotal = properties.reduce((sum, p) => sum + (p.quantity * p.pricePerUnit * packageInfo.sessions), 0);
+    return propertiesTotal + propertiesTotal * 0.05; // Adding 5% VAT
   };
 
   const handleConfirmBooking = async () => {
@@ -276,10 +291,22 @@ ${propertiesText}`;
             <CardTitle>Order Summary</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
+            {properties.length > 0 && (
+              <div className="flex justify-between">
+                <span>{packageInfo.title} ({packageInfo.sessions} sessions, {properties.map(p => p.type).join(", ")})</span>
+                {/* <span className="font-medium">AED {properties[0].pricePerUnit * packageInfo.sessions}</span> */}
+              </div>
+            )}
             {properties.map((property) => (
               <div key={property.type} className="flex justify-between">
                 <span>{property.type} x {property.quantity}</span>
                 <span className="font-medium">AED {property.quantity * property.pricePerUnit}</span>
+              </div>
+            ))}
+            {properties.map((property) => (
+              <div key={property.type} className="flex justify-between">
+                <span>VAT</span>
+                <span className="font-medium">AED {property.quantity * property.pricePerUnit * 0.05}</span>
               </div>
             ))}
             <div className="border-t pt-4 flex justify-between text-lg font-bold">
