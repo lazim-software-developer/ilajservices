@@ -22,15 +22,15 @@ const Gallery = () => {
     "ac-service": [
       {
         image: "/lovable-uploads/gallary_images/holiday_home_cleaning.jpg",
-        title: "AC Unit Maintenance"
+        title: "Trusted housekeeping for homes that welcome"
       },
       {
         image: "/lovable-uploads/gallary_images/holiday_home.jpg",
-        title: "AC Coil Cleaning"
+        title: "Your property, our promise of excellence."
       },
       {
         image: "/lovable-uploads/gallary_images/holiday_home_cleaning_out_view.jpg",
-        title: "Duct Cleaning Process"
+        title: "Spotless spaces, stress-free living"
       }
     ],
     "upholstery": [
@@ -57,7 +57,7 @@ const Gallery = () => {
         title: "Rewarded Excellence"
       },
       {
-        image: "public/lovable-uploads/airbnbcleaning.jpg",
+        image: "lovable-uploads/airbnbcleaning.jpg",
         title: "Skilled Professionals"
       }
     ]
