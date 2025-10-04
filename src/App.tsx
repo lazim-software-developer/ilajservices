@@ -22,21 +22,24 @@ import HolidayHomeBooking from "./pages/services/HolidayHomeBooking";
 import CorporateSolution from "./pages/services/CorporateSolution";
 import ServiceBooking from "./pages/ServiceBooking";
 import NotFound from "./pages/NotFound";
-import AdminLayout from "./pages/admin/AdminLayout";
-import Dashboard from "./pages/admin/Dashboard";
-import DailyLogs from "./pages/admin/DailyLogs";
-import CustomerManagement from "./pages/admin/CustomerManagement";
-import AllCustomers from "./pages/admin/customers/AllCustomers";
-import AddCustomer from "./pages/admin/customers/AddCustomer";
-import CustomerDetail from "./pages/admin/customers/CustomerDetail";
-import CustomerEdit from "./pages/admin/customers/CustomerEdit";
-import BookingManagement from "./pages/admin/BookingManagement";
-import ServiceManagement from "./pages/admin/ServiceManagement";
-import ServiceProviders from "./pages/admin/ServiceProviders";
-import FinanceManagement from "./pages/admin/FinanceManagement";
-import Reports from "./pages/admin/Reports";
+// import AdminLayout from "./pages/admin/AdminLayout";
+// import Dashboard from "./pages/admin/Dashboard";
+// import DailyLogs from "./pages/admin/DailyLogs";
+// import CustomerManagement from "./pages/admin/CustomerManagement";
+// import AllCustomers from "./pages/admin/customers/AllCustomers";
+// import AddCustomer from "./pages/admin/customers/AddCustomer";
+// import CustomerDetail from "./pages/admin/customers/CustomerDetail";
+// import CustomerEdit from "./pages/admin/customers/CustomerEdit";
+// import BookingManagement from "./pages/admin/BookingManagement";
+// import ServiceManagement from "./pages/admin/ServiceManagement";
+// import ServiceProviders from "./pages/admin/ServiceProviders";
+// import FinanceManagement from "./pages/admin/FinanceManagement";
+// import Reports from "./pages/admin/Reports";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/LicenseAgreement";
+import '@n8n/chat/style.css';
+import { createChat } from '@n8n/chat';
+import ChatWidget from "./components/n8nChatWidget";
 
 const queryClient = new QueryClient();
 
@@ -125,7 +128,16 @@ const App = () => (
                   </Routes>
                 </main>
                 <Footer />
-                <WhatsAppWidget />
+                {/* <WhatsAppWidget /> */}
+                {/* <ChatWidget /> */}
+                <ChatWidget
+                  webhookUrl="https://workflow.lazim.ae/webhook/4f29fb59-a11e-43ab-b07b-82fecd715de6/chat"
+                  mode="window" // or "fullscreen"
+                  initialMessages={['Welcome to ILAJ! Ask about our services or prices.']}
+                  enableStreaming={true} // Set to true if streaming is enabled in n8n
+                  allowFileUploads={false}
+                  showWelcomeScreen={true}
+                />
               </div>
             } />
           </Routes>

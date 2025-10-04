@@ -48,9 +48,102 @@ Brand Colors: Deep blue-green #085B86 & Vibrant orange #F59121
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
     --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-light)));
     --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-light)) 50%, hsl(var(--secondary)) 100%);
-    
+
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Chatbot */
+    /* Map ILAJ colors to @n8n/chat */
+    --chat--color-primary: hsl(197, 87%, 28%);
+    /* Deep blue-green for buttons/toggle */
+    --chat--color-primary-shade-50: hsl(197, 87%, 24%);
+    /* Hover state */
+    --chat--color-primary-shade-100: hsl(197, 87%, 20%);
+    /* Active state */
+    --chat--color-secondary: hsl(34, 91%, 67%);
+    /* Vibrant orange for user messages */
+    --chat--color-secondary-shade-50: hsl(34, 91%, 62%);
+    /* Hover state */
+    --chat--color-white: hsl(0, 0%, 100%);
+    /* White for backgrounds/text */
+    --chat--color-light: hsl(197, 20%, 96%);
+    /* Muted for subtle backgrounds */
+    --chat--color-light-shade-50: hsl(197, 20%, 92%);
+    /* Lighter muted */
+    --chat--color-medium: hsl(197, 25%, 45%);
+    /* Muted foreground for text */
+    --chat--color-dark: hsl(197, 87%, 16%);
+    /* Dark for headers/text */
+    --chat--color-disabled: hsl(197, 25%, 45%);
+    /* Disabled state */
+    --chat--color-typing: hsl(197, 25%, 45%);
+    /* Typing indicator */
+
+    /* Spacing and layout */
+    --chat--spacing: 1.2rem;
+    --chat--border-radius: 0.75rem;
+    /* Matches --radius */
+    --chat--transition-duration: 0.3s;
+    /* Matches --transition-smooth */
+
+    /* Chat window */
+    --chat--window--width: 420px;
+    --chat--window--height: 650px;
+    --chat--window--box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    /* Header */
+    --chat--header--background: linear-gradient(135deg, hsl(197, 87%, 28%), hsl(197, 87%, 35%));
+    /* --gradient-primary */
+    --chat--header--color: hsl(0, 0%, 100%);
+    /* --primary-foreground */
+    --chat--header--padding: 1.5rem;
+    --chat--header--border-bottom: 1px solid hsl(197, 15%, 88%);
+    /* --border */
+    --chat--heading--font-size: 1.6rem;
+    --chat--subtitle--font-size: 0.95rem;
+    --chat--subtitle--line-height: 1.4;
+
+    /* Footer */
+    --chat--footer--background: hsl(197, 20%, 96%);
+    /* --muted */
+    --chat--footer--color: hsl(197, 25%, 45%);
+    /* --muted-foreground */
+    --chat--footer--padding: 0.8rem;
+    --chat--footer--font-size: 0.85rem;
+
+    /* Messages */
+    --chat--message--font-size: 1rem;
+    --chat--message--padding: 0.8rem 1.2rem;
+    --chat--message--border-radius: 0.75rem;
+    /* Matches --radius */
+    --chat--message-line-height: 1.5;
+    --chat--message--bot--background: hsl(197, 20%, 96%);
+    /* --muted */
+    --chat--message--bot--color: hsl(197, 87%, 16%);
+    /* --foreground */
+    --chat--message--bot--border: 1px solid hsl(197, 15%, 88%);
+    /* --border */
+    --chat--message--user--background: hsl(34, 91%, 67%);
+    /* --secondary */
+    --chat--message--user--color: hsl(0, 0%, 100%);
+    /* --secondary-foreground */
+    --chat--message--user--border: none;
+
+    /* Toggle button */
+    --chat--toggle--background: linear-gradient(135deg, hsl(197, 87%, 28%), hsl(197, 87%, 35%));
+    /* --gradient-primary */
+    --chat--toggle--hover--background: hsl(197, 87%, 24%);
+    /* --primary-hover */
+    --chat--toggle--active--background: hsl(197, 87%, 20%);
+    /* Darker for active */
+    --chat--toggle--color: hsl(0, 0%, 100%);
+    /* --primary-foreground */
+    --chat--toggle--size: 60px;
+
+    /* Input area */
+    --chat--textarea--height: 60px;
+    --chat--textarea--border: 1px solid hsl(197, 15%, 88%);
+    /* --input */
   }
 
   .dark {
@@ -92,7 +185,7 @@ Brand Colors: Deep blue-green #085B86 & Vibrant orange #F59121
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
     --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-light)));
     --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-light)) 50%, hsl(var(--secondary)) 100%);
-    
+
     /* Shadows for dark mode */
     --shadow-soft: 0 4px 20px -4px hsl(0 0% 0% / 0.3);
     --shadow-medium: 0 8px 30px -8px hsl(0 0% 0% / 0.4);
@@ -110,15 +203,15 @@ Brand Colors: Deep blue-green #085B86 & Vibrant orange #F59121
   }
 
   /* Optimized spacing for better content flow */
-  .space-y-4 > * + * {
+  .space-y-4>*+* {
     margin-top: 1rem;
   }
-  
-  .space-y-6 > * + * {
+
+  .space-y-6>*+* {
     margin-top: 1.25rem;
   }
 
-  .space-y-8 > * + * {
+  .space-y-8>*+* {
     margin-top: 1.5rem;
   }
 
@@ -144,7 +237,7 @@ Brand Colors: Deep blue-green #085B86 & Vibrant orange #F59121
   .table-row-hover:hover {
     @apply bg-muted/30 transition-colors;
   }
-  
+
   /* Custom Cursor for Services Page */
   .services-page {
     cursor: url('./assets/anime-cursor-small.png') 24 24, auto !important;
@@ -166,10 +259,12 @@ Brand Colors: Deep blue-green #085B86 & Vibrant orange #F59121
       opacity: 1;
       transform: scale(0) rotate(0deg);
     }
+
     50% {
       opacity: 1;
       transform: scale(1) rotate(180deg);
     }
+
     100% {
       opacity: 0;
       transform: scale(0.5) rotate(360deg);
@@ -177,10 +272,13 @@ Brand Colors: Deep blue-green #085B86 & Vibrant orange #F59121
   }
 
   @keyframes sparkle {
-    0%, 100% {
+
+    0%,
+    100% {
       opacity: 0;
       transform: scale(0);
     }
+
     50% {
       opacity: 1;
       transform: scale(1);
@@ -215,9 +313,11 @@ Brand Colors: Deep blue-green #085B86 & Vibrant orange #F59121
     0% {
       transform: translateX(-100%) skewX(-15deg);
     }
+
     50% {
       transform: translateX(100%) skewX(-15deg);
     }
+
     100% {
       transform: translateX(200%) skewX(-15deg);
     }
@@ -227,8 +327,71 @@ Brand Colors: Deep blue-green #085B86 & Vibrant orange #F59121
     from {
       transform: rotate(0deg);
     }
+
     to {
       transform: rotate(360deg);
     }
+  }
+}
+
+.chat-get-started-footer {
+  display: none;
+}
+
+/* Smooth transitions */
+#n8n-chat .n8n-chat-window,
+#n8n-chat .n8n-chat-toggle {
+  transition: var(--transition-smooth);
+}
+
+/* Custom toggle button styling */
+.chat-toggle-btn {
+  background: var(--chat--toggle--background);
+  color: var(--chat--toggle--color);
+  border: none;
+  border-radius: var(--chat--border-radius);
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+}
+
+.chat-toggle-btn:hover {
+  background: var(--chat--toggle--hover--background);
+}
+
+/* Loading indicator */
+.chat-loading {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: var(--chat--color-typing);
+  font-size: 0.9rem;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.4;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  :root {
+    --chat--window--width: 90vw;
+    --chat--window--height: 80vh;
+    --chat--heading--font-size: 1.4rem;
+    --chat--message--font-size: 0.9rem;
+    --chat--toggle--size: 50px;
   }
 }
