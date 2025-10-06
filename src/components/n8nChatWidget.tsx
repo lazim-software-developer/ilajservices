@@ -59,7 +59,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
         defaultLanguage: 'en',
         i18n: {
           en: {
-            title: 'Chat with Safa',
+            title: 'Chat with Safa',
             subtitle: 'Make your life easier with Safa. Book Services with Safa now!',
             getStarted: 'Start Chat',
             inputPlaceholder: 'E.g., How much is deep cleaning for a 2 BHK apartment?',
