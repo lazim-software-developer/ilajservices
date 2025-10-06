@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import WhatsAppWidget from "./components/WhatsAppWidget";
 import CursorSparkles from "./components/CursorSparkles";
 import ClickParticles from "./components/ClickParticles";
 import Home from "./pages/Home";
@@ -38,7 +37,6 @@ import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/LicenseAgreement";
 import '@n8n/chat/style.css';
-import { createChat } from '@n8n/chat';
 import ChatWidget from "./components/n8nChatWidget";
 
 const queryClient = new QueryClient();
