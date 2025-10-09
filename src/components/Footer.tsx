@@ -29,7 +29,7 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <img
-                src="/lovable-uploads/white_logo.png"
+                src="/lovable-uploads/white_logo.webp"
                 alt="ILAJ Services"
                 className="h-8 w-auto"
               />

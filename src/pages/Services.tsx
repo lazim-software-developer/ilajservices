@@ -11,7 +11,7 @@ const Services = () => {
       title: 'Professional Home Services',
       description: 'Comprehensive cleaning, pest control, AC maintenance, and handyman solutions to keep your home in top condition.',
       icon: Home,
-      image: '/lovable-uploads/bestmaidserviceindubai.png',
+      image: '/lovable-uploads/bestmaidserviceindubai.webp',
       link: '/services/professional',
       gradient: 'from-primary/10 to-primary/5'
     },

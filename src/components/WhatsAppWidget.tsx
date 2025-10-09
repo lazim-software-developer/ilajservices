@@ -17,7 +17,7 @@ const WhatsAppWidget = () => {
         aria-label="Chat on WhatsApp"
       >
         <img 
-          src="/lovable-uploads/whatsapp.png" 
+          src="/lovable-uploads/whatsapp.webp" 
           alt="WhatsApp" 
           className="h-14 w-14 group-hover:scale-110 transition-transform"
         />

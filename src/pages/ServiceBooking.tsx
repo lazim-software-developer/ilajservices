@@ -12,7 +12,7 @@ const ServiceBooking = () => {
         title: "Maid Service",
         description: "Professional and reliable maid service for regular home maintenance and cleaning.",
         basePrice: 34,
-        image: "/lovable-uploads/1_maid_service.png",
+        image: "/lovable-uploads/1_maid_service.webp",
         duration: "1-12 hours",
         category: "Professional Service",
         serviceType: "maid-service"
@@ -21,7 +21,7 @@ const ServiceBooking = () => {
         title: "Deep Cleaning Service",
         description: "Complete deep cleaning for your home with professional equipment and eco-friendly products.",
         basePrice: 345,
-        image: "/lovable-uploads/2_deepcleaning.png",
+        image: "/lovable-uploads/2_deepcleaning.webp",
         duration: "3-4 hours",
         category: "Professional Service",
         serviceType: "deep-cleaning"
@@ -30,7 +30,7 @@ const ServiceBooking = () => {
         title: "Upholstery (Sofa) Cleaning",
         description: "Professional sofa and upholstery cleaning service with fabric and leather care options.",
         basePrice: 30,
-        image: "/lovable-uploads/3_sofa_shampooing.png",
+        image: "/lovable-uploads/3_sofa_shampooing.webp",
         duration: "1-2 hours",
         category: "Professional Service",
         serviceType: "upholstery-sofa-cleaning"
@@ -39,7 +39,7 @@ const ServiceBooking = () => {
         title: "Carpet Cleaning",
         description: "Deep carpet cleaning service for all carpet sizes and types.",
         basePrice: 75,
-        image: "/lovable-uploads/4_carpet_cleaning.png",
+        image: "/lovable-uploads/4_carpet_cleaning.webp",
         duration: "1-2 hours",
         category: "Professional Service",
         serviceType: "carpet-cleaning"
@@ -48,7 +48,7 @@ const ServiceBooking = () => {
         title: "Kitchen Deep Cleaning",
         description: "Comprehensive kitchen deep cleaning service for all kitchen sizes.",
         basePrice: 170,
-        image: "/lovable-uploads/5_kitchen_deepcleaning.png",
+        image: "/lovable-uploads/5_kitchen_deepcleaning.webp",
         duration: "2-3 hours",
         category: "Professional Service",
         serviceType: "kitchen-deep-cleaning"
@@ -57,7 +57,7 @@ const ServiceBooking = () => {
         title: "Bathroom Deep Cleaning",
         description: "Professional bathroom deep cleaning and sanitization service.",
         basePrice: 170,
-        image: "/lovable-uploads/6_bathroom_cleaning.png",
+        image: "/lovable-uploads/6_bathroom_cleaning.webp",
         duration: "1-2 hours",
         category: "Professional Service",
         serviceType: "bathroom-deep-cleaning"
@@ -66,7 +66,7 @@ const ServiceBooking = () => {
         title: "AC Service",
         description: "Complete air conditioning maintenance and servicing.",
         basePrice: 150,
-        image: "/lovable-uploads/7_ac_service.png",
+        image: "/lovable-uploads/7_ac_service.webp",
         duration: "1-2 hours",
         category: "Professional Service",
         serviceType: "ac-service"
@@ -75,7 +75,7 @@ const ServiceBooking = () => {
         title: "AC Coil Cleaning",
         description: "Professional AC coil cleaning service for optimal performance.",
         basePrice: 375,
-        image: "/lovable-uploads/8_ac_coil_cleaning.png",
+        image: "/lovable-uploads/8_ac_coil_cleaning.webp",
         duration: "1-2 hours",
         category: "Professional Service",
         serviceType: "ac-coil-cleaning"
@@ -84,7 +84,7 @@ const ServiceBooking = () => {
         title: "AC Duct Cleaning",
         description: "Professional AC duct cleaning and sanitization service.",
         basePrice: 350,
-        image: "/lovable-uploads/9_ac_duct_cleaning.png",
+        image: "/lovable-uploads/9_ac_duct_cleaning.webp",
         duration: "2-3 hours",
         category: "Professional Service",
         serviceType: "ac-duct-cleaning"
@@ -93,7 +93,7 @@ const ServiceBooking = () => {
         title: "AC Duct & Coil Cleaning",
         description: "Combined AC duct and coil cleaning service for complete maintenance.",
         basePrice: 475,
-        image: "/lovable-uploads/10_ac_duct_coil.png",
+        image: "/lovable-uploads/10_ac_duct_coil.webp",
         duration: "2-4 hours",
         category: "Professional Service",
         serviceType: "ac-duct-coil-cleaning"
@@ -102,7 +102,7 @@ const ServiceBooking = () => {
         title: "Pest Control",
         description: "Comprehensive pest control services including general, mosquito, bedbug, and rodent control.",
         basePrice: 120,
-        image: "/lovable-uploads/11_pestcontrol.png",
+        image: "/lovable-uploads/11_pestcontrol.webp",
         duration: "1-2 hours",
         category: "Professional Service",
         serviceType: "pest-control"
@@ -111,7 +111,7 @@ const ServiceBooking = () => {
         title: "Painting Service",
         description: "Professional painting services for apartments and villas.",
         basePrice: 600,
-        image: "/lovable-uploads/12_painting_service.png",
+        image: "/lovable-uploads/12_painting_service.webp",
         duration: "1-3 days",
         category: "Professional Service",
         serviceType: "painting"
@@ -120,7 +120,7 @@ const ServiceBooking = () => {
         title: "Packers & Movers",
         description: "Professional packing and moving services for Dubai and Abu Dhabi regions.",
         basePrice: 743,
-        image: "/lovable-uploads/13_packers_and_movers.png",
+        image: "/lovable-uploads/13_packers_and_movers.webp",
         duration: "4-8 hours",
         category: "Professional Service",
         serviceType: "packers-movers"
@@ -129,7 +129,7 @@ const ServiceBooking = () => {
         title: "Handyman Service",
         description: "Professional handyman services for home repairs and maintenance.",
         basePrice: 150,
-        image: "/lovable-uploads/14_handyman_service.png",
+        image: "/lovable-uploads/14_handyman_service.webp",
         duration: "Per hour",
         category: "Professional Service",
         serviceType: "handyman"

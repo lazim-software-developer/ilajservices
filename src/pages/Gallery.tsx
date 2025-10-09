@@ -7,15 +7,15 @@ const Gallery = () => {
   const galleryItems = {
     "deep-cleaning": [
       {
-        image: "/lovable-uploads/bestmaidserviceindubai.png",
+        image: "/lovable-uploads/bestmaidserviceindubai.webp",
         title: "Kitchen Deep Clean"
       },
       {
-        image: "/lovable-uploads/bathroom_deep_cleaning.png",
+        image: "/lovable-uploads/bathroom_deep_cleaning.webp",
         title: "Bathroom Deep Clean"
       },
       {
-        image: "/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.png",
+        image: "/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.webp",
         title: "Living Room Deep Clean"
       }
     ],
@@ -35,15 +35,15 @@ const Gallery = () => {
     ],
     "upholstery": [
       {
-        image: "/lovable-uploads/corporate_cleaning_1.png",
+        image: "/lovable-uploads/corporate_cleaning_1.webp",
         title: "Office Cleaning Service"
       },
       {
-        image: "/lovable-uploads/corporate_cleaning_2.png",
+        image: "/lovable-uploads/corporate_cleaning_2.webp",
         title: "Corporate Workspace Cleaning"
       },
       {
-        image: "/lovable-uploads/corporate_cleaning_3.png",
+        image: "/lovable-uploads/corporate_cleaning_3.webp",
         title: "Professional Office Maintenance"
       }
     ],

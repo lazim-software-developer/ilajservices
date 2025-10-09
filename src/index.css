@@ -240,17 +240,17 @@ Brand Colors: Deep blue-green #085B86 & Vibrant orange #F59121
 
   /* Custom Cursor for Services Page */
   .services-page {
-    cursor: url('./assets/anime-cursor-small.png') 24 24, auto !important;
+    cursor: url('./assets/anime-cursor-small.webp') 24 24, auto !important;
   }
 
   .services-page * {
-    cursor: url('./assets/anime-cursor-small.png') 24 24, auto !important;
+    cursor: url('./assets/anime-cursor-small.webp') 24 24, auto !important;
   }
 
   .services-page a:hover,
   .services-page button:hover,
   .services-page [role="button"]:hover {
-    cursor: url('./assets/anime-cursor-small.png') 24 24, pointer !important;
+    cursor: url('./assets/anime-cursor-small.webp') 24 24, pointer !important;
   }
 
   /* Sparkle Animation Keyframes */

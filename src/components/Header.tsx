@@ -74,7 +74,7 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
             <img
-              src="/lovable-uploads/01b6ec03-1f3a-4290-aa3a-52202a2236e8.png"
+              src="/lovable-uploads/01b6ec03-1f3a-4290-aa3a-52202a2236e8.webp"
               alt="Ilaj Services"
               className="h-10 w-auto"
             />

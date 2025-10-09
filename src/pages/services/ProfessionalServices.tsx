@@ -15,7 +15,7 @@ const ProfessionalServices = () => {
     {
       title: "Maid Service",
       description: "Professional and reliable maid service for regular home maintenance and cleaning. AED 34/hr (without materials) or AED 45/hr (with materials).",
-      image: "/lovable-uploads/1_maid_service.png",
+      image: "/lovable-uploads/1_maid_service.webp",
       rating: 4.7,
       duration: "Hourly",
       features: ["Regular Cleaning", "Flexible Schedule", "Trained Staff"],
@@ -24,7 +24,7 @@ const ProfessionalServices = () => {
     {
       title: "Deep Cleaning",
       description: "Comprehensive deep cleaning service for your entire home. Apartments from AED 345, Villas from AED 745.",
-      image: "/lovable-uploads/2_deepcleaning.png",
+      image: "/lovable-uploads/2_deepcleaning.webp",
       rating: 4.9,
       duration: "3-4 hours",
       features: ["Deep Kitchen Clean", "Bathroom Sanitization", "Floor Care"],
@@ -33,7 +33,7 @@ const ProfessionalServices = () => {
     {
       title: "Upholstery (Sofa) Cleaning",
       description: "Specialized cleaning for sofas and furniture. Fabric AED 30/seat, Leather AED 46/seat.",
-      image: "/lovable-uploads/3_sofa_shampooing.png",
+      image: "/lovable-uploads/3_sofa_shampooing.webp",
       rating: 4.8,
       duration: "1-2 hours",
       features: ["Stain Removal", "Fabric Protection", "Quick Dry"],
@@ -42,7 +42,7 @@ const ProfessionalServices = () => {
     {
       title: "Carpet Cleaning",
       description: "Professional carpet cleaning service. Small (5x10ft) AED 75, Medium (8x12ft) AED 105, Large (10x15ft) AED 150.",
-      image: "/lovable-uploads/4_carpet_cleaning.png",
+      image: "/lovable-uploads/4_carpet_cleaning.webp",
       rating: 4.7,
       duration: "1-2 hours",
       features: ["Steam Cleaning", "Stain Treatment", "Fast Drying"],
@@ -51,7 +51,7 @@ const ProfessionalServices = () => {
     {
       title: "Kitchen Deep Cleaning",
       description: "Thorough kitchen cleaning. Small (below 100 sq.ft) AED 170, Medium (100-200 sq.ft) AED 230, Large (above 200 sq.ft) AED 345.",
-      image: "/lovable-uploads/5_kitchen_deepcleaning.png",
+      image: "/lovable-uploads/5_kitchen_deepcleaning.webp",
       rating: 4.8,
       duration: "2-3 hours",
       features: ["Appliance Clean", "Degreasing", "Sanitization"],
@@ -60,7 +60,7 @@ const ProfessionalServices = () => {
     {
       title: "Bathroom Deep Cleaning",
       description: "Complete bathroom sanitization and deep cleaning. AED 170 per bathroom.",
-      image: "/lovable-uploads/6_bathroom_cleaning.png",
+      image: "/lovable-uploads/6_bathroom_cleaning.webp",
       rating: 4.8,
       duration: "1-2 hours",
       features: ["Mold Removal", "Tile Cleaning", "Sanitization"],
@@ -69,7 +69,7 @@ const ProfessionalServices = () => {
     {
       title: "AC Service",
       description: "Complete AC maintenance and servicing. AED 150 per AC unit.",
-      image: "/lovable-uploads/7_ac_service.png",
+      image: "/lovable-uploads/7_ac_service.webp",
       rating: 4.8,
       duration: "2-3 hours",
       features: ["Filter Replacement", "Performance Check", "Gas Top-up"],
@@ -78,7 +78,7 @@ const ProfessionalServices = () => {
     {
       title: "AC Coil Cleaning",
       description: "Specialized AC coil cleaning to improve efficiency. AED 375 per AC unit.",
-      image: "/lovable-uploads/8_ac_coil_cleaning.png",
+      image: "/lovable-uploads/8_ac_coil_cleaning.webp",
       rating: 4.7,
       duration: "1-2 hours",
       features: ["Evaporator Coil", "Condenser Coil", "Improved Efficiency"],
@@ -87,7 +87,7 @@ const ProfessionalServices = () => {
     {
       title: "AC Duct Cleaning",
       description: "Professional duct cleaning to remove dust and allergens. AED 350 per AC unit.",
-      image: "/lovable-uploads/9_ac_duct_cleaning.png",
+      image: "/lovable-uploads/9_ac_duct_cleaning.webp",
       rating: 4.9,
       duration: "3-4 hours",
       features: ["Dust Removal", "Allergen Cleaning", "Better Air Quality"],
@@ -96,7 +96,7 @@ const ProfessionalServices = () => {
     {
       title: "AC Duct & Coil Cleaning",
       description: "Complete AC system cleaning including both ducts and coils. AED 475 per AC unit.",
-      image: "/lovable-uploads/10_ac_duct_coil.png",
+      image: "/lovable-uploads/10_ac_duct_coil.webp",
       rating: 4.9,
       duration: "4-5 hours",
       features: ["Complete System", "Maximum Efficiency", "Health Benefits"],
@@ -105,7 +105,7 @@ const ProfessionalServices = () => {
     {
       title: "Pest Control",
       description: "Comprehensive pest control solutions. General pest control from AED 120, specialized treatments available.",
-      image: "/lovable-uploads/11_pestcontrol.png",
+      image: "/lovable-uploads/11_pestcontrol.webp",
       rating: 4.9,
       duration: "1-2 hours",
       features: ["Safe Chemicals", "Long-lasting", "Follow-up Service"],
@@ -114,7 +114,7 @@ const ProfessionalServices = () => {
     {
       title: "Painting",
       description: "Professional interior and exterior painting. Apartments from AED 600, Villas from AED 1,450.",
-      image: "/lovable-uploads/12_painting_service.png",
+      image: "/lovable-uploads/12_painting_service.webp",
       rating: 4.8,
       duration: "1-3 days",
       features: ["Premium Paints", "Surface Preparation", "Clean Finish"],
@@ -123,7 +123,7 @@ const ProfessionalServices = () => {
     {
       title: "Packers & Movers",
       description: "Professional packing and moving services. Dubai: Studio from AED 743, Abu Dhabi: Studio from AED 1,229.",
-      image: "/lovable-uploads/13_packers_and_movers.png",
+      image: "/lovable-uploads/13_packers_and_movers.webp",
       rating: 4.7,
       duration: "4-8 hours",
       features: ["Safe Packing", "Insured", "Timely Delivery"],
@@ -132,7 +132,7 @@ const ProfessionalServices = () => {
     {
       title: "Handyman Services",
       description: "Professional handyman services for all your home repair needs. AED 150 per hour.",
-      image: "/lovable-uploads/14_handyman_service.png",
+      image: "/lovable-uploads/14_handyman_service.webp",
       rating: 4.8,
       duration: "Hourly",
       features: ["Expert Technicians", "All Repairs", "Flexible Scheduling"],

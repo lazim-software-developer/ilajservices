@@ -15,7 +15,7 @@ const Home = () => {
   const heroServices = getServicesByCategory('Home').slice(0, 3).map(service => ({
     title: service.name,
     description: service.description,
-    image: service.image_url || "/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.png",
+    image: service.image_url || "/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.webp",
     price: `AED ${service.base_price}`,
     duration: `${service.duration_minutes} minutes`,
     features: service.features,
@@ -23,14 +23,14 @@ const Home = () => {
   }));
 
   const heroImages = [
-    "/lovable-uploads/9c656186-628c-46d9-b263-7e372f0a8bf7.png",
-    "/lovable-uploads/00d8abb5-8a1c-40c2-87ee-3aa6583cf8cf.png",
-    "/lovable-uploads/78a49ba5-8cb9-40d9-b04e-d409d61b4935.png",
-    "/lovable-uploads/9470a896-617e-4470-8f48-1b686adc6cc3.png",
-    "/lovable-uploads/painting.png",
-    "/lovable-uploads/f44c00a2-be13-45d3-a1f6-b197c16afabb.png",
-    "/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.png",
-    "/lovable-uploads/5a4a612f-8971-4ca5-b85c-298b721a9f60.png"
+    "/lovable-uploads/9c656186-628c-46d9-b263-7e372f0a8bf7.webp",
+    "/lovable-uploads/00d8abb5-8a1c-40c2-87ee-3aa6583cf8cf.webp",
+    "/lovable-uploads/78a49ba5-8cb9-40d9-b04e-d409d61b4935.webp",
+    "/lovable-uploads/9470a896-617e-4470-8f48-1b686adc6cc3.webp",
+    "/lovable-uploads/painting.webp",
+    "/lovable-uploads/f44c00a2-be13-45d3-a1f6-b197c16afabb.webp",
+    "/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.webp",
+    "/lovable-uploads/5a4a612f-8971-4ca5-b85c-298b721a9f60.webp"
   ];
 
   // Use dynamic services from database
@@ -162,7 +162,7 @@ const Home = () => {
                   <ServiceCard
                     title={service.name}
                     description={service.description}
-                    image={service.image_url || "/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.png"}
+                    image={service.image_url || "/lovable-uploads/130a581b-75f6-44d1-a316-42881950a64e.webp"}
                     duration={`${Math.round(service.duration_minutes / 60)} hours`}
                     features={service.features}
                     href={
